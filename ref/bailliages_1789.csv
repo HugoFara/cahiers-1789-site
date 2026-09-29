@@ -1,0 +1,438 @@
+id,nom,nom_long,nom_brette,generalite,type_gen,type_det,rang,superieur,cl_cassini,cl_insee,cl_nom_cassini,cl_nom_2021,cl_x_l93,cl_y_l93
+001,Agen,Sénéchaussée d'Agen,Sénéchaussée d'Agen,Bordeaux,2,2,1,,148,47001,Agen,Agen,509715.612949094,6347776.09011697
+002,Castelmoron,Sénéchaussée de Castelmoron,Sénéchaussée de Castelmoron,Bordeaux,2,2,1,,7101,33103,Castelmoron,Castelmoron-d'Albret,461373.451719668,6402378.70696053
+003,Albret,Sénéchaussée d'Albret,Sénéchaussée d'Albret à Nérac,Bordeaux,2,2,2,,24682,47195,Nerac,Nérac,487150.504818802,6341043.01556347
+004,Casteljaloux,Sénéchaussée de Casteljaloux,Sénéchaussée de Casteljaloux,Bordeaux,2,2,3,003,7087,47052,Casteljaloux,Casteljaloux,467790.779532846,6361558.69397637
+005,Tartas,Sénéchaussée de Tartas,Sénéchaussée de Tartas,Bordeaux,2,2,1,,37107,40313,Tartas,Tartas,393749.990412145,6311111.33975429
+006,Alençon,Bailliage d'Alençon,Bailliage d'Alençon,Alençon,1,1,2,,397,61001,Alençon,Alençon,484933.576708888,6818332.82891081
+007,Argentan,Bailliage d'Argentan,Bailliage d'Argentan,Alençon,1,1,3,006,1192,61006,Argentan,Argentan,477970.531020399,6853610.04834416
+008,Domfront,Bailliage de Domfront,Bailliage de Domfront,Alençon,1,1,3,006,11959,61145,Domfront,Domfront en Poiraie,431623.333950736,6838419.5494938
+009,Exmes,Bailliage d'Exmes,Bailliage d'Exmes,Alençon,1,1,3,006,13367,61474,Exmes,Gouffern en Auge,492719.673803233,6854862.3574156
+010,Verneuil,Bailliage de Verneuil,Bailliage de Verneuil,Alençon,1,1,3,006,39482,27679,Verneuil,Verneuil d'Avre et d'Iton,547630.5325768579,6850741.48028734
+011,Amiens,Bailliage d'Amiens,Bailliage d'Amiens,Amiens,1,1,2,,659,80021,Amiens,Amiens,649497.856161551,6977246.67278218
+012,Ham,Bailliage de Ham,Bailliage de Ham,Amiens,1,1,3,011,16598,80410,Ham,Ham,705249.654929214,6960832.89715518
+013,Angoulême,Sénéchaussée d'Angoulême,Sénéchaussée d'Angoulême,Limoges,2,2,2,,853,16015,Angoulesme,Angoulême,478817.216507915,6509514.28304519
+014,Cognac,Siège royal de Cognac,Siège royal de Cognac,Limoges,3,17,3,013,9804,16102,Cognac,Cognac,440991.378593764,6516149.82682822
+015,Angers,Sénéchaussée d'Angers,Sénéchaussée d'Angers,Tours,2,2,2,,804,49007,Angers,Angers,432284.879946358,6714078.89432277
+016,Baugé,Sénéchaussée de Baugé,Sénéchaussée de Baugé,Tours,2,2,3,015,2970,49018,Bauge,Baugé-en-Anjou,466566.16551989,6720421.69616706
+017,Beaufort,Sénéchaussée de Beaufort,Sénéchaussée de Beaufort,Tours,2,2,3,015,3161,49021,Beaufort,Beaufort-en-Anjou,457721.823750923,6709288.80281634
+018,Château-Gontier,Sénéchaussée de Château-Gontier,Sénéchaussée de Château-Gontier,Tours,2,2,3,015,8652,53062,Chateau Gontier,Château-Gontier-sur-Mayenne,423066.433982376,6754072.11637764
+019,La Flèche,Sénéchaussée de La Flèche,Sénéchaussée de La Flèche,Tours,2,2,3,015,13973,72154,La Fleche,La Flèche,469348.358687714,6737759.28453625
+020,Armagnac,Sénéchaussée d'Armagnac,Sénéchaussée d'Armagnac à Lectoure,Auch,2,2,2,,19096,32208,Lectoure,Lectoure,509001.537993501,6317923.33559046
+021,L'Isle-Jourdain,Sénéchaussée de l'Isle-Jourdain,Sénéchaussée de l'Isle-Jourdain,Auch,2,2,3,020,17498,32160,L'Isle en Jourdain,L'Isle-Jourdain,545048.323338542,6281286.66223991
+022,Auch,Sénéchaussée d'Auch,Sénéchaussée d'Auch,Auch,2,2,1,,1709,32013,Auch,Auch,505411.295148524,6285894.3919025
+023,Quatre-Vallées,Pays des Quatre-Vallées,"Pays des Quatre-Vallées (Vallées d'Aure, de Barousse, de Magnoac, de Neste)",Auch,3,10,1,,2770,65069,la Barthe de Nestés,La Barthe-de-Neste,486786.150173293,6223548.76208742
+024,Riom,Bailliage de Riom,Bailliage de Riom,Riom,1,1,2,,29217,63300,Riom,Riom,708733.910261621,6532661.98157674
+025,Usson,Siège royal d'Usson,Siège royal d'Usson,Riom,3,17,3,024,38494,63439,Usson,Usson,726488.808196001,6492041.57465306
+026,Montaigut,Bailliage de Montaigut,Bailliage de Montaigut,Riom,1,1,3,024,23093,63233,Montaigu,Montaigut,685234.685263773,6564405.2377488
+027,Salers,Bailliage de Salers,Bailliage de Salers,Riom,1,1,3,024,35086,15219,Salers,Salers,660237.112959791,6448891.71237549
+028,Bazas,Sénéchaussée de Bazas,Sénéchaussée de Bazas,Bordeaux,2,2,1,,3051,33036,Bazas,Bazas,444425.126626384,6375512.89982183
+029,Villefranche-de-Beaujolais,Sénéchaussée de Villefranche-de-Beaujolais,Sénéchaussée de Villefranche de Beaujolais,Lyon,2,2,1,,40202,69264,Villefranche,Villefranche-sur-Saône,833098.833663897,6544766.27448796
+030,Beauvais,Bailliage de Beauvais,Bailliage de Beauvais,Paris,1,1,1,,3332,60057,Beauvais,Beauvais,633792.313025582,6926473.60182199
+031,Bourges,Bailliage de Bourges,Bailliage de Bourges,Bourges,1,1,2,,5289,18033,Bourges,Bourges,654145.148145196,6664994.32429954
+032,Châteauroux,Bailliage de Châteauroux,Bailliage de Châteauroux,Bourges,1,1,3,031,8710,36044,Chateauroux,Châteauroux,600133.320138678,6635213.15883832
+033,Concressault,Bailliage de Concressault,Bailliage de Concressault,Bourges,1,1,3,031,10077,18070,Concressault,Concressault,668072.932430743,6709974.70617274
+034,Dun-le-Roi,Bailliage de Dun-le-Roi,Bailliage de Dun-le-Roi,Bourges,1,1,3,031,12299,18087,Dun le Roy,Dun-sur-Auron,667386.570898658,6642823.07252726
+035,Issoudun,Baillage d'Issoudun,Baillage d'Issoudun,Bourges,1,1,3,031,17656,36088,Issoudun,Issoudun,623441.111886682,6650262.30320772
+036,Mehun-sur-Yèvre,Bailliage de Mehun-sur-Yèvre,Bailliage de Mehun-sur-Yèvre,Bourges,1,1,3,031,21833,18141,Mehun,Mehun-sur-Yèvre,640585.083530702,6671975.89939433
+037,Vierzon,Bailliage de Vierzon,Bailliage de Vierzon,Bourges,1,1,3,031,39847,18279,Vierzon,Vierzon,629508.654850392,6680585.32294358
+038,Henrichemont,Bailliage d'Henrichemont,Bailliage d'Henrichemont,Bourges,1,1,3,031,16952,18109,Henrichemont,Henrichemont,664058.107382073,6689309.67661816
+039,Blois,Bailliage de Blois,Bailliage de Blois,Orléans,1,1,2,,4549,41018,Blois,Blois,574294.7824798099,6722749.05185995
+040,Romorantin,Bailliage de Romorantin,Bailliage de Romorantin,Orléans,1,1,3,039,29551,41194,Romorantin,Romorantin-Lanthenay,605103.617177526,6696075.16499674
+041,Bordeaux,Sénéchaussée de Bordeaux,Sénéchaussée de Bordeaux,Bordeaux,2,2,1,,4923,33063,Bordeaux,Bordeaux,417218.083394132,6421810.23173383
+042,Boulogne,Sénéchaussée de Boulogne,Sénéchaussée de Boulogne,Amiens,2,2,1,,5200,62160,Boulogne,Boulogne-sur-Mer,601955.415381082,7070737.2936361
+043,Moulins,Sénéchaussée de Moulins,Sénéchaussée de Moulins,Moulins,2,2,1,,24214,03190,Moulins,Moulins,725464.100291391,6607227.32185833
+044,Caen,Bailliage de Caen,Bailliage de Caen,Caen,1,1,2,,6530,14118,Caen,Caen,454304.400278861,6903285.51084686
+045,Bayeux,Bailliage de Bayeux,Bailliage de Bayeux,Caen,1,1,3,044,3032,14047,Bayeux,Bayeux,430521.294743956,6915089.43491086
+046,Falaise,Bailliage de Falaise,Bailliage de Falaise,Caen,1,1,3,044,13442,14258,Falaise,Falaise,465924.439263361,6870524.13284262
+047,Torigni,Bailliage de Torigni,Bailliage de Torigni,Caen,1,1,3,044,37547,50601,Thorigny,Torigny-les-Villes,409133.126154649,6889070.22152516
+048,Vire,Bailliage de Vire,Bailliage de Vire,Caen,1,1,3,044,40806,14762,Vire,Vire Normandie,414647.446781743,6866852.349263
+049,Calais,Sière royal de Calais,Sière royal de Calais,Amiens,3,17,2,,6584,62193,Calais,Calais,619409.488407996,7095192.88873543
+050,Ardres,Bailliage d'Ardres,Bailliage d'Ardres,Amiens,1,1,3,049,1154,62038,Ardres,Ardres,627858.451659214,7084744.56272927
+051,Caudebec,Bailliage de Caudebec,Bailliage de Caudebec,Rouen,1,1,2,,7228,76164,Caudebec,Rives-en-Seine,535323.8072832481,6938719.39570877
+052,Arques,Bailliage d'Arques,Bailliage d'Arques à Dieppe,Rouen,1,1,3,051,11812,76217,Dieppe,Dieppe,561854.614376261,6982000.87764167
+053,Montivilliers,Bailliage de Montivilliers,Bailliage de Montivilliers,Rouen,1,1,3,051,23596,76447,Montivilliers,Montivilliers,496453.734915671,6942171.64023041
+054,Cany,Bailliage de Cany,Bailliage de Cany,Rouen,1,1,3,051,6841,76159,Cany,Cany-Barville,529850.783108381,6967999.11368402
+055,Neufchâtel,Bailliage de Neufchâtel,Bailliage de Neufchâtel,Rouen,1,1,3,051,24741,76462,Neufchatel,Neufchâtel-en-Bray,587505.3901580781,6960543.27114617
+056,Le Havre,Bailliage du Havre,Bailliage du Havre,Rouen,1,1,3,051,16833,76351,Le Havre de Grace,Le Havre,491419.376620877,6937078.06983532
+057,Châlons,Bailliage de Châlons,Bailliage de Châlons,Châlons,1,1,1,,7728,51108,Chalons,Châlons-en-Champagne,799918.69920872,6873829.08070799
+058,Chartres,Bailliage de Chartres,Bailliage de Chartres,Orléans,1,1,1,,8537,28085,Chartres,Chartres,588209.682865641,6817343.44693631
+059,Châteauneuf-en-Thymerais,Bailliage de Châteauneuf-en-Thymerais,Bailliage de Châteauneuf-en-Thymerais,Alençon,1,1,1,,8684,28089,Château-Neuf,Châteauneuf-en-Thymerais,570271.330193947,6832595.34619213
+060,Château-Thierry,Bailliage de Château-Thierry,Bailliage de Château-Thierry,Soissons,1,1,1,,8715,02168,Chateau Thiery,Château-Thierry,729466.430938832,6883014.70953752
+061,Châtellerault,Sénéchaussée de Châtellerault,Sénéchaussée de Châtellerault,Poitiers,2,2,1,,8760,86066,Chatellerault,Châtellerault,512877.113708496,6638113.60892815
+062,Chaumont-en-Bassigny,Bailliage de Chaumont-en-Bassigny,Bailliage de Chaumont-en-Bassigny,Châlons,1,1,1,,8922,52121,Chaumont en Bassigny,Chaumont,859140.251530703,6781111.12480521
+063,Chaumont-en-Vexin,Bailliage de Chaumont-en-Vexin,Bailliage de Chaumont-en-Vexin,Rouen,1,1,2,,8921,60143,Chaumont,Chaumont-en-Vexin,619115.593440229,6908099.909127
+064,Magny,Bailliage de Magny,Bailliage de Magny,Rouen,1,1,3,063,20586,95355,Magny,Magny-en-Vexin,611478.696826883,6895630.0049229
+065,Clermont-Ferrand,Sénéchaussées de Clermont-Ferrand,Sénéchaussées de Clermont-Ferrand,Riom,2,2,1,,9705,63113,Clermont,Clermont-Ferrand,706746.792585376,6520011.74415505
+066,Clermont-en-Beauvaisis,Bailliage de Clermont-en-Beauvaisis,Bailliage de Clermont-en-Beauvaisis,Soissons,1,1,1,,9700,60157,Clermont,Clermont,657328.59021235,6920096.62497953
+067,Comminges,Comté de Comminges,"Comté de Comminges, assemblé à Muret",Auch,3,4,1,,24432,31395,Muret,Muret,564450.955602664,6263789.43015825
+068,Couserans,Pays de Couserans,"Pays de Couserans, assemblé à Saint-Girons",Auch,3,10,1,,32191,09261,St Girons,Saint-Girons,548655.261082941,6211278.04519283
+069,Condom,Sénéchaussée de Condom,Sénéchaussée de Condom,Bordeaux,2,2,1,,10126,32107,Condom,Condom,489151.27231646,6321110.71798243
+070,Coutances,Bailliage de Coutances,Bailliage de Coutances,Caen,1,1,2,,10841,50147,Coutances,Coutances,375192.013480183,6891978.47153871
+071,Saint-Lô,Bailliage de Saint-Lô,Bailliage de Saint-Lô,Caen,1,1,3,070,32990,50502,St Lo,Saint-Lô,401406.883384842,6898248.16407852
+072,Avranches,Bailliage d'Avranches,Bailliage d'Avranches,Caen,1,1,3,070,2213,50025,Avranches,Avranches,379423.658667771,6851528.49176459
+073,Carentan,Bailliage de Carentan,Bailliage de Carentan,Caen,1,1,3,070,6932,50099,Carentan,Carentan-les-Marais,391109.792573397,6919841.03844833
+074,Cérences,Bailliage de Cérences,Bailliage de Cérences,Caen,1,1,3,070,7481,50109,Cerences,Cérences,375094.778783558,6877625.85824483
+075,Mortain,Bailliage de Mortain,Bailliage de Mortain,Caen,1,1,3,070,24051,50359,Mortain,Mortain-Bocage,409801.242319618,6845871.12209436
+076,Saint-Sauveur-Lendeleu,Bailliage de Saint-Sauveur-Lendeleu,Bailliage de Saint-Sauveur-Lendeleu,Caen,1,1,3,070,34592,50550,St Sauveur Lendelin,Saint-Sauveur-Villages,378034.590165759,6901295.73903135
+077,Valognes,Bailliage de Valognes,Bailliage de Valognes,Caen,1,1,3,070,38769,50615,Valognes,Valognes,376356.353073525,6943586.42810476
+078,Saint-Sauveur-le-Vicomte,Bailliage de Saint-Sauveur-le-Vicomte,Bailliage de Saint-Sauveur-le-Vicomte,Caen,1,1,3,070,34576,50551,St Sauveur le Vicomte,Saint-Sauveur-le-Vicomte,371024.002859634,6930225.44679156
+079,Tinchebray,Siège royal de Tinchebray,Siège royal de Tinchebray,Caen,3,17,3,070,37676,61486,Tinchebrai,Tinchebray-Bocage,425612.220912285,6857908.78222276
+080,Crépy-en-Valois,Bailliage de Crépy-en-Valois,Bailliage de Crépy-en-Valois,Soissons,1,1,1,,11024,60176,Crespy en Valois,Crépy-en-Valois,691812.4256633359,6903857.60093318
+081,Dourdan,Bailliage de Dourdan,Bailliage de Dourdan,Orléans,1,1,1,,12146,91200,Dourdan,Dourdan,626971.175376534,6825869.77330246
+082,Étampes,Bailliage d'Étampes,Bailliage d'Étampes,Paris,1,1,1,,13197,91223,Estampes,Étampes,638041.4241955139,6815302.73037628
+083,Évreux,Bailliage d'Évreux,Bailliage d'Évreux,Rouen,1,1,2,,13353,27229,Evreux,Évreux,564891.1087739361,6881975.90408846
+084,Beaumont-le-Roger,Bailliage de Beaumont-le-Roger,Bailliage de Beaumont-le-Roger,Rouen,1,1,3,083,3261,27051,Beaumont le Roger,Beaumont-le-Roger,537621.294492636,6888961.59976354
+085,Breteuil,Bailliage de Breteuil,Bailliage de Breteuil,Rouen,1,1,3,083,5776,27112,Breteuil,Breteuil,546893.300846265,6861598.93962628
+086,Conches,Bailliage de Conches,Bailliage de Conches,Rouen,1,1,3,083,10066,27165,Conches,Conches-en-Ouche,549351.376426607,6875364.17716316
+088,Nonancourt,Bailliage de Nonancourt,Bailliage de Nonancourt,Rouen,1,1,3,083,25171,27438,Nonancourt,Nonancourt,567234.3249878091,6854441.0232982
+089,Bernay,Bailliage de Bernay,Bailliage de Bernay,Rouen,1,1,3,083,3797,27056,Bernay,Bernay,524583.182932082,6890317.03762166
+090,Orbec,Bailliage d'Orbec,Bailliage d'Orbec,Rouen,1,1,3,083,25649,14478,Orbec,Orbec,510348.572737645,6883311.18997929
+092,Saint-Flour,Bailliage de Saint-Flour,Bailliage de Saint-Flour,Riom,1,1,2,,31781,15187,St Flour,Saint-Flour,707314.424052843,6437160.83743573
+093,Aurillac,Bailliage d'Aurillac,Bailliage d'Aurillac,Riom,1,1,3,092,1915,15014,Aurillac,Aurillac,655798.801160814,6425284.1189298
+094,Vic-en-Carladez,Bailliage de Vic-en-Carladez,Bailliage de Vic-en-Carladez,Riom,1,1,3,092,39768,15258,Vic en Carladez,Vic-sur-Cère,670443.367230166,6431277.26451269
+095,Andelat,Bailliage d'Andelat,"Bailliage d'Andelat, séant à Murat",Riom,1,1,3,092,24419,15138,Murat,Murat,689664.697136571,6445656.87640051
+096,Calvinet,Bailliage de Calvinet,Bailliage de Calvinet,Riom,1,1,3,092,6623,15027,Calvinet,Puycapel,649123.745465038,6402281.14444425
+097,Forez,Bailliage de Forez,Bailliage de Forez à Montbrison,Lyon,1,1,2,,23224,42147,Montbrison,Montbrison,783029.393254036,6501448.6545014
+098,Bourg-Argental,Bailliage de Bourg-Argental,Bailliage de Bourg-Argental,Lyon,1,1,3,097,5270,42023,Bourg Argental,Bourg-Argental,822261.388389281,6467550.98649259
+099,Gien,Bailliage de Gien,Bailliage de Gien,Orléans,1,1,1,,15458,45155,Gien,Gien,672202.40145072,6732122.03992723
+100,Saint-Jean-d'Angely,Sénéchaussée de Saint-Jean-d'Angely,Sénéchaussée de Saint-Jean-d'Angely,La Rochelle,2,2,1,,32442,17347,St Jean d'Angely,Saint-Jean-d'Angély,427315.68200402,6544347.92805538
+101,Langres,Bailliage de Langres,Bailliage de Langres,Châlons,1,1,1,,18621,52269,Langres,Langres,874426.878780727,6753935.67276004
+102,Dax,Sénéchaussée de Dax,Sénéchaussée de Dax,Bordeaux,2,2,2,,11662,40088,Dax ou Acqs,Dax,373517.560148823,6298134.97503427
+103,Bayonne,Sénéchaussée de Bayonne,Sénéchaussée de Bayonne,Bordeaux,2,2,3,102,2448,64102,Bayonne,Bayonne,337973.377730555,6276205.26837399
+104,Saint-Sever,Sénéchaussée de Saint-Sever,Sénéchaussée de Saint-Sever,Bordeaux,2,2,3,102,34646,40282,St Sever-Cap de Gascogne,Saint-Sever,412204.400449969,6301812.20937132
+105,Libourne,Sénéchaussée de Libourne,Sénéchaussée de Libourne,Bordeaux,2,2,1,,19449,33243,Libourne,Libourne,444068.095371089,6429267.88800504
+106,Limoges,Sénéchaussée de Limoges,Sénéchaussée de Limoges,Limoges,2,2,2,,19609,87085,Limoges,Limoges,565065.568268122,6527579.08527412
+107,Saint-Yrieix,Sénéchaussée de Saint-Yrieix,Sénéchaussée de Saint-Yrieix,Limoges,2,2,3,106,35034,87187,St Yrieix,Saint-Yrieix-la-Perche,559742.975173156,6492149.72786292
+108,Tulle,Sénéchaussée de Tulle,Sénéchaussée de Tulle,Limoges,2,2,2,,38367,19272,Tulle,Tulle,603723.379754209,6463687.21161118
+109,Brives,Sénéchaussée de Brives,Sénéchaussée de Brives,Limoges,2,2,3,108,6008,19031,Brive,Brive-la-Gaillarde,584750.262941165,6452135.49288502
+110,Uzerches,Siège royal d'Uzerches,Siège royal d'Uzerches,Limoges,3,17,3,108,38480,19276,Uzerche,Uzerche,587661.707260367,6481598.22655725
+111,Loudun,Bailliage de Loudun,Bailliage de Loudun,Tours,1,1,1,,20095,86137,Loudun,Loudun,478485.084596589,6660722.82990748
+112,Lyon,Sénéchaussée de Lyon,Sénéchaussée de Lyon,Lyon,2,2,1,,20464,69123,Lyon,Lyon,843116.224469029,6519367.61982103
+113,Le Mans,Baillage du Mans,Baillage du Mans,Tours,1,1,2,,20932,72181,Le Mans,Le Mans,490998.293750728,6770787.30298618
+114,Laval,Siège royal de Laval,Siège royal de Laval,Tours,3,17,3,113,18964,53130,Laval,Laval,419321.673163978,6781399.06173056
+115,Beaumont-le-Vicomte,Siège royal de Beaumont-le-Vicomte,Siège royal de Beaumont-le-Vicomte,Tours,3,17,3,113,3268,72029,Beaumont le Vicomte,Beaumont-sur-Sarthe,486950.607695006,6795638.02903529
+116,Fresnay-le-Vicomte,Bailliage de Fresnay-le-Vicomte,Bailliage de Fresnay-le-Vicomte,Tours,1,1,3,113,14719,72138,Frenay le Vicomte,Fresnay-sur-Sarthe,479071.216597252,6802100.8832211
+117,Sainte-Suzanne,Sénéchaussée de Sainte-Suzanne,Sénéchaussée de Sainte-Suzanne,Tours,2,2,3,113,31608,53255,Ste Susanne,Sainte-Suzanne-et-Chammes,450471.687198608,6782756.80897421
+118,Mamers,Bailliage de Mamers,Bailliage de Mamers,Tours,1,1,3,113,20847,72180,Mamers,Mamers,505134.686746813,6808705.91794586
+119,Château-du-Loir,Sénéchaussée de Château-du-Loir,Sénéchaussée de Château-du-Loir,Tours,2,2,3,113,8643,72071,Chateau du Loir,Montval-sur-Loir,506369.302014445,6735727.47854779
+120,Mantes,Bailliage de Mantes,Bailliage de Mantes,Paris,1,1,2,,20949,78361,Mantes,Mantes-la-Jolie,606082.1082460569,6877484.82067229
+121,Meulan,Bailliage de Meulan,Bailliage de Meulan,Paris,1,1,3,120,22358,78401,Meulan,Meulan-en-Yvelines,619991.593000644,6879017.52103204
+122,Dorat,Sénéchaussée de Dorat,Sénéchaussée de Dorat,Limoges,2,2,2,,12080,87059,Le Dorat,Le Dorat,552110.559510834,6570175.68846772
+123,Bellac,Siège royal de Bellac,Siège royal de Bellac,Limoges,3,17,3,122,3485,87011,Bellac,Bellac,549382.214518424,6559890.05717554
+124,Guéret,Sénéchausée de Guéret,Sénéchausée de Guéret (Haute-Marche),Moulins,2,2,1,,16355,23096,Gueret,Guéret,612688.512717211,6564029.00675085
+125,Meaux,Bailliage de Meaux,Bailliage de Meaux,Paris,1,1,1,,21801,77284,Meaux,Meaux,691786.777648026,6873294.71684184
+126,Melun,Bailliage de Melun,Bailliage de Melun,Paris,1,1,2,,21914,77288,Melun,Melun,674836.445481712,6826676.25723864
+127,Moret,Bailliage de Moret,Bailliage de Moret,Paris,1,1,3,126,23967,77316,Moret,Moret-Loing-et-Orvanne,686230.225217168,6808151.20039292
+128,Montargis,Bailliage de Montargis,Bailliage de Montargis,Orléans,1,1,2,,23133,45208,Montargis,Montargis,680052.8580778081,6766319.12387249
+130,Lorris,Bailliage de Lorris,Bailliage de Lorris,Orléans,1,1,3,128,20043,45187,Lorris,Lorris,663599.21778014,6754434.77268266
+131,Montfort-l'Amaury,Bailliage de Montfort-l'Amaury,Bailliage de Montfort-l'Amaury,Paris,1,1,2,,23435,78420,Montfort,Montfort-l'Amaury,612483.871182729,6853658.69488645
+132,Dreux,Bailliage de Dreux,Bailliage de Dreux,Paris,1,1,3,131,12219,28134,Dreux,Dreux,579805.14929973,6849716.14214238
+133,Mont-de-Marsan,Sénéchaussée de Mont-de-Marsan,Sénéchaussée de Mont-de-Marsan,Bordeaux,2,2,1,,23289,40192,Mont de Marsan,Mont-de-Marsan,418777.590994318,6316385.98418963
+134,Montreuil-sur-Mer,Bailliage de Montreuil-sur-Mer,Bailliage de Montreuil-sur-Mer,Amiens,1,1,1,,23805,62588,Montreuil sur Mer,Montreuil,612073.57834608,7041385.93684798
+135,Nemours,Baillaige de Nemours,Baillaige de Nemours,Paris,1,1,1,,24675,77333,Nemours,Nemours,677265.239479246,6796534.32033948
+136,Nevers,Bailliage de Nevers,Bailliage de Nevers,Moulins,1,1,1,,24962,58194,Nevers,Nevers,711912.312534972,6654718.45790228
+137,Orléans,Bailliage d'Orléans,Bailliage d'Orléans,Orléans,1,1,2,,25733,45234,Orléans,Orléans,618115.491981329,6756324.1543767
+138,Beaugency,Bailliage de Beaugency,Bailliage de Beaugency,Orléans,1,1,3,137,3168,45028,Beaugency,Beaugency,597535.211855252,6742868.71048565
+139,Boiscommun,Bailliage de Boiscommun,Bailliage de Boiscommun,Orléans,1,1,3,137,4635,45035,Boilcommun,Boiscommun,654012.044718445,6770889.06994334
+140,Neuville-aux-Bois,Bailliage de Neuville-aux-Bois,Bailliage de Neuville-aux-Bois,Orléans,1,1,3,137,24856,45224,Neuville aux bois,Neuville-aux-Bois,629531.635776628,6774826.84365768
+141,Vitry-aux-Loges,Bailliage de Vitry-aux-Loges,Bailliage de Vitry-aux-Loges,Orléans,1,1,3,137,40891,45346,Vitry aux Loges,Vitry-aux-Loges,645215.4342080849,6760217.24815874
+142,Janville,Bailliage de Janville,Bailliage de Janville,Orléans,1,1,3,137,17747,28199,Yenville,Janville-en-Beauce,616952.124508159,6789499.3772502
+143,Yèvre-le-Chatel,Bailliage de Yèvre-le-Chatel,Bailliage de Yèvre-le-Chatel,Orléans,1,1,3,137,41386,45348,Yevre le Chatel,Yèvre-la-Ville,650531.500087352,6784613.10494766
+144,Paris (ville et faubourgs),"Prévôté et vicomté de Paris, ville et faubourgs","Prévôté et vicomté de Paris, ville et faubourgs",Paris,3,15,1,,26207,75056,Paris,Paris,651650.322778378,6862412.01009903
+145,Paris (hors les murs),Prévôté et vicomté de Paris hors les murs,Prévôté et vicomté de Paris hors les murs,Paris,3,15,2,,26207,75056,Paris,Paris,651650.322778378,6862412.01009903
+146,Choisy-le-Roi,Bailliage de Choisy-le-Roi,Bailliage de Choisy-le-Roi,Paris,1,1,3,145,9421,94022,Choisy le Roy,Choisy-le-Roi,656477.8051881969,6851980.83213806
+147,Vincennes,Bailliage de Vincennes,Bailliage de Vincennes,Paris,1,1,3,145,40749,94080,Vincennes,Vincennes,658832.305380904,6861017.51742047
+148,Meudon,Bailliage de Meudon,Bailliage de Meudon,Paris,1,1,3,145,22356,92048,Meudon,Meudon,644204.4716836161,6856641.04115211
+149,Versailles,Bailliage de Versailles,Bailliage de Versailles,Paris,1,1,3,145,39569,78646,Versailles,Versailles,636411.315858494,6856411.56401363
+150,Bellême,Bailliage de Bellême,Bailliage de Bellême,Alençon,1,1,2,,3459,61038,Bellesme,Bellême,519378.434404031,6811240.1985062
+151,Mortagne (bailliage),Bailliage de Mortagne,Bailliage de Mortagne,Alençon,1,1,3,150,24048,61293,Mortagne,Mortagne-au-Perche,518906.476752201,6827247.79324029
+152,Périgueux,Sénéchaussée de Périgueux,Sénéchaussée de Périgueux,Bordeaux,2,2,2,,26489,24322,Perigueux,Périgueux,520798.383464423,6456452.25662375
+153,Bergerac,Sénéchaussée de Bergerac,Sénéchaussée de Bergerac,Bordeaux,2,2,3,152,3735,24037,Bergerac,Bergerac,501091.734823556,6420061.94115572
+154,Sarlat,Sénéchaussée de Sarlat,Sénéchaussée de Sarlat,Bordeaux,2,2,3,152,35368,24520,Sarlat,Sarlat-la-Canéda,559203.1649231541,6422778.18911695
+155,Péronne,Bailliage de Péronne,Bailliage de Péronne,Amiens,1,1,2,,26513,80620,Peronne,Péronne,695421.088807895,6981504.09597997
+156,Montdidier,Bailliage de Montdidier,Bailliage de Montdidier,Amiens,1,1,3,155,22887,80561,Montdidier,Montdidier,668921.334754326,6949957.78677671
+157,Roye,Bailliage de Roye,Bailliage de Roye,Amiens,1,1,3,155,29937,80685,Roye,Roye,684852.050792497,6955693.62181909
+158,Saint-Pierre-le-Moutier,Bailliage de Saint-Pierre-le-Moutier,Bailliage de Saint-Pierre-le-Moutier,Moulins,1,1,2,,34223,58264,St Pierre le Moutier,Saint-Pierre-le-Moûtier,709003.292605427,6632310.47427077
+159,Cusset,Bailliage de Cusset,Bailliage de Cusset,Moulins,1,1,3,158,11413,03095,Cusset,Cusset,735234.313241054,6559512.97828414
+160,Poitiers,Sénéchaussée de Poitiers,Sénéchaussée de Poitiers,Poitiers,2,2,2,,27358,86194,Poitiers,Poitiers,495982.902387654,6612457.0809208
+161,Civray,Sénéchaussée de Civray,Sénéchaussée de Civray,Poitiers,2,2,3,160,9550,86078,Civray,Civray,491280.582762147,6564497.59309281
+162,Saint-Maixent,Sénéchaussée de Saint-Maixent,Sénéchaussée de Saint-Maixent,Poitiers,2,2,3,160,33083,79270,St Maixent,Saint-Maixent-l'École,453646.769373474,6595330.01679986
+163,Fontenay-le-Comte,Sénéchaussée de Fontenay-le-Comte,Sénéchaussée de Fontenay-le-Comte,Poitiers,2,2,3,160,14275,85092,Fontenay-le-Comté,Fontenay-le-Comte,408021.333250877,6603373.09156307
+164,Lusignan,Siège royal de Lusignan,Siège royal de Lusignan,Poitiers,3,17,3,160,20389,86139,Lusignan,Lusignan,479128.756115582,6596780.32283321
+165,Montmorillon,Sénéchaussée de Montmorillon,Sénéchaussée de Montmorillon,Poitiers,2,2,3,160,23694,86165,Montmorillon,Montmorillon,536503.7627416539,6594000.81384128
+166,Niort,Siège royal de Niort,Siège royal de Niort,Poitiers,3,17,3,160,25044,79191,Niort,Niort,433720.503657063,6586400.65192316
+167,Vouvant,Bailliage de Vouvant,Bailliage de Vouvant séant à la Châtaigneraie,Poitiers,1,1,3,160,8725,85059,La Chataigneraye sur Vouvant,La Châtaigneraie,414048.945702843,6623385.36263497
+168,Ponthieu,Sénéchaussée de Ponthieu,Sénéchaussée de Ponthieu à Abbeville,Amiens,2,2,1,,24,80001,Abbeville,Abbeville,616593.696726384,7001382.27808562
+169,Provins,Bailliage de Provins,Bailliage de Provins,Paris,1,1,2,,28134,77379,Provins,Provins,722091.450002763,6828792.25073564
+170,Montereau,Bailliage de Montereau,Bailliage de Montereau,Paris,1,1,3,169,23360,77305,Montereau Fault-Yonne,Montereau-Fault-Yonne,696143.536095906,6809188.94893374
+171,Saint-Quentin,Bailliage de Saint-Quentin,Bailliage de Saint-Quentin,Amiens,1,1,1,,34360,02691,St Quentin,Saint-Quentin,720549.33544945,6972151.74640092
+172,Cahors,Sénéchaussée de Cahors,Sénéchaussée de Cahors,Montauban,2,2,2,,6548,46042,Cahors,Cahors,575912.067930773,6373276.60884341
+173,Montauban,Sénéchaussée de Montauban,Sénéchaussée de Montauban,Montauban,2,2,3,172,23155,82121,Montauban,Montauban,568109.190294271,6325629.47265811
+174,Gourdon,Sénéchaussée de Gourdon,Sénéchaussée de Gourdon,Montauban,2,2,3,172,15817,46127,Gourdon,Gourdon,571975.325809319,6405552.09155906
+175,Lauzerte,Sénéchaussée de Lauzerte,Sénéchaussée de Lauzerte,Montauban,2,2,3,172,18947,82094,Lauzerte,Lauzerte,551304.165272587,6352497.47366242
+176,Figeac,Sénéchaussée de Figeac,Sénéchaussée de Figeac,Montauban,2,2,3,172,13863,46102,Figeac,Figeac,623173.386356927,6390428.41421621
+177,Martel,Siège royal de Martel,Siège royal de Martel,Montauban,3,17,3,172,21413,46185,Martel,Martel,590269.215554988,6427378.51023999
+178,Reims,Bailliage de Reims,Bailliage de Reims,Châlons,1,1,1,,28831,51454,Reims,Reims,774870.0257736261,6907772.3700355
+179,Rodez,Sénéchaussée de Rodez,Sénéchaussée de Rodez,Montauban,2,2,2,,29437,12202,Rodez,Rodez,666064.734434878,6361305.68485832
+180,Millau,Bailliage de Millau,Bailliage de Millau,Montauban,1,1,3,179,22497,12145,Milhau,Millau,706225.443855581,6333195.2382378
+181,Rivière-Verdun,"Pays de Rivière-Verdun, Gaure, Launac et Marestaing","Pays de Rivière-Verdun, Gaure, Launac et Marestaing",Auch,3,10,1,,39382,82190,Verdun sur Garonne,Verdun-sur-Garonne,558140.779502691,6307578.14586223
+182,La Rochelle,Sénéchaussée de La Rochelle,Sénéchaussée de La Rochelle,La Rochelle,2,2,2,,29365,17300,La Rochelle,La Rochelle,379796.791444917,6570591.91658643
+183,Rochefort,Siège royal de Rochefort,Siège royal de Rochefort,La Rochelle,3,17,3,182,29352,17299,Rochefort,Rochefort,392790.074681457,6545758.51910902
+184,Rouen,Bailliage de Rouen,Bailliage de Rouen,Rouen,1,1,2,,29752,76540,Rouen,Rouen,562353.811740784,6928720.17785385
+185,Gisors,Haute justice de Gisors,Haute justice de Gisors,Rouen,3,7,3,184,15563,27284,Gisors,Gisors,610946.370722345,6909667.37892895
+186,Honfleur,Siège royal d'Honfleur,Siège royal d'Honfleur,Rouen,3,17,3,184,17232,14333,Honfleur,Honfleur,499208.252560065,6927905.73598834
+187,Pont-Audemer,Bailliage de Pont-Audemer,Bailliage de Pont-Audemer,Rouen,1,1,3,184,27498,27467,Pont Audemer,Pont-Audemer,519354.619482424,6920022.29358908
+188,Pont-de-l'Arche,Bailliage de Pont-de-l'Arche,Bailliage de Pont-de-l'Arche,Rouen,1,1,3,184,27527,27469,Le Pont de l'Arche,Pont-de-l'Arche,565724.22905073,6913021.93434018
+189,Pont-l'Évêque,Bailliage de Pont-l'Évêque,Bailliage de Pont-l'Évêque,Rouen,1,1,3,184,27579,14514,Pont l'Eveque,Pont-l'Évêque,495116.803791867,6913195.88671886
+190,Andely,Haute justice d'Andely,Haute justice d'Andely,Rouen,3,7,3,184,749,27016,Gd Andelys,Les Andelys,584338.025146778,6906249.63124799
+191,Lyons-la-Forêt,Haute justice de Lyons-la-Forêt,Haute justice de Lyons-la-Forêt,Rouen,3,7,3,184,19673,27377,Lions,Lyons-la-Forêt,589355.401100164,6923283.11175893
+192,Vernon,Haute justice de Vernon,Haute justice de Vernon,Rouen,3,7,3,184,39507,27681,Vernon,Vernon,589351.608108798,6889054.76275728
+193,Charleval,Bailliage de Charleval,Bailliage de Charleval,Rouen,1,1,3,184,8440,27151,Charleval,Charleval,582530.981618496,6920257.75585544
+194,Villefranche-de-Rouergue,Sénéchaussée de Villefranche-de-Rouergue,Sénéchaussée de Villefranche-de-Rouergue,Montauban,2,2,1,,40203,12300,Villefranche,Villefranche-de-Rouergue,623015.83934594,6361958.6663376
+195,Saintes,Sénéchaussée de Saintes,Sénéchaussée de Saintes,La Rochelle,2,2,2,,31580,17415,Saintes,Saintes,417513.141053782,6522704.42067641
+196,Tonnay-Charente,Sénéchaussée de Tonnay-Charente,Sénéchaussée de Tonnay-Charente,La Rochelle,2,2,3,195,37730,17449,Tonnay Charente,Tonnay-Charente,397313.373240815,6546159.04344228
+197,Île d'Oleron,Baronnie de l'île d'Oleron,Baronnie de l'île d'Oleron,La Rochelle,3,3,3,195,8625,17093,Oleron,Le Château-d'Oléron,374840.769478498,6540427.31650904
+198,Pons,Sénéchaussée de Pons,Sénéchaussée de Pons,La Rochelle,2,2,3,195,27472,17283,Pons,Pons,423395.514530934,6504072.49629605
+199,Taillebourg,Bailliage de Taillebourg,Bailliage de Taillebourg,La Rochelle,1,1,3,195,36985,17436,Taillebourg,Taillebourg,417291.623974277,6532840.38417453
+200,Brouage,Siège royal de Brouage,Siège royal de Brouage,La Rochelle,3,17,3,195,6061,17219,Brouage,Marennes-Hiers-Brouage,384716.62848173,6537691.95048979
+201,Saumur,Sénéchaussée de Saumur,Sénéchaussée de Saumur,Tours,2,2,1,,35529,49328,Saumur,Saumur,467288.895694578,6688840.98887094
+202,Senlis,Bailliage de Senlis,Bailliage de Senlis,Paris,1,1,2,,35988,60612,Senlis,Senlis,669869.28344024,6900911.09121572
+203,Beaumont-sur-Oise,Bailliage de Beaumont-sur-Oise,Bailliage de Beaumont-sur-Oise,Paris,1,1,3,202,3248,95052,Beaumont,Beaumont-sur-Oise,647934.737583735,6893861.51111643
+204,Chambly,Bailliage de Chambly,Bailliage de Chambly,Paris,1,1,3,202,7772,60139,Chambly,Chambly,645156.980372779,6896572.25325812
+205,Compiègne,Bailliage de Compiègne,Bailliage de Compiègne,Paris,1,1,3,202,10039,60159,Compiègne,Compiègne,687091.7095930669,6923863.07972724
+206,Creil,Bailliage de Creil,Bailliage de Creil,Paris,1,1,3,202,10978,60175,Creil,Creil,662331.066871836,6906569.23923434
+207,Pontoise,Baillage de Pontoise,Baillage de Pontoise,Paris,1,1,3,202,27588,95500,Pontoise,Pontoise,634267.2969098029,6883803.07406575
+208,Sens,Bailliage de Sens,Bailliage de Sens,Paris,1,1,2,,36018,89387,Sens,Sens,721043.1798950559,6788592.21273463
+209,Villeneuve-sur-Yonne,Bailliage de Villeneuve-sur-Yonne,Bailliage de Villeneuve-sur-Yonne,Paris,1,1,3,208,40613,89464,Villeneuve le Roy,Villeneuve-sur-Yonne,722100.454360619,6775705.91024763
+210,Sézanne,Bailliage de Sézanne,Bailliage de Sézanne,Châlons,1,1,2,,36285,51535,Sezanne,Sézanne,753173.245686647,6846787.79704185
+211,Châtillon-sur-Marne,Bailliage de Châtillon-sur-Marne,Bailliage de Châtillon-sur-Marne,Châlons,1,1,3,210,8817,51136,Chatillon sur Marne,Châtillon-sur-Marne,755315.2768406119,6889149.13385361
+212,Soissons,Bailliage de Soissons,Bailliage de Soissons,Soissons,1,1,1,,36448,02722,Soissons,Soissons,723432.670302297,6920221.35408112
+213,Tours,Bailliage de Tours,Bailliage de Tours,Tours,1,1,2,,37911,37261,Tours,Tours,525641.082557998,6701698.25241719
+214,Châtillon-sur-Indre,Bailliage de Châtillon-sur-Indre,Bailliage de Châtillon-sur-Indre,Tours,1,1,3,213,8819,36045,Chatillon sur Indre,Châtillon-sur-Indre,561203.388291023,6655789.0848914
+215,Chinon,Bailliage de Chinon,Bailliage de Chinon,Tours,1,1,3,213,9378,37072,Chinon,Chinon,491182.996447565,6677715.81615646
+216,Langeais,Bailliage de Langeais,Bailliage de Langeais,Tours,1,1,3,213,18603,37123,Langeais,Langeais,504115.734802816,6694921.81211959
+217,Loches,Bailliage de Loches,Bailliage de Loches,Tours,1,1,3,213,19776,37132,Loches,Loches,548041.360752931,6671742.46852071
+218,Montrichard,Bailliage de Montrichard,Bailliage de Montrichard,Tours,1,1,3,213,23834,41151,Montrichard,Montrichard Val de Cher,562837.480249687,6695198.67203847
+219,Troyes,Bailliage de Troyes,Bailliage de Troyes,Châlons,1,1,2,,38334,10387,Troyes,Troyes,779953.273832029,6800379.99503926
+220,Nogent-sur-Seine,Bailliage de Nogent-sur-Seine,Bailliage de Nogent-sur-Seine,Châlons,1,1,3,219,25113,10268,Nogent sur Seine,Nogent-sur-Seine,737134.095458945,6821615.53644996
+221,Méry-sur-Seine,Bailliage de Méry-sur-Seine,Bailliage de Méry-sur-Seine,Châlons,1,1,3,219,22163,10233,Mery,Méry-sur-Seine,765690.825864004,6823740.06064389
+222,Rumilly-les-Vaudes,Bailliage de Rumilly-les-Vaudes,Bailliage de Rumilly-les-Vaudes,Châlons,1,1,3,219,30052,10331,Rumilly les Vandes,Rumilly-lès-Vaudes,790461.289564966,6783218.9912988
+223,Virey-les-Bar,Bailliage de Virey-les-Bar,Bailliage de Virey-les-Bar,Châlons,1,1,3,219,40818,10437,Virey sous Bar,Virey-sous-Bar,797070.340460251,6783039.85470497
+224,Vendôme,Bailliage de Vendôme,Bailliage de Vendôme,Orléans,1,1,2,,39274,41269,Vendome,Vendôme,555180.984803027,6745382.23884269
+225,Mondoubleau,Bailliage de Mondoubleau,Bailliage de Mondoubleau,Orléans,1,1,3,224,23300,41143,Mondoubleau,Mondoubleau,543286.740283748,6766593.48281279
+226,Saint-Calais,Bailliage de Saint-Calais,Bailliage de Saint-Calais,Orléans,1,1,3,224,30803,72269,St Calais,Saint-Calais,531441.478896764,6760162.3463245
+227,Laon,Bailliage de Laon,Bailliage de Laon,Soissons,1,1,2,,18722,02408,Laon,Laon,745140.543059729,6940641.3410438
+228,La Fère,Bailliage de la Fère,Bailliage de la Fère,Soissons,1,1,3,227,13689,02304,La Fere,La Fère,726409.252474059,6951463.08306415
+229,Marle,Bailliage de Marle,Bailliage de Marle,Soissons,1,1,3,227,21248,02468,Marle,Marle,755634.291926906,6960390.80697425
+230,Chauny,Bailliage de Chauny,Bailliage de Chauny,Soissons,1,1,3,227,8939,02173,Chauny,Chauny,715849.2647795971,6946299.12729036
+231,Coucy,Bailliage de Coucy,Bailliage de Coucy,Soissons,1,1,3,227,10473,02217,Coucy le Château,Coucy-le-Château-Auffrique,723363.685519887,6935718.35715384
+232,Guise,Bailliage de Guise,Bailliage de Guise,Soissons,1,1,3,227,16471,02361,Guise,Guise,745111.235971072,6978132.790425
+233,Noyon,Bailliage de Noyon,Bailliage de Noyon,Soissons,1,1,3,227,25350,60471,Noyon,Noyon,699921.03959083,6942417.70914066
+234,Villers-Cotterets,Bailliage de Villers-Cotterets,Bailliage de Villers-Cotterets,Soissons,1,1,1,,40462,02810,Villers Coterets,Villers-Cotterêts,706581.432815853,6905934.81454962
+235,Vitry-le-François,Bailliage de Vitry-le-François,Bailliage de Vitry-le-François,Châlons,1,1,2,,40895,51649,Vitry le François,Vitry-le-François,816541.500692313,6848359.86277552
+236,Sainte-Menehould,Bailliage de Sainte-Menehould,Bailliage de Sainte-Menehould,Châlons,1,1,3,235,31533,51507,Ste Manehould,Sainte-Menehould,838575.3778933811,6889477.97240168
+237,Fismes,Bailliage de Fismes,Bailliage de Fismes,Châlons,1,1,3,235,13886,51250,Fismes,Fismes,749499.919895869,6912181.18586737
+238,Saint-Dizier,Bailliage de Saint-Dizier,Bailliage de Saint-Dizier,Châlons,1,1,3,235,31223,52448,St Dizier,Saint-Dizier,843581.014665629,6839272.5592165
+239,Épernay,Baillage d'Épernay,Baillage d'Épernay,Châlons,1,1,3,235,12717,51230,Epernay,Épernay,770129.359331392,6882651.21555754
+240,Haut-Vivarais,Sénéchaussée du Haut-Vivarais,"Sénéchaussée du Haut-Vivarais, séant à Annonay",Montpellier,2,2,1,,913,07010,Annonay,Annonay,831076.2105774659,6461452.32666574
+241,Béziers,Sénéchaussée de Béziers,Sénéchaussée de Béziers,Montpellier,2,2,1,,4149,34032,Beziers,Béziers,717506.394830212,6249385.26482064
+242,Carcassonne,Sénéchaussée de Carcassonne,Sénéchaussée de Carcassonne,Toulouse,2,2,1,,6912,11069,Carcassonne,Carcassonne,647265.228214203,6235392.44191073
+243,Lauraguais,Sénéchaussée de Lauraguais,"Sénéchaussée de Lauraguais, séant à Castelnaudary",Toulouse,2,2,1,,7123,11076,Castelnaudarry,Castelnaudary,615089.389989452,6247120.81449735
+244,Castres,Sénéchaussée de Castres,Sénéchaussée de Castres,Toulouse,2,2,1,,7188,81065,Castres,Castres,638621.273760519,6278826.67678035
+245,Limoux,Sénéchaussée de Limoux,Sénéchaussée de Limoux,Toulouse,2,2,1,,19622,11206,Limoux,Limoux,636291.535355389,6217822.77308436
+246,Gévaudan,Bailliage de Gévaudan,"Bailliage de Gévaudan, séant à Mende",Montpellier,1,1,1,,21932,48095,Mende,Mende,739778.419257994,6380053.84101054
+247,Montpellier,Sénéchaussée de Montpellier,Sénéchaussée de Montpellier,Montpellier,2,2,1,,23741,34172,Montpellier,Montpellier,770781.092091255,6279507.83330968
+248,Nîmes,Sénéchaussée de Nîmes,Sénéchaussée de Nîmes,Montpellier,2,2,1,,25041,30189,Nismes,Nîmes,809396.092584647,6305150.61419068
+249,Le Puy-en-Velay,Sénéchaussée du Puy-en-Velay,Sénéchaussée du Puy-en-Velay,Montpellier,2,2,1,,28294,43157,Le Puy en Velay,Le Puy-en-Velay,769675.504921215,6438610.32316027
+250,Toulouse,Sénéchaussée de Toulouse,Sénéchaussée de Toulouse,Toulouse,2,2,1,,37818,31555,Toulouse,Toulouse,574178.700961694,6279608.48612485
+251,Bas-Vivarais,Sénéchaussée du Bas-Vivarais,"Sénéchaussée du Bas-Vivarais, séant à Villeneuve-de-Berg",Montpellier,2,2,1,,40341,07341,Villeneuve de Berc,Villeneuve-de-Berg,819296.874576307,6385347.78165523
+252,Roussillon et Vallespir,Viguerie de Roussillon et Vallespir,Viguerie de Roussillon et Vallespir,Perpignan,3,19,1,,26522,66136,Perpignan,Perpignan,691371.661583227,6177563.89617927
+253,Conflent et Capsir,Viguerie de Conflent et Capsir,Viguerie de Conflent et Capsir,Perpignan,3,19,1,,27867,66149,Prades,Prades,652521.442447525,6168781.02158218
+254,Cerdagne,Viguerie de Cerdagne,Viguerie de Cerdagne,Perpignan,3,19,1,,35119,66167,Sallagousa,Saillagouse,620894.218166688,6151609.14827173
+255,Dijon,Bailliage de Dijon,Bailliage de Dijon,Dijon,1,1,2,,11845,21231,Dijon,Dijon,854217.8955084099,6693401.1908494
+256,Beaune,Bailliage de Beaune,Bailliage de Beaune,Dijon,1,1,3,255,3277,21054,Beaune,Beaune,839654.734474046,6659837.0260793
+257,Auxonne,Bailliage d'Auxonne,Bailliage d'Auxonne,Dijon,1,1,3,255,2077,21038,Auxonne,Auxonne,880764.595350689,6679804.85530636
+258,Nuits,Bailliage de Nuits,Bailliage de Nuits,Dijon,1,1,3,255,25373,21464,Nuÿs,Nuits-Saint-Georges,847808.8636028901,6672624.57308034
+259,Saint-Jean-de-Losne,Bailliage de Saint-Jean-de-Losne,Bailliage de Saint-Jean-de-Losne,Dijon,1,1,3,255,3508,21554,Saint Jean de Losne,Saint-Jean-de-Losne,871683.451588415,6669433.56164436
+260,Autun,Bailliage d'Autun,Bailliage d'Autun,Dijon,1,1,2,,2040,71014,Autun,Autun,798766.92627352,6650904.71726595
+261,Montcenis,Bailliage de Montcenis,Bailliage de Montcenis,Dijon,1,1,3,260,23247,71309,Montcenis,Montcenis,805942.728424245,6633209.38747433
+262,Semur-en-Brionnois,Bailliage de Semur-en-Brionnois,Bailliage de Semur-en-Brionnois,Dijon,1,1,3,260,35950,71510,Semur en Brionnois,Semur-en-Brionnais,784022.444255757,6574240.67819681
+263,Bourbon-Lancy,Bailliage de Bourbon-Lancy,Bailliage de Bourbon-Lancy,Dijon,1,1,3,260,3567,71047,Bourbon-Lancy,Bourbon-Lancy,759180.6578769929,6613553.59592254
+264,Chalon-sur-Saône,Bailliage de Chalon-sur-Saône,Bailliage de Chalon-sur-Saône,Dijon,1,1,1,,7729,71076,Chalons sur Saone,Chalon-sur-Saône,840899.241572132,6634270.22781712
+265,Semur-en-Auxois,Bailliage de Semur-en-Auxois,Bailliage de Semur-en-Auxois,Dijon,1,1,2,,35949,21603,Semur en Auxois,Semur-en-Auxois,800343.711318339,6710890.33274552
+266,Avallon,Bailliage d'Avallon,Bailliage d'Avallon,Dijon,1,1,3,265,2116,89025,Avallon,Avallon,768389.3079265089,6710355.47362436
+267,Arnay-le-Duc,Bailliage d'Arnay-le-Duc,Bailliage d'Arnay-le-Duc,Dijon,1,1,3,265,1299,21023,Arnay le Duc,Arnay-le-Duc,812633.310937975,6671207.03695773
+268,Saulieu,Bailliage de Saulieu,Bailliage de Saulieu,Dijon,1,1,3,265,35491,21584,Saulieu,Saulieu,792859.8118897279,6687359.35187562
+269,La Montagne,Bailliage de La Montagne,"Bailliage de La Montagne, séant à Châtillon-sur-Seine",Dijon,1,1,1,,8837,21154,Chatillon,Châtillon-sur-Seine,817697.10266288,6752043.19314953
+270,Charolles,Bailliage de Charolles,Bailliage de Charolles,Dijon,1,1,1,,8506,71106,Charolles,Charolles,797912.0006820119,6593514.60798869
+271,Mâcon,Bailliage de Mâcon,Bailliage de Mâcon,Dijon,1,1,1,,20502,71270,Macon,Mâcon,840970.77805875,6580171.25140029
+272,Auxerre,Bailliage d'Auxerre,Bailliage d'Auxerre,Dijon,1,1,1,,2069,89024,Auxerre,Auxerre,742446.401300769,6744262.33282382
+273,Bar-sur-Seine,Bailliage de Bar-sur-Seine,Bailliage de Bar-sur-Seine,Dijon,1,1,1,,2764,10034,Bar sur Seine,Bar-sur-Seine,802375.660643833,6780207.57021631
+274,Bourg-en-Bresse,Bailliage de Bourg-en-Bresse,Bailliage de Bourg-en-Bresse,Dijon,1,1,1,,5260,01053,Bourg en Bresse,Bourg-en-Bresse,871777.012545739,6569645.33771896
+275,Belley,Bailliage de Belley,Bailliage de Belley,Dijon,1,1,1,,3569,01034,Belley,Belley,908912.188098963,6521281.87794907
+276,Gex,Bailliage de Gex,Bailliage de Gex,Dijon,1,1,1,,15436,01173,Gex le Chateau,Gex,935154.254275027,6586032.0243211
+277,Trévoux,Sénéchaussée de Trévoux,Sénéchaussée de Trévoux,Dijon,2,2,1,,38196,01427,Trevoux,Trévoux,837510.825398535,6539464.12458114
+278,Marches communes,Pays des Marches communes,Pays des Marches communes franches de Poitou et de Bretagne,Poitiers,3,10,1,,23091,85146,Montaigu,Montaigu-Vendée,372505.8263032,6661443.15669905
+279,Vesoul,Bailliage de Vesoul,Bailliage de Vesoul,Besançon,1,1,2,,39644,70550,Vesoul,Vesoul,936924.817078538,6729380.49362652
+280,Baume-les-Dames,Bailliage de Baume-les-Dames,Bailliage de Baume-les-Dames,Besançon,1,1,3,279,3207,25047,Baume les Dames,Baume-les-Dames,953579.5700431271,6700037.04916396
+281,Gray,Bailliage de Gray,Bailliage de Gray,Besançon,1,1,3,279,16107,70279,Gray,Gray,895254.5387590399,6708086.52353185
+282,Lons-le-Saunier,Bailliage de Lons-le-Saunier,Bailliage de Lons-le-Saunier,Besançon,1,1,2,,19995,39300,Lons le Saunié,Lons-le-Saunier,895197.72275528,6622538.24988224
+283,Arbois,Bailliage d'Arbois,Bailliage d'Arbois,Besançon,1,1,3,282,1057,39013,Arbois,Arbois,911112.947027267,6648443.09401787
+284,Orgelet,Bailliage d'Orgelet,Bailliage d'Orgelet,Besançon,1,1,3,282,25686,39397,Orgelet,Orgelet,900069.846765392,6605772.84055709
+285,Poligny,Bailliage de Poligny,Bailliage de Poligny,Besançon,1,1,3,282,27379,39434,Poligny,Poligny,906349.415904477,6640856.96883995
+286,Pontarlier,Bailliage de Pontarlier,Bailliage de Pontarlier,Besançon,1,1,3,282,27494,25462,Pontarlier,Pontarlier,955283.71872316,6650527.76941652
+287,Salins,Bailliage de Salins,Bailliage de Salins,Besançon,1,1,3,282,35116,39500,Salins,Salins-les-Bains,918914.036983118,6652990.44475245
+288,Saint-Claude,Bailliage de Saint-Claude,Bailliage de Saint-Claude,Besançon,1,1,3,282,30977,39478,St Claude,Saint-Claude,919991.413325045,6591453.17080582
+289,Besançon,Bailliage de Besançon,Bailliage de Besançon,Besançon,1,1,1,,3928,25056,Besancon,Besançon,928499.129900994,6686816.20197695
+290,Dôle,Bailliage de Dôle,Bailliage de Dôle,Besançon,1,1,2,,11908,39198,Dole,Dole,888835.604026146,6668754.937682
+291,Ornans,Bailliage d'Ornans,Bailliage d'Ornans,Besançon,1,1,3,290,25771,25434,Ornans,Ornans,938304.576103182,6671960.85939663
+292,Quingey,Bailliage de Quingey,Bailliage de Quingey,Besançon,1,1,3,290,28496,25475,Quingey,Quingey,918598.284526509,6670997.37595784
+293,Orange,Principauté d'Orange,Principauté d'Orange,Grenoble,3,11,1,,25645,84087,Orange,Orange,844731.150289821,6339258.26115289
+294,Ustaritz,Bailliage d'Ustaritz,Bailliage d'Ustaritz (pays des Basques),Bordeaux,1,1,1,,38499,64547,Ustaritz,Ustaritz,338994.953393804,6265773.04585228
+295,Lille,Gouvernance de Lille,Gouvernance de Lille (Flandre wallonne),Lille,3,6,1,,19581,59350,Lille,Lille,704072.488293178,7059441.83582145
+296,Douai,Gouvernance de Douai,Gouvernance de Douai (Flandre wallonne),Lille,3,6,1,,12105,59178,Douay,Douai,705631.211647554,7030339.01410124
+297,Bailleul,Bailliage de Bailleul,Bailliage de Bailleul (Flandre maritime),Lille,1,1,1,,2412,59043,Belle ou Bailleul en Flandre,Bailleul,681180.125939081,7071249.59820446
+298,Soule,Pays de Soule,Pays de Soule,Auch,3,10,1,,21613,64371,Mauleon,Mauléon-Licharre,384130.969493296,6243895.63374205
+299,Pamiers,Sénéchaussée de Pamiers,Comté de Foix (Sénéchaussée de Pamiers),Auch,2,2,1,,26103,09225,Pamiers,Pamiers,586853.917403882,6225130.99539492
+300,Cambrai,Bailliage de Cambrai,Bailliage de Cambrai (province de Cambrésis),Valenciennes,1,1,1,,6666,59122,Cambrai,Cambrai,716792.767855692,7008666.13350817
+301,Bigorre,Pays de Bigorre,Pays de Bigorre,Auch,3,10,2,,37084,65440,Tarbe,Tarbes,462243.418945896,6241480.42924587
+302,Rustaing,Pays de Rustaing,Pays de Rustaing,Auch,3,10,3,301,34644,65397,St Sever de Rustan,Saint-Sever-de-Rustan,474889.716479708,6254162.10407286
+303,Arras,Gouvernance d'Arras,Gouvernance d'Arras,Lille,3,6,2,,1348,62041,Arras,Arras,684302.8024459661,7021264.15482028
+304,Saint-Pol,Sénéchaussée de Saint-Pol,Sénéchaussée de Saint-Pol,Lille,2,2,3,303,34254,62767,St Pol,Saint-Pol-sur-Ternoise,652603.62389123,7031473.90932919
+305,Saint-Omer,Bailliage de Saint-Omer,Bailliage de Saint-Omer,Lille,1,1,3,303,33826,62765,St Omer,Saint-Omer,647740.475643869,7072649.08682757
+306,Béthune,Gouvernance de Béthune,Gouvernance de Béthune,Lille,3,6,3,303,4023,62119,Béthune,Béthune,674435.211174891,7048099.70201433
+307,Aire,Bailliage d'Aire,Bailliage d'Aire,Lille,1,1,3,303,292,62014,Aire,Aire-sur-la-Lys,657249.030816592,7060351.67170313
+308,Lens,Bailliage de Lens,Bailliage de Lens,Lille,1,1,3,303,19196,62498,Lens,Lens,688075.473670406,7037111.90253577
+309,Bapaume,Bailliage de Bapaume,Bailliage de Bapaume,Lille,1,1,3,303,2595,62080,Bapaume,Bapaume,689343.225974258,7000604.73410247
+310,Hesdin,Bailliage de Hesdin,Bailliage de Hesdin,Lille,1,1,3,303,17079,62447,Hesdin,Hesdin,631376.740871622,7031140.12146441
+311,Navarre,Royaume de Navarre,Royaume de Navarre,Auch,3,16,1,,32582,64485,St Jean Pied de Port,Saint-Jean-Pied-de-Port,355368.464432441,6238685.26062442
+312,Valenciennes (ville),Ville de Valenciennes,Ville de Valenciennes,Valenciennes,3,20,1,,38657,59606,Valenciennes,Valenciennes,737411.269728379,7029164.90570791
+313,Le Quesnoy,Bailliage du Quesnoy,Bailliage du Quesnoy,Valenciennes,1,1,2,,28414,59481,Le Quesnoy,Le Quesnoy,745515.063755604,7016956.07618603
+314,Valenciennes (prévôté),Prévôté de Valenciennes,Prévôté-le-Comte de Valenciennes,Valenciennes,3,13,3,313,38657,59606,Valenciennes,Valenciennes,737411.269728379,7029164.90570791
+315,Saint-Amand,Prévôté de Saint-Amand,Prévôté de Saint-Amand,Valenciennes,3,13,3,313,30314,59526,St Amant,Saint-Amand-les-Eaux,730374.9582621231,7039018.85958835
+316,Mortagne (prévôté),Prévôté de Mortagne,Prévôté de Mortagne,Valenciennes,3,13,3,313,24047,59418,Mortagne,Mortagne-du-Nord,732282.27614828,7045312.8233567
+317,Bouchain,Prévôté de Bouchain,Prévôté de Bouchain,Valenciennes,3,13,3,313,5046,59092,Bouchain,Bouchain,722619.99305141,7020731.0530409
+318,Condé,Baronnie de Condé,Baronnie de Condé,Valenciennes,3,3,3,313,25193,59153,Condé,Condé-sur-l'Escaut,742003.468991347,7039242.31133578
+319,Avesnes,Bailliage d'Avesnes,Bailliage d'Avesnes,Valenciennes,1,1,2,,2166,59036,Avesnes,Avesnes-sur-Helpe,766262.35886315,7003215.78261065
+320,Givet,Prévôté de Givet,Prévôté de Givet,Valenciennes,3,13,3,319,15577,08190,Givet,Givet,830545.004354272,7005942.94984664
+321,Maubeuge,Prévôté de Maubeuge,Prévôté de Maubeuge,Valenciennes,3,13,3,319,21595,59392,Maubeuge,Maubeuge,769414.048941405,7020316.72023697
+322,Bavay,Prévôté de Bavay,Prévôté de Bavay,Valenciennes,3,13,3,319,3011,59053,Bavay,Bavay,756932.238647653,7022464.6414589
+323,Fumay,Prévôté de Fumay,Prévôté de Fumay,Valenciennes,3,13,3,319,14933,08185,Fumay,Fumay,822488.880633988,6989658.84312071
+324,Revin,Prévôté de Revin,Prévôté de Revin,Valenciennes,3,13,3,319,29039,08363,Revin,Revin,817711.899891629,6983863.54539807
+325,Strasbourg,Ville de Strasbourg,Ville de Strasbourg,Strasbourg,3,20,1,,36842,67482,Strasbourg,Strasbourg,1049992.48086016,6842024.63308381
+326,Villes impériales,Les Dix villes impériales,Les Dix villes impériales,Strasbourg,3,20,1,,35751,67462,Schlesttstat,Sélestat,1030394.74332683,6804771.23729194
+327,Colmar et Schlestadt,Districts de Colmar et Schlestadt,Districts de Colmar et Schlestadt réunis à Colmar,Strasbourg,3,5,1,,9899,68066,Colmar,Colmar,1024126.28270303,6784583.17871347
+328,Belfort et Huningue,Districts de Belfort et Huningue,Districts de Belfort et Huningue réunis à Belfort,Strasbourg,3,5,1,,3469,90010,Belfort,Belfort,988914.875354949,6733788.94582671
+329,Haguenau et Wissembourg,Districts de Haguenau et Wissembourg,Districts de Haguenau et Wissembourg réunis à Haguenau,Strasbourg,3,5,1,,16562,67180,Haguenau,Haguenau,1051354.58226791,6868050.67120276
+330,Metz (ville),Ville de Metz,Ville de Metz,Metz,3,20,1,,22347,57463,Metz,Metz,931873.0027461411,6895772.23607502
+331,Metz (bailliage),Bailliage de Metz,Bailliage de Metz,Metz,1,1,1,,22347,57463,Metz,Metz,931873.0027461411,6895772.23607502
+332,Thionville,Bailliage de Thionville,Bailliage de Thionville,Metz,1,1,1,,37479,57672,Thionville,Thionville,930182.188656864,6922237.70408156
+333,Sarrelouis,Bailliage de Sarrelouis,Bailliage de Sarrelouis,Metz,1,1,1,,,,,,,
+334,Longwy,Bailliage de Longwy,Bailliage de Longwy,Metz,1,1,1,,19987,54323,Longwy,Longwy,899924.211247824,6939109.92031239
+335,Sarrebourg,Bailliage de Sarrebourg,Bailliage de Sarrebourg,Metz,1,1,2,,35385,57630,Sarrebourg,Sarrebourg,998006.848635702,6855936.04589731
+336,Phalsbourg,Prévôté de Phalsbourg,Prévôté de Phalsbourg,Metz,3,13,3,335,26732,57540,Phalsbourg,Phalsbourg,1012838.6140295,6860413.53503455
+337,Toul,Bailliage de Toul,Bailliage de Toul,Metz,1,1,1,,37808,54528,Toul,Toul,912868.759029992,6845544.18454862
+338,Vic,Bailliage de Vic,Bailliage de Vic,Metz,1,1,1,,39739,57712,Vic,Vic-sur-Seille,959393.417941454,6859386.32710488
+339,Verdun,Bailliage de Verdun,Bailliage de Verdun,Metz,1,1,2,,39383,55545,Verdun,Verdun,873796.3278261831,6898164.32869115
+340,Marville,Prévôté de Marville,Prévôté de Marville,Metz,3,13,3,339,21481,55324,Marville,Marville,878112.474865062,6930877.80268076
+341,Clermont-en-Argonne,Bailliage de Clermont-en-Argonne,Bailliage de Clermont-en-Argonne,Metz,1,1,1,,9699,55117,Clermont en Argonne,Clermont-en-Argonne,851194.740505471,6891558.81474155
+342,Sedan,Bailliage de Sedan,Bailliage de Sedan,Metz,1,1,2,,35814,08409,Sedan,Sedan,840041.97145262,6957592.45139681
+343,Château-Regnault,Prévôté châtellenie de Château-Regnault,Prévôté châtellenie de Château-Regnault,Metz,3,14,3,342,8703,08081,Château Regnaul,Bogny-sur-Meuse,825569.45454822,6975037.644291
+344,Mouzon,Bailliage de Mouzon,Bailliage de Mouzon,Metz,1,1,1,,24352,08311,Mouzon,Mouzon,850072.565393535,6947183.20606534
+345,Mohon,Bailliage de Mohon,Bailliage de Mohon,Metz,1,1,1,,22667,08480,Mohon,Villers-Semeuse,825186.822392556,6962868.01477445
+346,Carignan,Bailliage de Carignan,Bailliage de Carignan,Metz,1,1,2,,6939,08090,Carignan,Carignan,856684.755074788,6950306.91859396
+347,Montmédy,Prévôté de Montmédy,Prévôté de Montmédy,Metz,3,13,3,346,23674,55351,Montmedy,Montmédy,871362.580581498,6938151.71052112
+348,Nancy,Bailliage de Nancy,Bailliage de Nancy,Nancy,1,1,1,,24537,54395,Nancy,Nancy,934268.47950516,6848337.07367219
+349,Lunéville,Bailliage de Lunéville,Bailliage de Lunéville,Nancy,1,1,1,,20356,54329,Luneville,Lunéville,958163.250125326,6837869.3041393
+350,Blamont,Bailliage de Blamont,Bailliage de Blamont,Nancy,1,1,1,,4414,54077,Blamont,Blâmont,983253.873047871,6839070.43469341
+351,Rosières,Bailliage de Rosières,Bailliage de Rosières,Nancy,1,1,1,,29689,54462,Rosieres aux Salines,Rosières-aux-Salines,945754.874107261,6837624.64487867
+352,Vezelise,Bailliage de Vezelise,Bailliage de Vezelise,Nancy,1,1,1,,39694,54563,Vezelise,Vézelise,928109.859877946,6825198.7226852
+353,Nomeny,Bailliage de Nomeny,Bailliage de Nomeny,Nancy,1,1,1,,25165,54400,Nomeny,Nomeny,936422.230176083,6870365.03793598
+354,Mirecourt,Bailliage de Mirecourt,Bailliage de Mirecourt,Nancy,1,1,1,,22591,88304,Mirecourt,Mirecourt,932075.2204396171,6804424.96576555
+355,Charmes,Bailliage de Charmes,Bailliage de Charmes,Nancy,1,1,1,,8465,88090,Charmes,Charmes,943759.701364367,6813006.5816114
+356,Châtel-sur-Moselle,Bailliage de Châtel-sur-Moselle,Bailliage de Châtel-sur-Moselle,Nancy,1,1,1,,8729,88094,Chatel sur Moselle,Châtel-sur-Moselle,951468.365231978,6806953.96176064
+357,Darney,Bailliage de Darney,Bailliage de Darney,Nancy,1,1,1,,11624,88124,Darney,Darney,926742.035774628,6780440.85888836
+358,Neufchâteau,Bailliage de Neufchâteau,Bailliage de Neufchâteau,Nancy,1,1,1,,24736,88321,Neufchateau,Neufchâteau,899680.526042904,6809549.50618643
+359,Saint-Dié,Bailliage de Saint-Dié,Bailliage de Saint-Dié,Nancy,1,1,1,,31211,88413,St Diey,Saint-Dié-des-Vosges,992827.056924082,6805537.99410198
+360,Épinal,Bailliage d'Épinal,Bailliage d'Épinal,Nancy,1,1,1,,12739,88160,Epinal,Épinal,956502.746213941,6791523.64227568
+361,Bruyières,Bailliage de Bruyères,Bailliage de Bruyères,Nancy,1,1,1,,6174,88078,Bruyeres,Bruyères,976150.7670969201,6796271.56551271
+362,Remiremont,Bailliage de Remiremont,Bailliage de Remiremont,Nancy,1,1,1,,28882,88383,Remiremont,Remiremont,967565.057811633,6774598.3881535
+363,Sarreguemines,Bailliage de Sarreguemines,Bailliage de Sarreguemines,Nancy,1,1,1,,35361,57631,Sarreguemine,Sarreguemines,996851.162028041,6897726.04956591
+364,Dieuze,Bailliage de Dieuze,Bailliage de Dieuze,Nancy,1,1,1,,11826,57177,Dieuze,Dieuze,973060.198864317,6863330.69851905
+365,Château-Salins,Bailliage de Château-Salins,Bailliage de Château-Salins,Nancy,1,1,1,,8711,57132,Chateau Salins,Château-Salins,957506.702859886,6863675.02066161
+366,Bitche,Bailliage de Bitche,Bailliage de Bitche,Nancy,1,1,1,,4356,57089,Bitche,Bitche,1023305.26983527,6892611.24572133
+367,Lixheim,Bailliage de Lixheim,Bailliage de Lixheim,Nancy,1,1,1,,19744,57407,Lixheim,Lixheim,1004245.89767067,6860768.93716846
+368,Fenestrange,Bailliage de Fenestrange,Bailliage de Fenestrange,Nancy,1,1,1,,13671,57210,Fenestrange,Fénétrange,994886.57197669,6868127.66860337
+369,Boulay,Bailliage de Boulay,Bailliage de Boulay,Nancy,1,1,1,,5160,57097,Boulay,Boulay-Moselle,954642.3358991219,6903824.0097231
+370,Bouzonville,Bailliage de Bouzonville,Bailliage de Bouzonville,Nancy,1,1,1,,5514,57106,Bouzonville,Bouzonville,957074.241087814,6916006.03465161
+372,Bar-le-Duc,Bailliage de Bar-le-Duc,Bailliage de Bar-le-Duc,Nancy,1,1,1,,2763,55029,Bar le Duc,Bar-le-Duc,859260.440811913,6854587.8840381
+373,Lamarche,Bailliage de Lamarche,Bailliage de Lamarche,Nancy,1,1,1,,21031,88258,La Marche,Lamarche,907148.349002264,6777890.26340033
+374,Pont-à-Mousson,Bailliage de Pont-à-Mousson,Bailliage de Pont-à-Mousson,Nancy,1,1,1,,27491,54431,Pont à Mousson,Pont-à-Mousson,923843.50322382,6871490.8105781
+375,Bourmont,Bailliage de Bourmont,Bailliage de Bourmont,Nancy,1,1,1,,5347,52064,Bourmont,Bourmont-entre-Meuse-et-Mouzon,892360.4568896201,6791300.39699342
+376,Commercy,Bailliage de Commercy,Bailliage de Commercy,Nancy,1,1,1,,10028,55122,Commercy,Commercy,890454.372923349,6854705.25641641
+377,Saint-Mihiel,Bailliage de Saint-Mihiel,Bailliage de Saint-Mihiel,Nancy,1,1,1,,33739,55463,St Mihiel,Saint-Mihiel,886228.163333377,6868478.17494239
+378,Thiaucourt,Bailliage de Thiaucourt,Bailliage de Thiaucourt,Nancy,1,1,1,,37412,54518,Thiaucourt,Thiaucourt-Regniéville,909866.900938245,6876502.16396821
+379,Étain,Bailliage d'Étain,Bailliage d'Étain,Nancy,1,1,1,,13187,55181,Estain,Étain,892073.537382834,6904664.68409761
+380,Briey,Bailliage de Briey,Bailliage de Briey,Nancy,1,1,1,,5926,54099,Briey,Val de Briey,914009.004689083,6909433.29539881
+381,Longuyon,Bailliage de Longuyon,Bailliage de Longuyon,Nancy,1,1,1,,19979,54322,Longuion,Longuyon,888615.388642468,6930611.77900311
+382,Villers-la-Montagne,Bailliage de Villiers-la-Montagne,Bailliage de Villiers-la-Montagne,Nancy,1,1,1,,40486,54575,Villers la Montagne,Villers-la-Montagne,904536.284282546,6933824.15098331
+383,Aix,Sénéchaussée d'Aix,Sénéchaussée d'Aix,Aix,2,2,1,,320,13001,Aix,Aix-en-Provence,897740.077887662,6272911.62727547
+384,Arles (sénéchaussée),Sénéchaussée d'Arles,Sénéchaussée d'Arles,Aix,2,2,1,,1256,13004,Arles,Arles,831363.22087179,6287792.27444021
+385,Arles (ville et territoire),Ville et terroire d'Arles,Ville et terroir d'Arles,Aix,3,20,1,,1256,13004,Arles,Arles,831363.22087179,6287792.27444021
+386,Marseille,Sénéchaussée de Marseille,Sénéchaussée de Marseille,Aix,2,2,1,,21387,13055,Marseille,Marseille,892923.3352800281,6247062.52426739
+387,Draguignan,Sénéchaussée de Draguignan,Sénéchaussée de Draguignan,Aix,2,2,1,,12198,83050,Draguignan,Draguignan,980151.0135148891,6277314.9745639
+388,Grasse,Sénéchaussée de Grasse,Sénéchaussée de Grasse,Aix,2,2,1,,16069,06069,Grasse,Grasse,1016584.63245063,6292198.87477029
+389,Castellane,Sénéchaussée de Castellane,Sénéchaussée de Castellane,Aix,2,2,1,,7090,04039,Castellane,Castellane,982445.8944197471,6311572.41522275
+390,Forcalquier,Sénéchaussée de Forcalquier,Sénéchaussée de Forcalquier,Aix,2,2,1,,14341,04088,Forcalquier,Forcalquier,923069.3887859531,6321726.20085854
+391,Digne,Sénéchaussée de Digne,Sénéchaussée de Digne,Aix,2,2,1,,11835,04070,Digne,Digne-les-Bains,959029.268199498,6337909.85612599
+392,Sisteron,Sénéchaussée de Sisteron,Sénéchaussée de Sisteron,Aix,2,2,1,,36408,04209,Sisteron,Sisteron,935478.6815620899,6347849.92575899
+393,Barcelonnette,Sénéchaussée de Barcelonnette,Sénéchaussée de Barcelonnette,Aix,2,2,1,,2645,04019,Barcelonnette,Barcelonnette,990857.616829794,6371937.78087571
+394,Toulon,Sénéchaussée de Toulon,Sénéchaussée de Toulon,Aix,2,2,1,,37812,83137,Toulon,Toulon,938608.8245416021,6229497.72657643
+395,Brignoles,Sénéchaussée de Brignoles,Sénéchaussée de Brignoles,Aix,2,2,1,,5936,83023,Brignolle,Brignoles,948053.149051744,6261110.27766859
+396,Hyères,Sénéchaussée d'Hyères,Sénéchaussée d'Hyères,Aix,2,2,1,,17134,83069,Hyeres,Hyères,954747.837711495,6229449.65937254
+397,Rennes,Sénéchaussée de Rennes,Sénéchaussée de Rennes,Rennes,2,2,1,,28930,35238,Rennes,Rennes,351869.823690404,6789643.91270451
+398,Hennebont,Juridiction royale d'Hennebont,Juridiction royale d'Hennebont,Rennes,3,9,1,,16939,56083,Hennebon,Hennebont,230490.465937613,6763531.0751093
+399,Brest,Juridiction royale de Brest,Juridiction royale de Brest,Rennes,3,9,1,,5761,29019,Brest,Brest,146573.241687167,6836205.99442605
+400,Léon,Juridiction royale de Léon,Juridiction royale de Léon à Lesneven,Rennes,3,9,1,,19288,29124,Lesneven,Lesneven,161019.410820365,6855122.18182484
+401,Dinan,Sénéchaussée de Dinan,Sénéchaussée de Dinan,Rennes,2,2,1,,11851,22050,Dinan,Dinan,326847.65809466,6829179.78683236
+402,Ploërmel,Sénéchaussée de Ploërmel,Sénéchaussée de Ploërmel,Rennes,2,2,1,,27166,56165,Ploermel,Ploërmel,297252.005425131,6772807.13537662
+403,Fougères,Sénéchaussée de Fougères,Sénéchaussée de Fougères,Rennes,2,2,1,,14453,35115,Fougeres,Fougères,388999.233556456,6813991.11009365
+404,Hédé,Siège royale de Hédé,Siège royale de Hédé,Rennes,3,17,1,,16885,35130,Hede,Hédé-Bazouges,344035.710028197,6810191.12041034
+405,Saint-Aubin-du-Cormier,Juridiction royale de Saint-Aubin-du-Cormier,Juridiction royale de Saint-Aubin-du-Cormier,Rennes,3,9,1,,30556,35253,Aubin,Saint-Aubin-du-Cormier,373721.088397347,6804559.37841535
+406,Nantes,Sénéchaussée de Nantes,Sénéchaussée de Nantes,Rennes,2,2,1,,24557,44109,Nantes,Nantes,355548.020942501,6689598.34833609
+407,Guérande,Siège royal de Guérande,Siège royal de Guérande,Rennes,3,17,1,,16345,44069,Guerrande,Guérande,290280.927681363,6706053.67936744
+408,Vannes,Sénéchaussée de Vannes,Sénéchaussée de Vannes,Rennes,2,2,1,,38837,56260,Vannes,Vannes,267889.630180758,6744070.5162287
+409,Auray,Sénéchaussée d'Auray,Sénéchaussée d'Auray,Rennes,2,2,1,,1879,56007,Auray,Auray,251451.714103233,6746706.67369717
+410,Ruis,Siège royal de Ruis,Siège royal de Ruis,Rennes,3,17,1,,32165,56214,St Gildas,Saint-Gildas-de-Rhuys,260890.971890386,6727309.30792806
+411,Carhaix,Siège royale de Carhaix,Siège royale de Carhaix,Rennes,3,17,1,,6937,29024,Carhaix,Carhaix-Plouguer,213252.077865064,6817715.03417243
+412,Châteaulin,Juridiction royale de Châteaulin,Juridiction royale de Châteaulin,Rennes,3,9,1,,8664,29026,Chateaulin,Châteaulin,173898.323639143,6812122.04497704
+413,Châteauneuf-du-Faou,Sénéchaussée de Châteauneuf-du-Faou,Sénéchaussée de Châteauneuf-du-Faou,Rennes,2,2,1,,8695,29027,Chateauneuf du Faou,Châteauneuf-du-Faou,194208.190178704,6809198.91835541
+414,Gourin,Siège royal de Gourin,Siège royal de Gourin,Rennes,3,17,1,,15826,56066,Gourin,Gourin,209077.719284565,6802671.69591411
+415,Quimperlé,Sénéchaussée de Quimperlé,Sénéchaussée de Quimperlé,Rennes,2,2,1,,28472,29233,Quimperle,Quimperlé,210909.707257362,6772769.45810154
+416,Quimper,Sénéchaussée de Quimper,Sénéchaussée de Quimper,Rennes,2,2,1,,28471,29232,Quimper Corentin,Quimper,171324.164788852,6789945.73872208
+417,Concarneau,Sénéchaussée de Concarneau,Sénéchaussée de Concarneau,Rennes,2,2,1,,10060,29039,Concarneau,Concarneau,183432.12552242,6775405.61887858
+418,Morlaix,Sénéchaussée de Morlaix,Sénéchaussée de Morlaix,Rennes,2,2,1,,24000,29151,Morlaix,Morlaix,196953.948657292,6852559.52915797
+419,Tréguier,Sénéchaussée de Tréguier,Sénéchaussée de Tréguier à Lannion,Rennes,2,2,1,,18665,22113,-,Lannion,225741.545705852,6867437.50002132
+420,Saint-Brieuc,Juridiction royale de Saint-Brieuc,Juridiction royale de Saint-Brieuc,Rennes,3,9,1,,30795,22278,St Brieuc,Saint-Brieuc,274945.385858012,6839202.80708931
+421,Jugon,Juridiction royale de Jugon,Juridiction royale de Jugon,Rennes,3,9,1,,17979,22084,Jugon,Jugon-les-Lacs - Commune nouvelle,306438.780951352,6825362.25103533
+431,Bastia,Juridiction de Bastia,Juridiction de Bastia,Corse,3,8,1,,2849,2B033,,Bastia,1228512.53060254,6199404.58117826
+432,Ajaccio,Juridiction d'Ajaccio,Juridiction d'Ajaccio,Corse,3,8,1,,339,2A004,,Ajaccio,1176426.60576953,6108966.09071854
+433,Aleria,Juridiction d'Aleria,Juridiction d'Aleria,Corse,3,8,1,,7549,2B087,,Cervione,1235323.11653651,6158862.51663507
+434,Bonifacio,Juridiction de Bonifacio,Juridiction de Bonifacio,Corse,3,8,1,,4806,2A041,,Bonifacio,1216252.32520969,6051944.52480587
+435,Calvi,Juridiction de Calvi,Juridiction de Calvi,Corse,3,8,1,,6619,2B050,,Calvi,1172899.43036551,6180347.4805449
+436,Cap Corse,Juridiction de Cap Corse,Juridiction de Cap Corse,Corse,3,8,1,,29453,2B261,,Rogliano,1223638.51705529,6227587.27759923
+437,Corte,Juridiction de Corte,Juridiction de Corte,Corse,3,8,1,,10403,2B096,,Corte,1207481.87428299,6153724.81912562
+438,La Porta d'Ampugnani,Juridiction de La Porta d'Ampugnani,Juridiction de La Porta d'Ampugnani,Corse,3,8,1,,27649,2B246,,La Porta,1223083.09732273,6168040.9508517
+439,Nebbio,Juridiction de Nebbio,Juridiction de Nebbio,Corse,3,8,1,,25531,2B185,,Oletta,1221424.01619739,6191299.19499913
+440,Sartène,Juridiction de Sartène,Juridiction de Sartène,Corse,3,8,1,,35406,2A272,,Sartène,1198660.52010436,6076584.38861842
+441,Vico,Juridiction de Vico,Juridiction de Vico,Corse,3,8,1,,39752,2A348,,Vico,1179646.95971535,6136083.01074339
+442A,Vienne,Élection de Vienne,Élection de Vienne,Grenoble,3,21,1,,39839,38544,Vienne,Vienne,846334.619845397,6493537.9175521
+442B,Romans,Élection de Romans,Élection de Romans,Grenoble,3,21,1,,29521,26281,Romans,Romans-sur-Isère,861456.642186073,6440577.88351259
+442C,Grenoble,Élection de Grenoble,Élection de Grenoble,Grenoble,3,21,1,,16147,38185,Grenoble,Grenoble,914070.209075996,6457870.39179373
+442D,Valence,Élection de Valence,Élection de Valence,Grenoble,3,21,1,,38655,26362,Valence,Valence,849172.186657328,6427718.05019949
+442E,Gap,Élection de Gap,Élection de Gap,Grenoble,3,21,1,,15035,05061,Gap,Gap,944380.811982612,6389149.42628998
+442F,Montélimar,Élection de Montélimar,Élection de Montélimar,Grenoble,3,21,1,,23337,26198,Montelimart,Montélimar,839040.618888839,6385928.6726778
+443,Béarn,Souveraineté de Béarn,Souveraineté de Béarn,Auch,3,18,1,,26299,64445,Pau,Pau,426484.256074666,6250461.00034094
+444,Arches et Charleville,Principauté d'Arches et Charleville,Principauté d'Arches et Charleville,Metz,3,11,1,,8443,08105,Charleville,Charleville-Mézières,823927.36537913,6964969.24794281
+445,Bassigny-Barrois,Province du Bassigny-Barrois,Province du Bassigny-Barrois,Nancy,3,12,1,,,,,,,

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas des collectes 1789</title>
+<!-- Polices servies localement (paquets @fontsource, licence OFL) : aucune requête vers un tiers. -->
+<link rel="stylesheet" href="assets/fonts/spectral-400.css">
+<link rel="stylesheet" href="assets/fonts/spectral-400-italic.css">
+<link rel="stylesheet" href="assets/fonts/spectral-600.css">
+<link rel="stylesheet" href="assets/fonts/ibm-plex-mono-400.css">
+<link rel="stylesheet" href="assets/fonts/ibm-plex-mono-500.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="entete">
+  <h1>Atlas des collectes 1789</h1>
+  <p class="entete-sous">Où sont les cahiers de doléances que nous avons récupérés, dénombrés ou attendus, paroisse par paroisse.
+    <span id="genere"></span></p>
+  <div class="outils">
+    <a class="lien-page" href="a-propos.html">À propos</a>
+    <label class="recherche">
+      <span class="visually-hidden">Chercher un lieu</span>
+      <input id="recherche" type="search" list="lieux-liste" placeholder="Chercher un lieu…" autocomplete="off">
+      <datalist id="lieux-liste"></datalist>
+    </label>
+    <div class="segment" role="group" aria-label="Affichage">
+      <button id="btn-carte" type="button" class="actif" aria-pressed="true">Carte</button>
+      <button id="btn-liste" type="button" aria-pressed="false">Liste</button>
+    </div>
+  </div>
+</header>
+
+<main class="corps">
+  <section class="scene" id="scene" aria-label="Carte">
+    <svg id="carte" role="img" aria-labelledby="carte-titre">
+      <title id="carte-titre">Royaume de France en 1789, bailliages et sénéchaussées, un point par paroisse dont un cahier a été collecté</title>
+    </svg>
+    <div class="bulle" id="bulle" hidden></div>
+    <div class="zoom">
+      <button id="zoom-plus" type="button" aria-label="Agrandir">+</button>
+      <button id="zoom-moins" type="button" aria-label="Réduire">−</button>
+      <button id="zoom-reset" type="button" aria-label="Vue d'ensemble">⌂</button>
+    </div>
+    <p class="fond-note">Fond : royaume et bailliages de 1789 d'après l'<em>Atlas des bailliages</em> de Brette (1904), vectorisé par Gay, Gobbi et Goñi (2024, CC BY 4.0). Paroisses et population de 1793 d'après <em>Des chefs-lieux de Cassini aux communes de France</em> (EHESS, CC BY 3.0 FR).</p>
+  </section>
+
+  <section class="liste" id="liste" hidden aria-label="Liste des lieux">
+    <div class="tableau-cadre">
+      <table id="tableau">
+        <thead><tr><th>Lieu</th><th>Bailliage</th><th>Dép.</th><th>Dépôt</th><th class="num">Documents</th><th class="num">Vues</th><th class="num">Hab. 1793</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="rail">
+    <section class="bloc" aria-labelledby="legende-titre">
+      <h2 id="legende-titre">Dépôts</h2>
+      <p class="aide">Cocher pour filtrer. La forme du point dit l'état de la collecte, la couleur dit le dépôt.</p>
+      <ul class="legende" id="legende"></ul>
+    </section>
+    <section class="bloc" aria-labelledby="etats-titre">
+      <h2 id="etats-titre">États</h2>
+      <ul class="etats">
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt collecte"/></svg> collecté</li>
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt en-cours"/></svg> en cours</li>
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt denombre"/></svg> dénombré, pas collecté</li>
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt annonce"/></svg> annoncé, hors ligne</li>
+        <li><svg width="18" height="18"><rect x="4" y="4" width="10" height="10" class="chef-lieu"/></svg> chef‑lieu d'un bailliage dont un cahier d'ordre est en ligne (bailliage teinté)</li>
+      </ul>
+    </section>
+    <section class="bloc" aria-labelledby="couverture-titre">
+      <h2 id="couverture-titre">Représentativité</h2>
+      <p class="aide" id="royaume"></p>
+      <fieldset class="teinte">
+        <legend class="visually-hidden">Teinte des bailliages</legend>
+        <label><input type="radio" name="teinte" value="cahiers" checked> cahier d'ordre ou de bailliage connu</label>
+        <label><input type="radio" name="teinte" value="couverture"> part des communes de 1793 ayant un document</label>
+        <label><input type="radio" name="teinte" value="hyslop"> part des paroisses de Hyslop (1933) retrouvées dans un dépôt</label>
+        <label><input type="radio" name="teinte" value="editions"> cahiers de paroisses dans une édition imprimée numérisée</label>
+      </fieldset>
+      <ul class="degres" aria-label="Degrés de couverture">
+        <li><i data-degre="1"></i>&lt; 10 %</li><li><i data-degre="2"></i>10–25</li><li><i data-degre="3"></i>25–50</li><li><i data-degre="4"></i>50–75</li><li><i data-degre="5"></i>≥ 75 %</li>
+      </ul>
+      <ul class="degres editions-legende" aria-label="Éditions imprimées">
+        <li><i data-edition="paroisses"></i>paroisses éditées</li><li><i data-edition="autre"></i>cahiers généraux, clergé ou étude seulement</li>
+      </ul>
+      <p class="aide" id="hyslop1933-total"></p>
+      <p class="aide" id="editions-total"></p>
+      <p class="aide" id="hyslop-total"></p>
+      <p class="aide">Ce que la deuxième teinte mesure : les communes de 1793 (une commune vaut presque toujours une paroisse ou communauté de 1789) pour lesquelles les dépôts cochés signalent au moins un document — cahier ou procès‑verbal, collecté ou non. Ce qu'elle ne mesure pas : la part des cahiers <em>conservés</em>. C'est la troisième teinte qui la donne, par le seul inventaire national, le <em>Répertoire critique</em> de Hyslop (1933) : pour chaque bailliage, la part de ses paroisses listées qu'un dépôt coché montre aujourd'hui — un bailliage blanc y est un bailliage où Hyslop ne liste rien, ou dont aucun dépôt n'est en ligne. Le dénominateur de chaque dépôt reste aussi son propre inventaire, résumé dans la légende (« signalés », « collecté »). Population : recensement de l'an III (EHESS, CC BY 3.0 FR). La quatrième teinte dit si les cahiers de paroisses du bailliage ont été imprimés (Archives parlementaires, Commission Jaurès 1906‑1953, éditions locales 1868‑1949) et si ce livre est numérisé sur Gallica ou Internet Archive : du texte libre, sans licence à négocier ; le détail du bailliage donne les liens.</p>
+    </section>
+    <section class="bloc detail" id="detail" aria-live="polite">
+      <h2>Lieu</h2>
+      <p class="aide">Survoler un point pour le nom, cliquer pour le détail et les liens vers le portail d'archives.</p>
+    </section>
+  </aside>
+</main>
+
+<script src="assets/d3.min.js"></script>
+<script src="carte.js"></script>
+</body>
+</html>
