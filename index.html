@@ -22,8 +22,9 @@
     <a class="lien-page" href="a-propos.html">À propos</a>
     <label class="recherche">
       <span class="visually-hidden">Chercher un lieu</span>
-      <input id="recherche" type="search" list="lieux-liste" placeholder="Chercher un lieu…" autocomplete="off">
-      <datalist id="lieux-liste"></datalist>
+      <input id="recherche" type="search" placeholder="Chercher un lieu…" autocomplete="off"
+        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggestions">
+      <ul id="suggestions" class="suggestions" role="listbox" aria-label="Lieux trouvés" hidden></ul>
     </label>
     <div class="segment" role="group" aria-label="Affichage">
       <button id="btn-carte" type="button" class="actif" aria-pressed="true">Carte</button>

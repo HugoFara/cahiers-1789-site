@@ -77,6 +77,13 @@ a:hover { text-decoration-color: currentColor; }
 .entete-sous { grid-column: 1; margin: 0; color: var(--encre-2); max-width: 62ch; }
 .entete-sous #genere { color: var(--encre-3); font-family: var(--mono); font-size: 12px; }
 .outils { grid-column: 2; grid-row: 1 / 3; display: flex; gap: 12px; align-items: center; }
+.recherche { position: relative; }
+.suggestions { position: absolute; top: calc(100% + 4px); left: 0; right: 0; min-width: 240px; z-index: 20; margin: 0; padding: 4px 0; list-style: none;
+  background: var(--papier); border: 1px solid var(--trait-fort); border-radius: 3px; box-shadow: 0 6px 18px rgb(0 0 0 / 0.18); max-height: 340px; overflow-y: auto; }
+.suggestions li { padding: 6px 10px; font-size: 14px; cursor: pointer; }
+.suggestions li small { font: 11px var(--mono); color: var(--encre-3); margin-left: 4px; }
+.suggestions li[aria-selected="true"], .suggestions li:hover { background: var(--papier-2); }
+.suggestions li.vide { color: var(--encre-3); cursor: default; font-style: italic; }
 .recherche input {
   font: 14px var(--serif); color: var(--encre); background: var(--papier-2);
   border: 1px solid var(--trait); border-radius: 3px; padding: 7px 10px; width: 240px;

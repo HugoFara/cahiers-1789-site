@@ -13,7 +13,7 @@ const detail = document.getElementById("detail");
 const legende = document.getElementById("legende");
 const tbody = document.querySelector("#tableau tbody");
 const recherche = document.getElementById("recherche");
-const datalist = document.getElementById("lieux-liste");
+const suggestions = document.getElementById("suggestions");
 
 const etat = { sources: new Set(), actif: null, k: 1, teinte: "cahiers" };  // teinte : cahiers | couverture | hyslop | editions
 let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, zoom, circonscriptions, cahiersParBailliage;
@@ -395,16 +395,55 @@ function construireTableau(lieux) {
 }
 
 // ---------- recherche ----------
+// Sans accents ni casse ni ligatures (œ, æ), traits d'union et apostrophes comme des espaces, « St » pour « Saint » : « nimes »,
+// « st front » et « Saint‑Front » se retrouvent. Un nom porté par plusieurs lieux est proposé avec son bailliage.
+const plier = s => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/œ/g, "oe").replace(/æ/g, "ae")
+  .replace(/[\u2010-\u2015'’\-]/g, " ").replace(/\bste\b/g, "sainte").replace(/\bst\b/g, "saint").replace(/\s+/g, " ").trim();
 function construireRecherche(lieux) {
-  const noms = [...new Set(lieux.map(l => l.nom))].sort((a, b) => a.localeCompare(b, "fr"));
-  datalist.innerHTML = noms.map(n => `<option value="${n.replace(/"/g, "&quot;")}">`).join("");
-  recherche.addEventListener("change", () => {
-    const q = recherche.value.trim().toLowerCase();
-    const l = lieux.find(x => x.nom.toLowerCase() === q) || lieux.find(x => x.nom.toLowerCase().startsWith(q));
-    if (l) allerA(l);
+  // un lieu par village de Cassini (deux dépôts peuvent tenir la même paroisse)
+  const vus = new Map();
+  for (const l of lieux) if (!vus.has(l.cassini)) vus.set(l.cassini, l);
+  const index = [...vus.values()].map(l => ({ l, cle: plier(l.nom) })).sort((a, b) => a.l.nom.localeCompare(b.l.nom, "fr"));
+  const homonymes = d3.rollup(index, v => v.length, e => e.cle);
+  let trouves = [], actif = -1;
+  const fermer = () => { suggestions.hidden = true; recherche.setAttribute("aria-expanded", "false"); recherche.removeAttribute("aria-activedescendant"); actif = -1; };
+  const marquer = i => {
+    actif = i;
+    suggestions.querySelectorAll("li").forEach((li, k) => li.setAttribute("aria-selected", k === i ? "true" : "false"));
+    if (i >= 0) { recherche.setAttribute("aria-activedescendant", `sugg-${i}`); suggestions.children[i].scrollIntoView({ block: "nearest" }); }
+  };
+  const aller = e => { recherche.value = e.l.nom; fermer(); allerA(e.l); };
+  recherche.addEventListener("input", () => {
+    const q = plier(recherche.value);
+    if (q.length < 2) { fermer(); return; }
+    const debut = [], mot = [], dedans = [];
+    for (const e of index) {
+      if (e.cle.startsWith(q)) debut.push(e);
+      else if (e.cle.includes(" " + q)) mot.push(e);
+      else if (e.cle.includes(q)) dedans.push(e);
+    }
+    trouves = [...debut, ...mot, ...dedans].slice(0, 12);
+    suggestions.innerHTML = trouves.length ? trouves.map((e, i) => `<li id="sugg-${i}" role="option" aria-selected="false">${e.l.nom}${
+      homonymes.get(e.cle) > 1 || trouves.some(f => f !== e && f.cle === e.cle) ? ` <small>${e.l.bailliage} (${e.l.dept})</small>` : ""}</li>`).join("")
+      : `<li class="vide" role="option" aria-disabled="true">Aucun lieu de ce nom sur la carte</li>`;
+    suggestions.hidden = false;
+    recherche.setAttribute("aria-expanded", "true");
+    actif = -1;
   });
+  recherche.addEventListener("keydown", ev => {
+    if (suggestions.hidden || !trouves.length) return;
+    if (ev.key === "ArrowDown") { ev.preventDefault(); marquer((actif + 1) % trouves.length); }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); marquer((actif - 1 + trouves.length) % trouves.length); }
+    else if (ev.key === "Enter") { ev.preventDefault(); aller(trouves[Math.max(actif, 0)]); }
+    else if (ev.key === "Escape") fermer();
+  });
+  // pointerdown plutôt que click : le choix passe avant que le champ perde le focus
+  suggestions.addEventListener("pointerdown", ev => {
+    const li = ev.target.closest("li[id]");
+    if (li) { ev.preventDefault(); aller(trouves[+li.id.slice(5)]); }
+  });
+  recherche.addEventListener("blur", fermer);
 }
-
 function allerA(l) {
   const [x, y] = projection([l.lon, l.lat]);
   const { width, height } = scene.getBoundingClientRect();
