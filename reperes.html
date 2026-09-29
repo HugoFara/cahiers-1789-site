@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repères — Atlas des collectes 1789</title>
+<!-- Polices servies localement (paquets @fontsource, licence OFL) : aucune requête vers un tiers. -->
+<link rel="stylesheet" href="assets/fonts/spectral-400.css">
+<link rel="stylesheet" href="assets/fonts/spectral-400-italic.css">
+<link rel="stylesheet" href="assets/fonts/spectral-600.css">
+<link rel="stylesheet" href="assets/fonts/ibm-plex-mono-400.css">
+<link rel="stylesheet" href="assets/fonts/ibm-plex-mono-500.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page">
+<header class="entete">
+  <h1>Atlas des collectes 1789</h1>
+  <p class="entete-sous">Repères : comment la France a écrit ses cahiers de doléances au printemps 1789, et ce qu'il en reste.</p>
+  <nav class="outils" aria-label="Pages"><a class="lien-page" href="index.html">← la carte</a><a class="lien-page" href="a-propos.html">À propos</a></nav>
+</header>
+
+<main class="prose reperes">
+<div class="bulle" id="bulle" hidden></div>
+
+<p class="chapeau">En quelques semaines du printemps 1789, des dizaines de milliers d'assemblées, de la plus petite paroisse jusqu'au bailliage, ont écrit ce qu'elles avaient à dire au roi. Voici le déroulé, la mécanique et les chiffres, pour lire la carte.</p>
+
+<h2>Le déroulé</h2>
+<h3>Onze mois, d'une convocation à une révolution</h3>
+<div class="figure" id="frise"></div>
+<ul class="cle" aria-hidden="true">
+  <li><i style="background:var(--g-2)"></i>la convocation</li>
+  <li><i style="background:var(--g-1);opacity:.5;border-radius:2px"></i>les assemblées et leurs cahiers</li>
+  <li><i style="background:var(--encre)"></i>les États généraux, puis la Révolution</li>
+</ul>
+<details class="detail-frise">
+  <summary>Les dates et leurs sources</summary>
+  <ol class="frise-liste" id="frise-liste">
+    <li data-date="1788-08-08" data-phase="convocation" data-court="Convocation"><time>8 août 1788</time><p class="quoi">Un arrêt du Conseil du roi fixe la réunion des États généraux au 1er mai 1789.<a href="#s1">[1]</a></p></li>
+    <li data-date="1788-12-27" data-phase="convocation" data-court="Doublement du tiers"><time>27 décembre 1788</time><p class="quoi">Le Conseil décide que le tiers état aura autant de députés que le clergé et la noblesse réunis.<a href="#s2">[2]</a></p></li>
+    <li data-date="1789-01-24" data-phase="convocation" data-court="Règlement électoral"><time>24 janvier 1789</time><p class="quoi">Lettre de convocation, à Versailles pour le 27 avril, et règlement des élections : qui vote, où, et combien de députés.<a href="#s3">[3]</a><a href="#s4">[4]</a></p></li>
+    <li data-date="1789-02-24" data-fin="1789-04-14" data-phase="assemblees" data-court="Assemblées"><time>fin février – mi‑avril 1789</time><p class="quoi">Les paroisses, les villes, puis les bailliages se réunissent, écrivent leurs cahiers et élisent leurs députés. Dates lues sur les procès‑verbaux de la carte ; en Bretagne, convoquée plus tard, on se réunit en avril.<a href="#s12">[12]</a><a href="#s16">[16]</a></p></li>
+    <li data-date="1789-05-05" data-phase="revolution" data-court="Ouverture à Versailles"><time>5 mai 1789</time><p class="quoi">Ouverture des États généraux à Versailles, salle des Menus‑Plaisirs.<a href="#s5">[5]</a></p></li>
+    <li data-date="1789-05-19" data-phase="assemblees" data-court="Paris vote encore"><time>19 mai 1789</time><p class="quoi">Toutes les élections ne sont pas finies : Sieyès, député du tiers état de Paris, est élu ce jour‑là.<a href="#s7">[7]</a></p></li>
+    <li data-date="1789-06-17" data-phase="revolution" data-court="Assemblée nationale"><time>17 juin 1789</time><p class="quoi">Le tiers état, rejoint par dix‑neuf députés du clergé, se constitue en Assemblée nationale.<a href="#s5">[5]</a></p></li>
+    <li data-date="1789-06-20" data-phase="revolution" data-court="Jeu de paume"><time>20 juin 1789</time><p class="quoi">Leur salle fermée, les députés prêtent serment dans la salle du Jeu de paume.<a href="#s5">[5]</a></p></li>
+    <li data-date="1789-07-09" data-phase="revolution" data-court="Constituante"><time>9 juillet 1789</time><p class="quoi">L'Assemblée nationale se proclame Assemblée nationale constituante.<a href="#s5">[5]</a></p></li>
+    <li data-date="1789-07-14" data-phase="revolution" data-court="Bastille"><time>14 juillet 1789</time><p class="quoi">Prise de la Bastille.<a href="#s9">[9]</a></p></li>
+    <li data-date="1789-08-04" data-phase="revolution" data-court="Nuit du 4 août"><time>4 août 1789</time><p class="quoi">Abolition des privilèges.<a href="#s6">[6]</a></p></li>
+    <li data-date="1789-08-26" data-phase="revolution" data-court="Droits de l'homme"><time>26 août 1789</time><p class="quoi">Adoption de la Déclaration des droits de l'homme et du citoyen.<a href="#s8">[8]</a></p></li>
+  </ol>
+</details>
+
+<h2>La mécanique</h2>
+<h3>De la paroisse à Versailles</h3>
+<p>Le règlement du 24 janvier 1789 organise l'élection par étages. À chaque étage, une assemblée écrit un cahier et désigne des députés pour le porter à l'étage au‑dessus.<a href="#s4">[4]</a></p>
+<ol class="convocation">
+  <li class="etage">
+    <p class="etage-nom">1 · Dans chaque paroisse, ville et chapitre</p>
+    <div class="boites">
+      <div class="boite tiers"><span class="ordre">Tiers état · campagnes</span><b>L'assemblée des habitants</b><p>Les hommes de 25 ans inscrits au rôle des impôts. Elle écrit le cahier de la paroisse et élit ses députés : deux jusqu'à 200 feux, un de plus par centaine.</p><span class="art">art. XXV, XXXI</span></div>
+      <div class="boite tiers"><span class="ordre">Tiers état · villes</span><b>Les corporations, puis l'hôtel de ville</b><p>Chaque métier élit un délégué pour cent membres (deux pour les arts libéraux, le négoce). Réunis à l'hôtel de ville, ils écrivent le cahier de la ville.</p><span class="art">art. XXVI‑XXVIII</span></div>
+      <div class="boite clerge"><span class="ordre">Clergé</span><b>Chapitres et couvents</b><p>Un délégué pour dix chanoines, un par couvent. Les curés iront au bailliage en personne ou par procureur.</p><span class="art">art. X‑XII</span></div>
+      <div class="boite noblesse"><span class="ordre">Noblesse</span><b>Pas d'assemblée locale</b><p>Chaque noble se rend lui‑même au bailliage : ceux qui ont un fief, et les autres dès 25 ans.</p><span class="art">art. XII, XVI</span></div>
+    </div>
+  </li>
+  <li class="passage">↓ les députés portent les cahiers</li>
+  <li class="etage">
+    <p class="etage-nom">2 · Au bailliage secondaire, s'il y en a un</p>
+    <div class="boites">
+      <div class="boite tiers large"><span class="ordre">Tiers état</span><b>L'assemblée préliminaire</b><p>Les cahiers des paroisses et des villes sont fondus en un seul. Un quart des députés seulement le porte plus haut.</p><span class="art">art. XXXIII, XXXVIII</span></div>
+    </div>
+  </li>
+  <li class="passage">↓</li>
+  <li class="etage">
+    <p class="etage-nom">3 · Au bailliage principal</p>
+    <div class="boites">
+      <div class="boite trois large"><span class="ordre">Les trois ordres</span><b>L'assemblée du bailliage</b><p>Séance commune, puis chaque ordre à part : il rédige son cahier, le <em>cahier général</em>, et élit ses députés aux États généraux.</p><span class="art">art. XL, XLIII</span></div>
+    </div>
+  </li>
+  <li class="passage">↓</li>
+  <li class="etage">
+    <p class="etage-nom">4 · À Versailles, le 5 mai 1789</p>
+    <div class="boites">
+      <div class="boite final large"><b>Les États généraux</b><p>Environ 1 150 à 1 200 députés selon les décomptes, dont la moitié pour le tiers état.<a href="#s5">[5]</a><a href="#s10">[10]</a></p></div>
+    </div>
+  </li>
+</ol>
+<p class="source">Trois cas à part : le Dauphiné, dont les États provinciaux élisent directement 24 députés ; la Bretagne, où le haut clergé et la noblesse refusent d'envoyer des députés<a href="#s11">[11]</a> ; Paris, qui élit encore après l'ouverture<a href="#s7">[7]</a>. Les numéros d'articles renvoient au règlement du 24 janvier 1789<a href="#s4">[4]</a>.</p>
+
+<h2>Les députés des paroisses</h2>
+<h3>La règle a été suivie, sauf par les grosses communautés</h3>
+<p>Le règlement fixe le nombre de députés au nombre de <em>feux</em>, les foyers de la communauté<a href="#s4">[4]</a>. Nous l'avons vérifié sur <span data-chiffre="n-pv">409</span> procès‑verbaux manuscrits de huit départements. Jusqu'à 400 feux, la règle est suivie <span data-chiffre="n-conformes-400">358 sur 384</span> fois. Au‑delà, <span data-chiffre="n-conformes-plus">8 sur 25</span> fois seulement : les grosses communautés s'arrêtent à quatre ou cinq députés.</p>
+<div class="figure" id="fig-deputes"></div>
+<ul class="cle" aria-hidden="true">
+  <li><i class="trait"></i>la règle du 24 janvier 1789</li>
+  <li><i class="conforme"></i>procès‑verbal conforme</li>
+  <li><i class="ecart"></i>procès‑verbal qui s'en écarte</li>
+</ul>
+<p class="source">Chaque point est un procès‑verbal, lu à l'image ; survolez‑le pour son nom. Les points d'un même nombre de députés sont légèrement décalés pour rester visibles.<a href="#s16">[16]</a></p>
+
+<h2>Le calendrier</h2>
+<h3>Pas partout le même jour</h3>
+<p>Le règlement donnait des délais, pas une date. Les <span data-chiffre="n-dates">516</span> assemblées de paroisse que les archives datent sur la carte s'étalent sur six semaines : mi‑mars dans le Cantal et en Saône‑et‑Loire, fin mars dans le Velay, avril en Bretagne, où la convocation était plus tardive<a href="#s12">[12]</a>.</p>
+<div class="figure" id="fig-calendrier"></div>
+<p class="source">Nombre d'assemblées de paroisse par jour, d'après les dates des notices des archives<a href="#s16">[16]</a>. Seuls les quatre dépôts qui datent au moins trente assemblées sont montrés.</p>
+
+<h2>Ce qu'il en reste</h2>
+<h3>Des dizaines de milliers de cahiers, dont une partie seulement survit</h3>
+<div class="figure" id="fig-reste"></div>
+<p class="source">Rédigés : plus de 40 000 selon Shapiro et Markoff<a href="#s14">[14]</a>, environ 60 000 selon Jacobs<a href="#s15">[15]</a>. Conservés et publiés : le décompte de J. Brancolini en 1974, cité par Grateau<a href="#s13">[13]</a>. En ligne : les cahiers que signalent les portails d'archives de cette carte<a href="#s16">[16]</a>, un minimum, car d'autres départements en ont mis en ligne que nous n'avons pas encore recensés.</p>
+
+<h2>Les mots</h2>
+<dl class="mots">
+  <div><dt>Bailliage, sénéchaussée</dt><dd>Circonscription de la justice royale ; en 1789, elle sert de circonscription électorale.<a href="#s11">[11]</a></dd></div>
+  <div><dt>Les trois ordres</dt><dd>Clergé, noblesse et tiers état : chacun vote, écrit son cahier et élit ses députés à part.<a href="#s4">[4]</a></dd></div>
+  <div><dt>Tiers état</dt><dd>Tous ceux qui ne sont ni du clergé ni de la noblesse : paysans, artisans, marchands, bourgeois des villes.</dd></div>
+  <div><dt>Feu</dt><dd>Un foyer, un ménage : c'est sur ce compte que la paroisse élit ses députés. En Bretagne, en Dauphiné et en Provence, le « feu » est aussi une unité d'impôt, sans rapport direct avec les ménages.<a href="#s11">[11]</a></dd></div>
+  <div><dt>Cahier de doléances</dt><dd>Le texte où une assemblée écrit ses plaintes et ses demandes, article par article.</dd></div>
+  <div><dt>Procès‑verbal</dt><dd>Le compte rendu de l'assemblée : qui était présent, combien de feux, qui a été élu. Souvent relié au cahier.</dd></div>
+  <div><dt>Cahier général</dt><dd>Le cahier d'un ordre pour tout le bailliage, écrit à partir des cahiers des paroisses ; c'est lui qui part à Versailles.<a href="#s4">[4]</a></dd></div>
+  <div><dt>États généraux</dt><dd>L'assemblée des députés des trois ordres de tout le royaume, réunie par le roi ; la précédente datait de 1614.<a href="#s10">[10]</a></dd></div>
+</dl>
+
+<h2>Sources</h2>
+<p class="source">Chaque lien a été ouvert, et le passage cité relu, le 29 septembre 2026.</p>
+<ol class="sources-liste">
+  <li id="s1"><i>Archives parlementaires</i>, 1re série, t. I, 1879, p. 387 : arrêt du Conseil du 8 août 1788 (Persée). <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_1417?pageId=T2_0387">persee.fr</a></li>
+  <li id="s2"><i>Archives parlementaires</i>, t. I : Résultat du Conseil du roi du 27 décembre 1788. <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_2951">persee.fr</a></li>
+  <li id="s3"><i>Archives parlementaires</i>, t. I : lettre du roi pour la convocation des États généraux, 24 janvier 1789. <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_2947">persee.fr</a></li>
+  <li id="s4"><i>Archives parlementaires</i>, t. I, p. 544‑550 : règlement du 24 janvier 1789 ; art. X‑XVI <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_1417?pageId=T2_0545">p. 545</a>‑<a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_1417?pageId=T2_0546">546</a>, art. XXV‑XXXIII <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_1417?pageId=T2_0547">p. 547</a>, art. XXXIV‑XXXVIII <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_1417?pageId=T2_0548">p. 548</a>, art. XL‑XLIII <a href="https://www.persee.fr/doc/arcpa_0000-0000_1879_num_1_1_1417?pageId=T2_0549">p. 549</a>.</li>
+  <li id="s5">Assemblée nationale, « 1789 – Assemblée nationale constituante ». <a href="https://www.assemblee-nationale.fr/dyn/histoire-et-patrimoine/revolution-francaise/assemblee-nationale-constituante">assemblee-nationale.fr</a></li>
+  <li id="s6">Assemblée nationale, « Nuit du 4 août : abolition des privilèges ». <a href="https://www.assemblee-nationale.fr/dyn/histoire-et-patrimoine/revolution-francaise/nuit-du-4-aout-abolition-des-privileges">assemblee-nationale.fr</a></li>
+  <li id="s7">Assemblée nationale, base Sycomore, fiche d'Emmanuel‑Joseph Sieyès. <a href="https://www2.assemblee-nationale.fr/sycomore/fiche?num_dept=12322">assemblee-nationale.fr</a></li>
+  <li id="s8">Archives nationales, « La Déclaration des droits de l'homme et du citoyen de 1789 ». <a href="https://www.archives-nationales.culture.gouv.fr/evenements/la-declaration-des-droits-de-lhomme-et-du-citoyen-de-1789">archives-nationales.culture.gouv.fr</a></li>
+  <li id="s9">BnF, Passerelles, « Prise de la Bastille ». <a href="https://passerelles.essentiels.bnf.fr/fr/chronologie/article/36e10ddd-6108-412d-bed6-92cae8f8df45-prise-la-bastille">bnf.fr</a></li>
+  <li id="s10">Encyclopédie Larousse, « états généraux » : 1 139 députés, dont 578 du tiers ; l'Assemblée nationale<a href="#s5">[5]</a> en compte 1 196, dont 598. <a href="https://www.larousse.fr/encyclopedie/divers/%C3%A9tats_g%C3%A9n%C3%A9raux/49635">larousse.fr</a></li>
+  <li id="s11">Ph. Sagnac, « La France en 1789 et les États généraux, d'après les travaux de M. Armand Brette », <i>Revue d'histoire moderne et contemporaine</i>, t. 6, 1904 : le feu <a href="https://www.persee.fr/doc/rhmc_0996-2743_1904_num_6_3_4331?pageId=T1_0169">p. 169</a>, les circonscriptions <a href="https://www.persee.fr/doc/rhmc_0996-2743_1904_num_6_3_4331?pageId=T1_0174">p. 174</a>, Dauphiné et Bretagne <a href="https://www.persee.fr/doc/rhmc_0996-2743_1904_num_6_3_4331?pageId=T1_0178">p. 178</a>.</li>
+  <li id="s12">Archives départementales du Finistère, « Les cahiers de doléances de 1789 (sous‑série 10 B) » : les réunions bretonnes prévues le 1er avril 1789. <a href="https://archives.finistere.fr/faites-vos-recherches/les-cahiers-de-doleances-de-1789-sous-serie-10-b">archives.finistere.fr</a></li>
+  <li id="s13">Ph. Grateau, <i>Les cahiers de doléances. Une relecture culturelle</i>, Presses universitaires de Rennes, 2001, « Dossier documentaire » : le décompte de J. Brancolini (1974). <a href="https://books.openedition.org/pur/23386">openedition.org</a></li>
+  <li id="s14">J. Markoff, page de <i>Revolutionary Demands</i> (G. Shapiro et J. Markoff, Stanford University Press, 1998) : « Over forty thousand of these cahiers were produced. » <a href="https://sites.pitt.edu/~jm2/revolutionary_demands.htm">pitt.edu</a></li>
+  <li id="s15">J. Jacobs, « Automated Content Analysis and the 1789 Cahiers de Doléances », Stanford, 2018, note 4. <a href="https://cs.stanford.edu/~jjacobs3/Jacobs-Cahiers_Paper_2018-06-01.pdf">stanford.edu (PDF)</a></li>
+  <li id="s16">Ce projet : catalogue des documents signalés par les portails d'archives, et procès‑verbaux lus à l'image ; méthode et chiffres dans la page <a href="a-propos.html">À propos</a>.</li>
+</ol>
+
+</main>
+<footer class="pied"><a href="index.html">La carte</a> · <a href="a-propos.html">À propos</a></footer>
+
+<script src="assets/d3.min.js"></script>
+<script src="reperes.js"></script>
+</body>
+</html>
