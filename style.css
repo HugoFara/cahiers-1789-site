@@ -14,14 +14,17 @@
   --encre-2: #55514a;
   --encre-3: #8a847a;
   --focus: #1f1e1a;
-  --ad22: #b5402f;
-  --ad56: #2a6f9e;
-  --ad62: #c08a1e;
-  --ad44: #6a4c9c;
-  --ad01: #2f9a4e;
-  --ad14: #3d5fcf;
-  --ad27: #d04c8f;
-  --ad29: #8a6d1f;          /* Finistère */
+  /* douze teintes ; deux dépôts voisins sur la carte n'ont jamais la même ni une proche */
+  --t-rouge: #b5402f; --t-bleu: #2a6f9e; --t-ocre: #b3801b; --t-violet: #6a4c9c; --t-vert: #2f9a4e; --t-indigo: #3d5fcf;
+  --t-rose: #d04c8f; --t-brun: #8a6d1f; --t-orange: #d9731f; --t-olive: #6b7d1a; --t-cyan: #1b8ca3; --t-bordeaux: #8c2f4f;
+  /* dépôt → teinte (un dépôt nouveau sans ligne ici sort en gris : .pt { --c } par défaut) */
+  --ad01: var(--t-vert); --ad02: var(--t-cyan); --ad07: var(--t-bleu); --ad14: var(--t-indigo); --ad15: var(--t-vert);
+  --ad16: var(--t-brun); --ad22: var(--t-rouge); --ad24: var(--t-bleu); --ad27: var(--t-rose); --ad29: var(--t-brun);
+  --ad30: var(--t-indigo); --ad34: var(--t-ocre); --ad41: var(--t-rose); --ad43: var(--t-bordeaux); --ad44: var(--t-violet);
+  --ad49: var(--t-olive); --ad52: var(--t-vert); --ad56: var(--t-bleu); --ad58: var(--t-ocre); --ad61: var(--t-orange);
+  --ad62: var(--t-ocre); --ad65: var(--t-violet); --ad70: var(--t-indigo); --ad71: var(--t-bordeaux); --ad76: var(--t-cyan);
+  --ad78: var(--t-orange); --ad7986: var(--t-rouge); --ad80: var(--t-rouge); --ad83: var(--t-rose); --ad89: var(--t-violet);
+  --ad91: var(--t-olive);
   --ed: #1f8a70;            /* éditions départementales : cahiers généraux hors AP */
   --ap: #55514a;            /* Archives parlementaires : encre, pas une teinte de plus */
   --ap-surface: #e6e2d6;    /* bailliages dotés d'un cahier général */
@@ -35,18 +38,18 @@
     --papier: #1b1b19; --papier-2: #242320; --mer: #1f2426; --terre: #2a2925; --terre-hors: #232220;
     --trait: #4a4741; --trait-fort: #8c867a; --encre: #ebe7dd; --encre-2: #b8b2a5; --encre-3: #7f796e;
     --focus: #ebe7dd; --bulle: #ebe7dd; --bulle-texte: #1b1b19;
-    --ad22: #d4634f; --ad56: #4f93c2; --ad62: #d6a23a; --ad44: #9370c4;
-    --ad01: #3fa85a; --ad14: #6f84e0; --ad27: #d9609e;
-    --ad29: #b08f3a; --ed: #3fae92; --ap: #b8b2a5; --ap-surface: #34322d;
+    --t-rouge: #d4634f; --t-bleu: #4f93c2; --t-ocre: #d6a23a; --t-violet: #9370c4; --t-vert: #3fa85a; --t-indigo: #6f84e0;
+    --t-rose: #d9609e; --t-brun: #b08f3a; --t-orange: #e8904a; --t-olive: #9aae3a; --t-cyan: #3fb3c9; --t-bordeaux: #c25a7c;
+    --ed: #3fae92; --ap: #b8b2a5; --ap-surface: #34322d;
   }
 }
 :root[data-theme="dark"] {
   --papier: #1b1b19; --papier-2: #242320; --mer: #1f2426; --terre: #2a2925; --terre-hors: #232220;
   --trait: #4a4741; --trait-fort: #8c867a; --encre: #ebe7dd; --encre-2: #b8b2a5; --encre-3: #7f796e;
   --focus: #ebe7dd; --bulle: #ebe7dd; --bulle-texte: #1b1b19;
-  --ad22: #d4634f; --ad56: #4f93c2; --ad62: #d6a23a; --ad44: #9370c4;
-  --ad01: #3fa85a; --ad14: #6f84e0; --ad27: #d9609e;
-  --ad29: #b08f3a; --ed: #3fae92; --ap: #b8b2a5; --ap-surface: #34322d;
+  --t-rouge: #d4634f; --t-bleu: #4f93c2; --t-ocre: #d6a23a; --t-violet: #9370c4; --t-vert: #3fa85a; --t-indigo: #6f84e0;
+  --t-rose: #d9609e; --t-brun: #b08f3a; --t-orange: #e8904a; --t-olive: #9aae3a; --t-cyan: #3fb3c9; --t-bordeaux: #c25a7c;
+  --ed: #3fae92; --ap: #b8b2a5; --ap-surface: #34322d;
 }
 
 * { box-sizing: border-box; }
@@ -115,8 +118,16 @@ a:hover { text-decoration-color: currentColor; }
 .pt.annonce { fill: none; stroke: var(--c); stroke-dasharray: 2 1.6; }
 .pt.actif { stroke: var(--encre); stroke-width: 2.2; }
 .etats .pt { --c: var(--encre-2); }
-.pt.ad22 { --c: var(--ad22); } .pt.ad56 { --c: var(--ad56); } .pt.ad62 { --c: var(--ad62); } .pt.ad44 { --c: var(--ad44); }
-.pt.ad01 { --c: var(--ad01); } .pt.ad14 { --c: var(--ad14); } .pt.ad27 { --c: var(--ad27); } .pt.ap { --c: var(--ap); } .pt.ad29 { --c: var(--ad29); } .pt.ed { --c: var(--ed); }
+.pt { --c: var(--encre-3); }
+.pt.ad01 { --c: var(--ad01); } .pt.ad02 { --c: var(--ad02); } .pt.ad07 { --c: var(--ad07); } .pt.ad14 { --c: var(--ad14); }
+.pt.ad15 { --c: var(--ad15); } .pt.ad16 { --c: var(--ad16); } .pt.ad22 { --c: var(--ad22); } .pt.ad24 { --c: var(--ad24); }
+.pt.ad27 { --c: var(--ad27); } .pt.ad29 { --c: var(--ad29); } .pt.ad30 { --c: var(--ad30); } .pt.ad34 { --c: var(--ad34); }
+.pt.ad41 { --c: var(--ad41); } .pt.ad43 { --c: var(--ad43); } .pt.ad44 { --c: var(--ad44); } .pt.ad49 { --c: var(--ad49); }
+.pt.ad52 { --c: var(--ad52); } .pt.ad56 { --c: var(--ad56); } .pt.ad58 { --c: var(--ad58); } .pt.ad61 { --c: var(--ad61); }
+.pt.ad62 { --c: var(--ad62); } .pt.ad65 { --c: var(--ad65); } .pt.ad70 { --c: var(--ad70); } .pt.ad71 { --c: var(--ad71); }
+.pt.ad76 { --c: var(--ad76); } .pt.ad78 { --c: var(--ad78); } .pt.ad7986 { --c: var(--ad7986); } .pt.ad80 { --c: var(--ad80); }
+.pt.ad83 { --c: var(--ad83); } .pt.ad89 { --c: var(--ad89); } .pt.ad91 { --c: var(--ad91); } .pt.ap { --c: var(--ap); }
+.pt.ed { --c: var(--ed); }
 .bulle {
   position: absolute; pointer-events: none; background: var(--bulle); color: var(--bulle-texte);
   padding: 6px 9px; border-radius: 3px; font-size: 13px; line-height: 1.35; max-width: 260px;
@@ -207,9 +218,6 @@ tbody tr:hover { background: var(--papier-2); }
   .scene { min-height: 60vh; }
   .rail { border-left: 0; border-top: 1px solid var(--trait); }
   .fond-note { display: none; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .pt { transition: r 120ms; }
 }
 
 /* ---- page de texte (a-propos.html) ---- */

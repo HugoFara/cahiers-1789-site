@@ -190,15 +190,15 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
 
   gPoints = g.append("g");
   const forme = l => donnees.sources.find(s => s.cle === l.source).forme === "carre" ? "rect" : "circle";
+  // position projetée et rayon calculés une fois : le zoom ne fait plus que les diviser
+  for (const l of lieux) { [l.x, l.y] = projection([l.lon, l.lat]); l.r = rayon(l.docs.length); }
+  for (const b of cahiersB) if (b.lon != null) [b.x, b.y] = projection([b.lon, b.lat]);
   const tri = lieux.slice().sort((a, b) => b.docs.length - a.docs.length);  // petits au-dessus
   gPoints.selectAll("circle").data(tri.filter(l => forme(l) === "circle")).join("circle")
-    .attr("cx", l => projection([l.lon, l.lat])[0])
-    .attr("cy", l => projection([l.lon, l.lat])[1])
-    .attr("r", l => rayon(l.docs.length));
+    .attr("cx", l => l.x).attr("cy", l => l.y).attr("r", l => l.r);
   gPoints.selectAll("rect").data(tri.filter(l => forme(l) === "rect")).join("rect")
-    .attr("x", l => projection([l.lon, l.lat])[0] - rayon(l.docs.length))
-    .attr("y", l => projection([l.lon, l.lat])[1] - rayon(l.docs.length))
-    .attr("width", l => 2 * rayon(l.docs.length)).attr("height", l => 2 * rayon(l.docs.length));
+    .attr("x", l => l.x - l.r).attr("y", l => l.y - l.r)
+    .attr("width", l => 2 * l.r).attr("height", l => 2 * l.r);
   gPoints.selectAll("circle, rect")
     .attr("class", l => `pt ${l.source} ${STATUT_CLASSE[statutDe(l)]}`)
     .attr("tabindex", 0)
@@ -209,21 +209,31 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
     .on("click", (ev, l) => choisir(l))
     .on("keydown", (ev, l) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); choisir(l); } });
 
+  // Les points gardent une taille lisible à l'écran, sans grossir avec le zoom. Redimensionner ~6 000
+  // éléments à chaque événement de zoom rendait le zoom lent : on le fait au plus une fois par image,
+  // seulement quand l'échelle a changé (pas en glissant), sur les nœuds directement.
+  const cercles = gPoints.selectAll("circle").nodes(), carres = gPoints.selectAll("rect").nodes(), chefs = gChefs.selectAll("rect").nodes();
+  let kTaille = 1, image = 0;
+  const redimensionner = () => {
+    image = 0;
+    if (etat.k === kTaille) return;
+    kTaille = etat.k;
+    const s = 1 / Math.sqrt(kTaille);
+    for (const n of cercles) n.setAttribute("r", n.__data__.r * s);
+    for (const n of carres) {
+      const l = n.__data__, r = l.r * s;
+      n.setAttribute("x", l.x - r); n.setAttribute("y", l.y - r); n.setAttribute("width", 2 * r); n.setAttribute("height", 2 * r);
+    }
+    for (const n of chefs) {
+      const b = n.__data__, r = 3.5 * s;
+      n.setAttribute("x", b.x - r); n.setAttribute("y", b.y - r); n.setAttribute("width", 2 * r); n.setAttribute("height", 2 * r);
+    }
+    gEtiquettes.attr("display", kTaille >= 2.5 ? null : "none").attr("font-size", `${11 / kTaille}px`);
+  };
   zoom = d3.zoom().scaleExtent([1, 14]).on("zoom", ev => {
     etat.k = ev.transform.k;
     g.attr("transform", ev.transform);
-    // les points gardent une taille lisible à l'écran, sans grossir avec le zoom
-    gPoints.selectAll("circle").attr("r", l => rayon(l.docs.length) / Math.sqrt(etat.k));
-    gPoints.selectAll("rect").each(function (l) {
-      const r = rayon(l.docs.length) / Math.sqrt(etat.k), [x, y] = projection([l.lon, l.lat]);
-      d3.select(this).attr("x", x - r).attr("y", y - r).attr("width", 2 * r).attr("height", 2 * r);
-    });
-    gChefs.selectAll("rect").each(function (b) {
-      const r = 3.5 / Math.sqrt(etat.k), [x, y] = projection([b.lon, b.lat]);
-      d3.select(this).attr("x", x - r).attr("y", y - r).attr("width", 2 * r).attr("height", 2 * r);
-    });
-    gEtiquettes.attr("display", etat.k >= 2.5 ? null : "none")
-      .attr("font-size", `${11 / etat.k}px`);
+    if (!image) image = requestAnimationFrame(redimensionner);
   });
   svg.call(zoom);
   document.getElementById("zoom-plus").onclick = () => svg.transition().call(zoom.scaleBy, 1.6);
