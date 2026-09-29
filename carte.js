@@ -259,6 +259,13 @@ function cadrer(lieux) {
   svg.transition().duration(600).call(zoom.transform, t);
 }
 
+// la cote sous la forme de citation que le dépôt demande (catalogue/construire.py, DEPOTS « mention »)
+function mention(d, cle) {
+  const m = donnees.sources.find(s => s.cle === cle)?.mention;
+  if (!d.cote || !m) return d.cote;
+  const gabarit = typeof m === "string" ? m : m.find(([prefixe]) => d.cote.startsWith(prefixe))?.[1];
+  return gabarit ? gabarit.replace("{cote}", d.cote) : d.cote;
+}
 function statutDe(l) { return donnees.sources.find(s => s.cle === l.source).statut; }
 function nomSource(cle) { return donnees.sources.find(s => s.cle === cle).nom; }
 
@@ -289,7 +296,7 @@ function choisir(l) {
   const s = donnees.sources.find(x => x.cle === l.source);
   const docs = l.docs.map(d => `
     <li>${d.url ? `<a href="${d.url}" target="_blank" rel="noopener">${d.titre}</a>` : d.titre}
-      <span class="meta">${[d.cote, d.vues ? `${d.vues} vues` : "", TEXTE_LIBELLE[d.texte], d.collecte !== "aucune" ? `${d.collecte === "partielle" ? "collecte partielle" : d.collecte === "texte" ? "texte collecté" : "images collectées"}` : "", d.note].filter(Boolean).join(" · ")}</span></li>`).join("");
+      <span class="meta">${[mention(d, l.source), d.vues ? `${d.vues} vues` : "", TEXTE_LIBELLE[d.texte], d.collecte !== "aucune" ? `${d.collecte === "partielle" ? "collecte partielle" : d.collecte === "texte" ? "texte collecté" : "images collectées"}` : "", d.note].filter(Boolean).join(" · ")}</span></li>`).join("");
   const methode = { alias: "graphie du portail ramenée au nom Cassini", prefixe: "rattaché à la première paroisse du nom", contenu: "nom contenu dans celui du village", bailliage: "cherché dans le bailliage nommé par le dépôt" }[l.methode];
   detail.innerHTML = `
     <h2>Lieu</h2>
@@ -315,7 +322,7 @@ function choisirBailliage(b) {
     const groupes = d3.group(b.docs.filter(d => d.depot === dep), libelleOrdre);
     return `<p class="commune"><span class="pastille${s.forme === "carre" ? " carre" : ""}" style="background:var(--${dep})"></span>${s.nom}</p><ol>${[...groupes].map(([ordre, docs]) => `
     <li><span class="ordre">${ordre}</span>${docs.map(d => `
-      <a href="${d.url}" target="_blank" rel="noopener">${d.titre}</a> <span class="meta">${[d.cote, d.vues ? `${d.vues} vues` : "", TEXTE_LIBELLE[d.texte]].filter(Boolean).join(" · ")}</span>`).join("<br>")}</li>`).join("")}</ol>`;
+      <a href="${d.url}" target="_blank" rel="noopener">${d.titre}</a> <span class="meta">${[mention(d, dep), d.vues ? `${d.vues} vues` : "", TEXTE_LIBELLE[d.texte]].filter(Boolean).join(" · ")}</span>`).join("<br>")}</li>`).join("")}</ol>`;
   }).join("");
   const q = circonscriptions.get(b.id);
   const parSource = q ? donnees.sources.filter(s => etat.sources.has(s.cle)).map(s => [s, couvertureDe(q, new Set([s.cle]))]).filter(([, v]) => v.lieux).map(([s, v]) => `
