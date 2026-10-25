@@ -44,7 +44,7 @@
       <button id="zoom-moins" type="button" aria-label="Réduire">−</button>
       <button id="zoom-reset" type="button" aria-label="Vue d'ensemble">⌂</button>
     </div>
-    <p class="fond-note">Fond : royaume et bailliages de 1789 d'après l'<em>Atlas des bailliages</em> de Brette (1904), vectorisé par Gay, Gobbi et Goñi (2024, CC BY 4.0). Paroisses et population de 1793 d'après <em>Des chefs-lieux de Cassini aux communes de France</em> (EHESS, CC BY 3.0 FR).</p>
+    <p class="fond-note">Fond : bailliages de 1789 d'après Brette (1904), vectorisés par Gay, Gobbi et Goñi (2024, CC BY 4.0) ; généralités : leurs bailliages réunis, contours approchés. Fleuves : tracé actuel simplifié (Natural Earth) ; le Rhin, déplacé au XIX<sup>e</sup> siècle, n'est pas tracé. Population de 1793 : EHESS (CC BY 3.0 FR).</p>
   </section>
 
   <section class="liste" id="liste" hidden aria-label="Liste des lieux">
@@ -60,17 +60,17 @@
     <p class="accueil">Première visite ? <a href="reperes.html">Les repères</a> racontent en images comment la France a écrit ses cahiers de doléances au printemps 1789, et ce qu'il en reste.</p>
     <section class="bloc" aria-labelledby="legende-titre">
       <h2 id="legende-titre">Dépôts</h2>
-      <p class="aide">Cocher pour filtrer. La forme du point dit l'état de la collecte, la couleur dit le dépôt.</p>
+      <p class="aide">Cocher pour filtrer : la carte et les disques ne comptent que les dépôts cochés.</p>
       <ul class="legende" id="legende"></ul>
     </section>
     <section class="bloc" aria-labelledby="etats-titre">
-      <h2 id="etats-titre">États</h2>
+      <h2 id="etats-titre">Ce que montre la carte</h2>
       <ul class="etats">
-        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt collecte"/></svg> collecté</li>
-        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt en-cours"/></svg> en cours</li>
-        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt denombre"/></svg> dénombré, pas collecté</li>
-        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt annonce"/></svg> annoncé, hors ligne</li>
-        <li><svg width="18" height="18"><rect x="4" y="4" width="10" height="10" class="chef-lieu"/></svg> chef‑lieu d'un bailliage dont un cahier d'ordre est en ligne (bailliage teinté)</li>
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt u-lire"/></svg> texte à lire ici, ligne à ligne en regard du manuscrit</li>
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="5" class="pt u-voir"/></svg> manuscrit à voir sur le site des archives</li>
+        <li><svg width="18" height="18"><rect x="4" y="4" width="10" height="10" class="pt u-imprime"/></svg> cahier imprimé (Archives parlementaires, éditions)</li>
+        <li><svg width="18" height="18"><circle cx="9" cy="9" r="8" class="tout" fill="var(--g-2)" fill-opacity="0.55" stroke="var(--g-2)"/><circle cx="9" cy="9" r="3.5" fill="var(--g-1)"/></svg> vue d'ensemble : un disque par bailliage, d'autant plus grand qu'il a de paroisses en ligne ; le disque intérieur, celles qu'on peut lire ici. Zoomer ou cliquer pour voir les paroisses.</li>
+        <li><svg width="18" height="18"><rect x="4" y="4" width="10" height="10" class="chef-lieu"/></svg> de près : chef‑lieu d'un bailliage dont un cahier d'ordre (clergé, noblesse, tiers) est en ligne</li>
       </ul>
     </section>
     <section class="bloc" aria-labelledby="couverture-titre">
@@ -78,7 +78,8 @@
       <p class="aide" id="royaume"></p>
       <fieldset class="teinte">
         <legend class="visually-hidden">Teinte des bailliages</legend>
-        <label><input type="radio" name="teinte" value="cahiers" checked> cahier d'ordre ou de bailliage connu</label>
+        <label><input type="radio" name="teinte" value="aucune" checked> aucune</label>
+        <label><input type="radio" name="teinte" value="cahiers"> cahier d'ordre ou de bailliage connu</label>
         <label><input type="radio" name="teinte" value="couverture"> part des communes de 1793 ayant un document</label>
         <label><input type="radio" name="teinte" value="hyslop"> part des paroisses de Hyslop (1933) retrouvées dans un dépôt</label>
         <label><input type="radio" name="teinte" value="editions"> cahiers de paroisses dans une édition imprimée numérisée</label>

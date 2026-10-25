@@ -3,7 +3,6 @@
 // (atlas des bailliages de Brette 1904, vectorisé par Gay, Gobbi et Goñi 2024, CC BY 4.0).
 // Tout est servi depuis ce dossier ; aucune requête vers un tiers.
 
-const STATUT_CLASSE = { "collecté": "collecte", "en cours": "en-cours", "dénombré": "denombre", "annoncé": "annonce" };
 const TEXTE_LIBELLE = { transcription: "transcription (PDF texte)", "édition": "transcription imprimée (images)", ocr: "texte OCR sur le portail", htr: "texte HTR", aucun: "" };
 
 const svg = d3.select("#carte");
@@ -15,8 +14,15 @@ const tbody = document.querySelector("#tableau tbody");
 const recherche = document.getElementById("recherche");
 const suggestions = document.getElementById("suggestions");
 
-const etat = { sources: new Set(), actif: null, k: 1, teinte: "cahiers" };  // teinte : cahiers | couverture | hyslop | editions
-let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, zoom, circonscriptions, cahiersParBailliage;
+const etat = { sources: new Set(), actif: null, k: 1, teinte: "aucune" };  // teinte : aucune | cahiers | couverture | hyslop | editions
+// Ce qu'on peut faire d'un lieu, du plus au moins : lire son texte ici, voir le manuscrit sur le portail des archives,
+// lire le cahier imprimé (Archives parlementaires, éditions). C'est la couleur du point ; le dépôt est dans la fiche.
+const USAGES = ["lire", "voir", "imprime"];
+const USAGE_LIBELLE = { lire: "texte à lire ici", voir: "manuscrit sur le site des archives", imprime: "cahier imprimé" };
+const usageDe = l => l.usage ??= l.docs.some(d => d.lire) ? "lire" : (l.source === "ap" || l.source === "ed") ? "imprime" : "voir";
+// En dessous de ce zoom, un disque par bailliage remplace les paroisses : la densité des dépôts va du compact au désert.
+const K_POINTS = 3;
+let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, gDisques, zoom, circonscriptions, cahiersParBailliage;
 const nombre = n => n.toLocaleString("fr-FR");
 const pourcent = (a, b) => { if (!b) return "—"; const x = 100 * a / b; return `${x.toLocaleString("fr-FR", x < 10 ? { minimumFractionDigits: 1, maximumFractionDigits: 1 } : { maximumFractionDigits: 0 })} %`; };
 let lieuxParBailliage;  // bailliage_id → lieux (toutes sources), pour la couverture
@@ -29,7 +35,10 @@ Promise.all([
   charger("ref/royaume_1789.geojson").then(r => r.json()),
   charger("ref/bailliages_1789.geojson").then(r => r.json()),
   charger("ref/bailliages_1789.csv").then(r => r.text()).then(d3.csvParse),
-]).then(([d, royaume, bailliages, tableB]) => {
+  charger("ref/generalites_1789.geojson").then(r => r.json()),
+  charger("ref/fleuves.geojson").then(r => r.json()),
+  charger("ref/villes_1789.csv").then(r => r.text()).then(d3.csvParse),
+]).then(([d, royaume, bailliages, tableB, generalites, fleuves, villes]) => {
   donnees = d;
   circonscriptions = new Map(d.circonscriptions.map(c => [c.id, c]));
   editions = new Map((d.editions ?? []).map(e => [e.id, e]));
@@ -38,7 +47,7 @@ Promise.all([
   document.getElementById("genere").textContent = `données du ${d.genere}`;
   construireLegende(d.sources);
   construireCouverture(d);
-  construireCarte(royaume, bailliages, new Map(tableB.map(b => [b.id, b])), d.lieux, d.bailliages ?? []);
+  construireCarte(royaume, bailliages, new Map(tableB.map(b => [b.id, b])), d.lieux, d.bailliages ?? [], { generalites, fleuves, villes });
   construireTableau(d.lieux);
   construireRecherche(d.lieux);
 }).catch(e => {
@@ -55,7 +64,6 @@ function construireLegende(sources) {
     li.innerHTML = `
       <input type="checkbox" id="src-${s.cle}" checked>
       <label class="nom" for="src-${s.cle}">
-        <span class="pastille${s.forme === "carre" ? " carre" : ""}" style="background:var(--${s.cle})"></span>
         <span>${s.nom}</span> <span class="statut">${s.statut}</span>
       </label>
       <span class="chiffres">${t.bailliages ? `<b>${t.bailliages}</b> bailliages · ` : ""}<b>${t.lieux}</b> ${t.bailliages ? "paroisses" : "lieux"} · <b>${t.signales}</b> doc. signalés${t.vues ? ` · <b>${nombre(t.vues)}</b> vues` : ""}${s.non_localises ? ` · ${s.non_localises} non localisé${s.non_localises > 1 ? "s" : ""}` : ""}<br>${collecteLibelle(t)}<br><b>${nombre(t.pop_1793)}</b> hab. en 1793, ${pourcent(t.pop_1793, donnees.royaume.pop_1793)} du royaume</span>
@@ -79,6 +87,7 @@ function collecteLibelle(t) {
 
 function appliquerFiltre() {
   gPoints.selectAll(".pt").attr("display", l => etat.sources.has(l.source) ? null : "none");
+  majDisques();
   // un bailliage reste teinté tant qu'un des dépôts qui lui donnent un cahier d'ordre est coché
   const visible = b => b && b.depots.some(d => etat.sources.has(d));
   g.selectAll(".bailliage.avec-cahier").classed("eteint", f => !visible(cahiersParBailliage.get(f.properties.BAIL_ID)));
@@ -114,7 +123,7 @@ function editionsDe(c) { return (c?.editions ?? []).map(id => editions.get(id)).
 function niveauEdition(c) { const es = editionsDe(c); return es.some(e => e.paroisses) ? "paroisses" : es.length ? "autre" : null; }
 function teinter() {
   const couverture = etat.teinte === "couverture", hy = etat.teinte === "hyslop", ed = etat.teinte === "editions";
-  svg.classed("teinte-couverture", couverture || hy).classed("teinte-editions", ed);
+  svg.classed("teinte-couverture", couverture || hy).classed("teinte-editions", ed).classed("teinte-aucune", etat.teinte === "aucune");
   g.selectAll(".bailliage").attr("data-degre", f => {
     const c = circonscriptions.get(f.properties.BAIL_ID);
     if (!c) return null;
@@ -140,7 +149,7 @@ function construireCouverture(d) {
 }
 
 // ---------- carte ----------
-function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
+function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   const avecCahier = cahiersParBailliage = new Map(cahiersB.map(b => [b.id, b]));
   const { width, height } = scene.getBoundingClientRect();
   svg.attr("viewBox", `0 0 ${width} ${height}`);
@@ -167,6 +176,14 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
     .on("pointermove", ev => placerBulle(ev))
     .on("pointerleave", () => { bulle.hidden = true; })
     .on("click", (ev, f) => choisirBailliage(avecCahier.get(f.properties.BAIL_ID) ?? { id: f.properties.BAIL_ID, ...tableB.get(f.properties.BAIL_ID), docs: [] }));
+  // le cadre du royaume, au-dessus des bailliages et sans les masquer : les fleuves (tracé actuel simplifié, le Rhin
+  // rectifié au XIXe siècle omis ; les affluents à partir d'un zoom ×2), puis les généralités, circonscriptions des
+  // intendants, en trait fort (bailliages de Brette réunis par généralité)
+  const gFleuves = g.append("g").attr("class", "fleuves");
+  gFleuves.selectAll("path").data(fond.fleuves.features).join("path")
+    .attr("d", chemin).attr("class", f => `fleuve rang-${f.properties.rang}`);
+  g.append("g").attr("class", "generalites").selectAll("path").data(fond.generalites.features).join("path")
+    .attr("d", chemin).attr("class", "generalite");
   // noms des bailliages, visibles quand on est assez près
   gEtiquettes = g.append("g").attr("class", "etiquettes").attr("display", "none");
   gEtiquettes.selectAll("text").data(bailliages.features).join("text")
@@ -200,7 +217,7 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
     .attr("x", l => l.x - l.r).attr("y", l => l.y - l.r)
     .attr("width", l => 2 * l.r).attr("height", l => 2 * l.r);
   gPoints.selectAll("circle, rect")
-    .attr("class", l => `pt ${l.source} ${STATUT_CLASSE[statutDe(l)]}`)
+    .attr("class", l => `pt u-${usageDe(l)}`)
     .attr("tabindex", 0)
     .attr("aria-label", l => `${l.nom}, ${nomSource(l.source)}`)
     .on("pointerenter", (ev, l) => montrerBulle(ev, l))
@@ -208,6 +225,45 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
     .on("pointerleave", () => { bulle.hidden = true; })
     .on("click", (ev, l) => choisir(l))
     .on("keydown", (ev, l) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); choisir(l); } });
+
+  // un disque par bailliage aux petites échelles, posé au centre du bailliage : son aire dit le nombre de paroisses
+  // ayant un document en ligne (dépôts cochés, un village compté une fois), le disque intérieur celles qu'on peut
+  // lire ici ; bleu s'il y a des manuscrits, creux s'il n'y a que de l'imprimé. Un clic zoome sur le bailliage.
+  const centres = new Map(bailliages.features.map(f => [f.properties.BAIL_ID, f]));
+  gDisques = g.append("g").attr("class", "disques");
+  const disques = gDisques.selectAll("g").data([...lieuxParBailliage.keys()].filter(id => centres.has(id))).join("g")
+    .attr("class", "disque")
+    .each(function (id) { const [x, y] = chemin.centroid(centres.get(id)); this.__xy = [x, y]; })
+    .attr("tabindex", 0)
+    .on("pointerenter", (ev, id) => { const c = compteBailliage(id), b = tableB.get(id);
+      montrerBulleTexte(ev, b?.nom_long ?? id, `${c.total} paroisse${c.total > 1 ? "s" : ""} avec un document en ligne : ${USAGES.filter(u => c[u]).map(u => `${c[u]} ${USAGE_LIBELLE[u]}`).join(", ")} · cliquer pour voir les paroisses`); })
+    .on("pointermove", ev => placerBulle(ev))
+    .on("pointerleave", () => { bulle.hidden = true; })
+    .on("click", (ev, id) => { bulle.hidden = true; zoomerSur(centres.get(id)); choisirBailliage(cahiersParBailliage.get(id) ?? { id, ...tableB.get(id), docs: [] }); })
+    .on("keydown", (ev, id) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); ev.currentTarget.dispatchEvent(new Event("click")); } });
+  disques.append("circle").attr("class", "tout");
+  disques.append("circle").attr("class", "lire");
+  majDisques();
+  gPoints.attr("display", "none");
+  gChefs.attr("display", "none");
+
+  // les villes d'intendance et de cour souveraine, au-dessus de tout : un point et un nom, à taille d'écran constante
+  const gVilles = g.append("g").attr("class", "villes");
+  for (const v of fond.villes) [v.x, v.y] = projection([+v.lon, +v.lat]);
+  const villes = gVilles.selectAll("g").data(fond.villes).join("g")
+    .attr("class", v => `ville${+v.cour ? " cour" : ""}${+v.intendance ? " intendance" : ""}`)
+    .attr("transform", v => `translate(${v.x},${v.y})`)
+    .on("pointerenter", (ev, v) => montrerBulleTexte(ev, v.nom, v.role))
+    .on("pointermove", ev => placerBulle(ev))
+    .on("pointerleave", () => { bulle.hidden = true; });
+  villes.append("circle").attr("r", v => +v.cour ? 3.6 : 2.8);
+  // le nom à droite du point, sauf là où deux villes se touchent : Versailles à gauche de Paris, Douai au-dessus
+  const PLACE = { Versailles: { x: -6, dy: "0.35em", ancre: "end" }, Douai: { x: 0, dy: "-0.75em", ancre: "middle" } };
+  villes.append("text").each(function (v) {
+    const p = PLACE[v.nom] ?? { x: 6, dy: "0.35em", ancre: "start" };
+    d3.select(this).attr("x", p.x).attr("dy", p.dy).attr("text-anchor", p.ancre).text(v.nom);
+  });
+  const noeudsVilles = villes.nodes();
 
   // Les points gardent une taille lisible à l'écran, sans grossir avec le zoom. Redimensionner ~6 000
   // éléments à chaque événement de zoom rendait le zoom lent : on le fait au plus une fois par image,
@@ -229,6 +285,13 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
       n.setAttribute("x", b.x - r); n.setAttribute("y", b.y - r); n.setAttribute("width", 2 * r); n.setAttribute("height", 2 * r);
     }
     gEtiquettes.attr("display", kTaille >= 2.5 ? null : "none").attr("font-size", `${11 / kTaille}px`);
+    gFleuves.classed("detail", kTaille >= 2);
+    for (const n of noeudsVilles) n.setAttribute("transform", `translate(${n.__data__.x},${n.__data__.y}) scale(${1 / kTaille})`);
+    for (const n of gDisques.node().children) n.setAttribute("transform", `translate(${n.__xy[0]},${n.__xy[1]}) scale(${1 / kTaille})`);
+    const proche = kTaille >= K_POINTS;
+    gDisques.attr("display", proche ? "none" : null);
+    gPoints.attr("display", proche ? null : "none");
+    gChefs.attr("display", proche ? null : "none");
   };
   zoom = d3.zoom().scaleExtent([1, 14]).on("zoom", ev => {
     etat.k = ev.transform.k;
@@ -247,6 +310,36 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB) {
     const r = scene.getBoundingClientRect();
     svg.attr("viewBox", `0 0 ${r.width} ${r.height}`);
   });
+}
+
+// le compte d'un bailliage par usage, sur les dépôts cochés, un village de Cassini compté une fois (à son meilleur usage)
+function compteBailliage(id) {
+  const meilleur = new Map();
+  for (const l of lieuxParBailliage.get(id) ?? []) {
+    if (!etat.sources.has(l.source)) continue;
+    const u = usageDe(l), v = meilleur.get(l.cassini);
+    if (!v || USAGES.indexOf(u) < USAGES.indexOf(v)) meilleur.set(l.cassini, u);
+  }
+  const c = { total: meilleur.size, lire: 0, voir: 0, imprime: 0 };
+  for (const u of meilleur.values()) c[u]++;
+  return c;
+}
+const rayonDisque = n => n ? 3 + 1.05 * Math.sqrt(n) : 0;  // aire ∝ nombre de paroisses ; 400 paroisses ≈ 24 px
+function majDisques() {
+  gDisques.selectAll("g.disque").each(function (id) {
+    const c = compteBailliage(id), k = etat.k;
+    this.setAttribute("transform", `translate(${this.__xy[0]},${this.__xy[1]}) scale(${1 / k})`);
+    this.style.display = c.total ? "" : "none";
+    this.classList.toggle("manuscrits", c.voir + c.lire > 0);
+    this.querySelector(".tout").setAttribute("r", rayonDisque(c.total));
+    this.querySelector(".lire").setAttribute("r", c.lire ? Math.max(2.5, rayonDisque(c.total) * Math.sqrt(c.lire / c.total)) : 0);
+  });
+}
+function zoomerSur(f) {
+  const [[x0, y0], [x1, y1]] = chemin.bounds(f);
+  const { width, height } = scene.getBoundingClientRect();
+  const k = Math.min(14, Math.max(K_POINTS + 0.5, 0.8 / Math.max((x1 - x0) / width, (y1 - y0) / height)));
+  svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2));
 }
 
 function cadrer(lieux) {
@@ -268,7 +361,6 @@ function mention(d, cle) {
 }
 // le texte publié du document (textes.py → texte.html), pour les dépôts dont la licence le permet
 const lire = d => d.lire ? ` <a class="lire" href="texte.html?id=${encodeURIComponent(d.id)}">Lire le texte</a>` : "";
-function statutDe(l) { return donnees.sources.find(s => s.cle === l.source).statut; }
 function nomSource(cle) { return donnees.sources.find(s => s.cle === cle).nom; }
 
 // ---------- bulle ----------
@@ -284,10 +376,13 @@ function montrerBulleTexte(ev, texte, petit = "") {
   bulle.hidden = false;
   placerBulle(ev);
 }
+// la bulle au-dessus du pointeur, gardée dans la scène : poussée vers l'intérieur près des bords, dessous près du haut
 function placerBulle(ev) {
-  const r = scene.getBoundingClientRect();
-  bulle.style.left = `${ev.clientX - r.left}px`;
-  bulle.style.top = `${ev.clientY - r.top}px`;
+  const r = scene.getBoundingClientRect(), w = bulle.offsetWidth, h = bulle.offsetHeight;
+  const x = ev.clientX - r.left, y = ev.clientY - r.top;
+  bulle.style.left = `${Math.min(Math.max(x, w / 2 + 8), r.width - w / 2 - 8)}px`;
+  bulle.style.top = `${y}px`;
+  bulle.classList.toggle("dessous", y - h - 12 < 8);
 }
 
 // ---------- détail ----------
