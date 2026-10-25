@@ -26,7 +26,7 @@ const TELEPHONE = matchMedia("(max-width: 640px)");
 const taille = () => TELEPHONE.matches ? 0.68 : 1;
 // En dessous de ce zoom, un disque par bailliage remplace les paroisses : la densité des dépôts va du compact au désert.
 const K_POINTS = 3;
-let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, gDisques, gActuelle, gNomsDep, gVoisins, gRoutes, gChemins, zoom, circonscriptions, cahiersParBailliage;
+let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, gPeuple, gActuelle, gNomsDep, gVoisins, gRoutes, gChemins, zoom, circonscriptions, cahiersParBailliage;
 const nombre = n => n.toLocaleString("fr-FR");
 const pourcent = (a, b) => { if (!b) return "—"; const x = 100 * a / b; return `${x.toLocaleString("fr-FR", x < 10 ? { minimumFractionDigits: 1, maximumFractionDigits: 1 } : { maximumFractionDigits: 0 })} %`; };
 let lieuxParBailliage;  // bailliage_id → lieux (toutes sources), pour la couverture
@@ -48,7 +48,8 @@ Promise.all([
   charger("ref/departements.geojson").then(r => r.json()),
   charger("ref/voisins_1789.csv").then(r => r.text()).then(d3.csvParse),
   charger("ref/routes_poste_1783.geojson").then(r => r.json()),
-]).then(([d, royaume, bailliages, tableB, generalites, fleuves, villes, hors, lacs, actuelle, departements, voisins, routes]) => {
+  charger("communautes.json").then(r => r.json()),
+]).then(([d, royaume, bailliages, tableB, generalites, fleuves, villes, hors, lacs, actuelle, departements, voisins, routes, peuple]) => {
   donnees = d;
   circonscriptions = new Map(d.circonscriptions.map(c => [c.id, c]));
   editions = new Map((d.editions ?? []).map(e => [e.id, e]));
@@ -57,7 +58,7 @@ Promise.all([
   document.getElementById("genere").textContent = `données du ${d.genere}`;
   construireLegende(d.sources);
   construireCouverture(d);
-  construireCarte(royaume, bailliages, new Map(tableB.map(b => [b.id, b])), d.lieux, d.bailliages ?? [], { generalites, fleuves, villes, hors, lacs, actuelle, departements, voisins, routes });
+  construireCarte(royaume, bailliages, new Map(tableB.map(b => [b.id, b])), d.lieux, d.bailliages ?? [], { generalites, fleuves, villes, hors, lacs, actuelle, departements, voisins, routes }, peuple);
   construireTableau(d.lieux);
   construireRecherche(d.lieux);
 }).catch(e => {
@@ -97,7 +98,7 @@ function collecteLibelle(t) {
 
 function appliquerFiltre() {
   gPoints.selectAll(".pt").attr("display", l => etat.sources.has(l.source) ? null : "none");
-  majDisques();
+  majPeuple();
   // un bailliage reste teinté tant qu'un des dépôts qui lui donnent un cahier d'ordre est coché
   const visible = b => b && b.depots.some(d => etat.sources.has(d));
   g.selectAll(".bailliage.avec-cahier").classed("eteint", f => !visible(cahiersParBailliage.get(f.properties.BAIL_ID)));
@@ -159,7 +160,7 @@ function construireCouverture(d) {
 }
 
 // ---------- carte ----------
-function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
+function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond, peuple) {
   const avecCahier = cahiersParBailliage = new Map(cahiersB.map(b => [b.id, b]));
   const { width, height } = scene.getBoundingClientRect();
   svg.attr("viewBox", `0 0 ${width} ${height}`);
@@ -183,11 +184,12 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     .on("pointerenter", (ev, f) => {
       const c = avecCahier.get(f.properties.BAIL_ID), q = circonscriptions.get(f.properties.BAIL_ID);
       const cv = q ? couvertureDe(q) : null, ed = editionsDe(q).filter(e => e.paroisses), h = hyslopDe(q);
-      montrerBulleTexte(ev, libelle(f) + (c ? ` — cahiers ${c.ordres.join(", ")}` : "") + (ed.length ? ` — édité : ${ed.map(e => `${e.auteur || e.titre.split(" ").slice(0, 3).join(" ")} ${e.annees.slice(0, 4)}`).join(", ")}` : ""),
-        q ? `${nombre(q.pop_1793)} hab. en 1793 · ${cv.lieux ? `${cv.lieux} cahier${cv.lieux > 1 ? "s" : ""} sur ${nombre(q.communes_1793)} paroisses (${pourcent(cv.lieux, q.communes_1793)})` : `${nombre(q.communes_1793)} paroisses, aucun cahier`}${h ? ` · Hyslop 1933 : ${h.retrouvees} retrouvée${h.retrouvees > 1 ? "s" : ""} sur ${h.listees}` : ""}` : "");
+      survolB = [libelle(f) + (c ? ` — cahiers ${c.ordres.join(", ")}` : "") + (ed.length ? ` — édité : ${ed.map(e => `${e.auteur || e.titre.split(" ").slice(0, 3).join(" ")} ${e.annees.slice(0, 4)}`).join(", ")}` : ""),
+        q ? `${nombre(q.pop_1793)} hab. en 1793 · ${cv.lieux ? `${cv.lieux} cahier${cv.lieux > 1 ? "s" : ""} sur ${nombre(q.communes_1793)} paroisses (${pourcent(cv.lieux, q.communes_1793)})` : `${nombre(q.communes_1793)} paroisses, aucun cahier`}${h ? ` · Hyslop 1933 : ${h.retrouvees} retrouvée${h.retrouvees > 1 ? "s" : ""} sur ${h.listees}` : ""}` : ""];
+      montrerBulleTexte(ev, ...survolB);
     })
-    .on("pointermove", ev => placerBulle(ev))
-    .on("pointerleave", () => { bulle.hidden = true; })
+    .on("pointermove", ev => survolerPeuple(ev) || (survolB ? montrerBulleTexte(ev, ...survolB) : placerBulle(ev)))
+    .on("pointerleave", () => { bulle.hidden = true; survolB = null; })
     .on("click", (ev, f) => choisirBailliage(avecCahier.get(f.properties.BAIL_ID) ?? { id: f.properties.BAIL_ID, ...tableB.get(f.properties.BAIL_ID), docs: [] }));
   // le cadre du royaume, au-dessus des bailliages et sans les masquer : les fleuves (tracé actuel simplifié, le Rhin
   // rectifié au XIXe siècle omis ; les affluents à partir d'un zoom ×2), puis les généralités, circonscriptions des
@@ -195,6 +197,10 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   // les routes de poste de 1783 tracées sur la carte de Cassini (routes-1789.md) : les grandes routes de Paris aux
   // villes d'intendance et de parlement d'emblée, les autres à partir de ×2, toutes les routes de Cassini à partir de ×6
   // (chargées à ce moment-là) ; une liaison que Cassini ne permet pas de suivre reste droite, en tirets
+  // le royaume habité : chaque communauté de 1793 (village de Cassini devenu commune), d'autant plus grosse qu'elle
+  // est peuplée ; de loin, la population seule ; en s'approchant, ce que l'on sait de son cahier (majPeuple)
+  gPeuple = g.append("g").attr("class", "peuple");
+  construirePeuple(peuple, lieux);
   gChemins = g.append("g").attr("class", "chemins");
   gRoutes = g.append("g").attr("class", "routes");
   gRoutes.selectAll("path").data(fond.routes.features).join("path")
@@ -229,8 +235,6 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     .attr("transform", f => `translate(${chemin.centroid(f)})`)
     .text(f => tableB.get(f.properties.BAIL_ID)?.nom ?? f.properties.BAIL_NS);
 
-  // rayon : racine du nombre de documents, pour que l'aire suive la quantité
-  const rayon = d3.scaleSqrt().domain([0, d3.max(lieux, l => l.docs.length) || 1]).range([2.6, 9]);
   // chefs-lieux des bailliages qui ont un cahier général : carré plein, cliquable
   gChefs = g.append("g");
   gChefs.selectAll("rect").data(cahiersB.filter(b => b.lon != null)).join("rect")
@@ -247,9 +251,9 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   gPoints = g.append("g");
   const forme = l => donnees.sources.find(s => s.cle === l.source).forme === "carre" ? "rect" : "circle";
   // position projetée et rayon calculés une fois : le zoom ne fait plus que les diviser
-  for (const l of lieux) { [l.x, l.y] = projection([l.lon, l.lat]); l.r = rayon(l.docs.length); }
+  for (const l of lieux) { [l.x, l.y] = projection([l.lon, l.lat]); l.r = rayonPop(l.pop_1793 ?? 300); }
   for (const b of cahiersB) if (b.lon != null) [b.x, b.y] = projection([b.lon, b.lat]);
-  const tri = lieux.slice().sort((a, b) => b.docs.length - a.docs.length);  // petits au-dessus
+  const tri = lieux.slice().sort((a, b) => b.r - a.r);  // petits au-dessus
   gPoints.selectAll("circle").data(tri.filter(l => forme(l) === "circle")).join("circle")
     .attr("cx", l => l.x).attr("cy", l => l.y).attr("r", l => l.r);
   gPoints.selectAll("rect").data(tri.filter(l => forme(l) === "rect")).join("rect")
@@ -265,24 +269,6 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     .on("click", (ev, l) => choisir(l))
     .on("keydown", (ev, l) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); choisir(l); } });
 
-  // un disque par bailliage aux petites échelles, posé au centre du bailliage : son aire dit le nombre de paroisses
-  // ayant un document en ligne (dépôts cochés, un village compté une fois), le disque intérieur celles qu'on peut
-  // lire ici (en vert) ; bleu s'il y a des manuscrits, creux s'il n'y a que de l'imprimé. Un clic zoome sur le bailliage.
-  const centres = new Map(bailliages.features.map(f => [f.properties.BAIL_ID, f]));
-  gDisques = g.append("g").attr("class", "disques");
-  const disques = gDisques.selectAll("g").data([...lieuxParBailliage.keys()].filter(id => centres.has(id))).join("g")
-    .attr("class", "disque")
-    .each(function (id) { const [x, y] = chemin.centroid(centres.get(id)); this.__xy = [x, y]; })
-    .attr("tabindex", 0)
-    .on("pointerenter", (ev, id) => { const c = compteBailliage(id), b = tableB.get(id);
-      montrerBulleTexte(ev, b?.nom_long ?? id, `${c.total} paroisse${c.total > 1 ? "s" : ""} avec un document en ligne : ${USAGES.filter(u => c[u]).map(u => `${c[u]} ${USAGE_LIBELLE[u]}`).join(", ")} · cliquer pour voir les paroisses`); })
-    .on("pointermove", ev => placerBulle(ev))
-    .on("pointerleave", () => { bulle.hidden = true; })
-    .on("click", (ev, id) => { bulle.hidden = true; zoomerSur(centres.get(id)); choisirBailliage(cahiersParBailliage.get(id) ?? { id, ...tableB.get(id), docs: [] }); })
-    .on("keydown", (ev, id) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); ev.currentTarget.dispatchEvent(new Event("click")); } });
-  disques.append("circle").attr("class", "tout");
-  disques.append("circle").attr("class", "lire");
-  majDisques();
   gPoints.attr("display", "none");
   gChefs.attr("display", "none");
 
@@ -313,7 +299,7 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     image = 0;
     if (etat.k === kTaille) return;
     kTaille = etat.k;
-    const s = taille() / Math.sqrt(kTaille), e = taille() / kTaille;
+    const e = taille() / kTaille, s = e;
     for (const n of cercles) n.setAttribute("r", n.__data__.r * s);
     for (const n of carres) {
       const l = n.__data__, r = l.r * s;
@@ -337,9 +323,8 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     for (const n of gVoisins.node().children) n.setAttribute("transform", `translate(${n.__data__.x},${n.__data__.y}) scale(${e})`);
     for (const n of noeudsVilles) n.setAttribute("transform", `translate(${n.__data__.x},${n.__data__.y}) scale(${e})`);
     gVilles.classed("serre", TELEPHONE.matches && kTaille < 2);
-    for (const n of gDisques.node().children) n.setAttribute("transform", `translate(${n.__xy[0]},${n.__xy[1]}) scale(${e})`);
     const proche = kTaille >= K_POINTS;
-    gDisques.attr("display", proche ? "none" : null);
+    majPeuple();
     gPoints.attr("display", proche ? null : "none");
     gChefs.attr("display", proche ? null : "none");
   };
@@ -364,8 +349,8 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   montrerActuelle(pref === "1");
   bActuelle.onclick = () => montrerActuelle(bActuelle.getAttribute("aria-pressed") !== "true");
 
-  // Première vue : cadrer sur les lieux plutôt que sur la France entière.
-  cadrer(lieux);
+  // Première vue : le royaume entier, et sa population ; on s'approche pour voir les cahiers.
+  majPeuple();
 
   window.addEventListener("resize", () => {
     const r = scene.getBoundingClientRect();
@@ -373,28 +358,61 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   });
 }
 
-// le compte d'un bailliage par usage, sur les dépôts cochés, un village de Cassini compté une fois (à son meilleur usage)
-function compteBailliage(id) {
+// ---------- le royaume habité ----------
+// rayon à l'écran d'une communauté : la racine de sa population (300 hab. ≈ 2,3 px, 5 000 ≈ 5,6 px, plafonné à 7) ;
+// de loin, plus fin (300 hab. ≈ 0,9 px, Paris 6 px), pour que la densité se lise sans faire un aplat
+const rayonPop = p => Math.min(7, 1.2 + Math.sqrt(p) / 16);
+const rayonLoin = p => Math.min(6, 0.35 + Math.sqrt(p) / 30);
+// ce que l'on sait du cahier d'une communauté, du plus au moins : lisible ici, manuscrit aux archives, imprimé
+// (dépôts cochés) ; signalé conservé par Hyslop (1933) mais pas en ligne ; rien de connu
+const SAVOIRS = ["lire", "voir", "imprime", "hyslop", "aucun"];
+const SAVOIR_LIBELLE = { hyslop: "cahier ou procès‑verbal signalé conservé par Hyslop (1933), pas en ligne ici", aucun: "aucun cahier connu de nos sources" };
+let peupleXY, peupleArbre, hyslopListe, survolB = null;
+function construirePeuple(c, lieux) {
+  peupleXY = c.c.map((cass, i) => {
+    const [x, y] = projection([c.x[i] / 1e4, c.y[i] / 1e4]);
+    return { cassini: +cass, nom: c.n[i], pop: c.p[i], x, y, r: rayonPop(c.p[i]) };
+  });
+  peupleArbre = d3.quadtree(peupleXY, q => q.x, q => q.y);
+  hyslopListe = new Set(donnees.circonscriptions.flatMap(q => q.hyslop1933?.cassini ?? []));
+  for (const s of ["fond", ...SAVOIRS]) gPeuple.append("path").attr("class", `communautes ${s}`);
+}
+// le savoir de chaque communauté, sur les dépôts cochés
+function savoirs() {
   const meilleur = new Map();
-  for (const l of lieuxParBailliage.get(id) ?? []) {
+  for (const l of donnees.lieux) {
     if (!etat.sources.has(l.source)) continue;
     const u = usageDe(l), v = meilleur.get(l.cassini);
-    if (!v || USAGES.indexOf(u) < USAGES.indexOf(v)) meilleur.set(l.cassini, u);
+    if (!v || SAVOIRS.indexOf(u) < SAVOIRS.indexOf(v)) meilleur.set(l.cassini, u);
   }
-  const c = { total: meilleur.size, lire: 0, voir: 0, imprime: 0 };
-  for (const u of meilleur.values()) c[u]++;
-  return c;
+  return q => meilleur.get(q.cassini) ?? (hyslopListe.has(q.cassini) ? "hyslop" : "aucun");
 }
-const rayonDisque = n => n ? 3 + 1.05 * Math.sqrt(n) : 0;  // aire ∝ nombre de paroisses ; 400 paroisses ≈ 24 px
-function majDisques() {
-  gDisques.selectAll("g.disque").each(function (id) {
-    const c = compteBailliage(id), k = etat.k;
-    this.setAttribute("transform", `translate(${this.__xy[0]},${this.__xy[1]}) scale(${taille() / k})`);
-    this.style.display = c.total ? "" : "none";
-    this.classList.toggle("manuscrits", c.voir + c.lire > 0);
-    this.querySelector(".tout").setAttribute("r", rayonDisque(c.total));
-    this.querySelector(".lire").setAttribute("r", c.lire ? Math.max(2.5, rayonDisque(c.total) * Math.sqrt(c.lire / c.total)) : 0);
-  });
+// Des cercles en un seul tracé par catégorie (40 000 éléments SVG rendraient le zoom lent), refaits quand l'échelle
+// change : de loin (< ×2) la population seule, en gris ; de ×2 à ×3 les couleurs viennent ; à partir de ×3
+// (K_POINTS) les lieux en ligne sont les points cliquables de gPoints, et ce tracé ne garde que les autres.
+function majPeuple() {
+  if (!peupleXY) return;
+  const k = etat.k, e = taille() / k, proche = k >= K_POINTS, savoir = savoirs();
+  const d = Object.fromEntries(["fond", ...SAVOIRS].map(s => [s, []]));
+  for (const q of peupleXY) {
+    const r = (k < 2 ? rayonLoin(q.pop) : q.r) * e, s = savoir(q);
+    const arc = `M${(q.x - r).toFixed(1)},${q.y.toFixed(1)}a${r.toFixed(2)},${r.toFixed(2)} 0 1,0 ${(2 * r).toFixed(2)},0a${r.toFixed(2)},${r.toFixed(2)} 0 1,0 ${(-2 * r).toFixed(2)},0`;
+    if (k < 2) d.fond.push(arc);
+    else if (!(proche && USAGES.includes(s))) d[s].push(arc);
+  }
+  gPeuple.classed("approche", k >= 2 && !proche).classed("proche", proche);
+  gPeuple.selectAll("path").each(function () { const s = this.classList[1]; this.setAttribute("d", d[s].join("")); });
+}
+// survol d'une communauté sans document en ligne, de près : son nom, sa population, ce qu'on sait de son cahier
+function survolerPeuple(ev) {
+  if (!peupleArbre || etat.k < K_POINTS) return false;
+  const t = d3.zoomTransform(svg.node()), [mx, my] = t.invert(d3.pointer(ev, svg.node()));
+  const q = peupleArbre.find(mx, my, 7 / etat.k);
+  if (!q) return false;
+  const s = savoirs()(q);
+  if (USAGES.includes(s)) return false;
+  montrerBulleTexte(ev, q.nom, `${nombre(q.pop)} hab. en 1793 · ${SAVOIR_LIBELLE[s]}`);
+  return true;
 }
 function zoomerSur(f) {
   const [[x0, y0], [x1, y1]] = chemin.bounds(f);
@@ -403,16 +421,6 @@ function zoomerSur(f) {
   const haut = TELEPHONE.matches ? Math.max(120, window.innerHeight * 0.38 - scene.getBoundingClientRect().top) : height;
   const k = Math.min(14, Math.max(K_POINTS + 0.5, 0.8 / Math.max((x1 - x0) / width, (y1 - y0) / haut)));
   svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity.translate(width / 2, haut / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2));
-}
-
-function cadrer(lieux) {
-  if (!lieux.length) return;
-  const pts = lieux.map(l => projection([l.lon, l.lat]));
-  const [x0, x1] = d3.extent(pts, p => p[0]), [y0, y1] = d3.extent(pts, p => p[1]);
-  const { width, height } = scene.getBoundingClientRect();
-  const k = Math.min(14, 0.8 / Math.max((x1 - x0) / width, (y1 - y0) / height));
-  const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
-  svg.transition().duration(600).call(zoom.transform, t);
 }
 
 // la cote sous la forme de citation que le dépôt demande (catalogue/construire.py, DEPOTS « mention »)
@@ -585,6 +593,12 @@ function construireRecherche(lieux) {
       if (!entrees.has(k) || nom === l.nom) entrees.set(k, { l: premier.get(l.cassini), nom, cle });
     }
   }
+  // et toutes les communautés de 1793 sans document en ligne : on cherche son village, qu'il ait un cahier ou non
+  for (const q of peupleXY ?? []) {
+    if (premier.has(q.cassini)) continue;
+    const cle = plier(q.nom);
+    entrees.set(`${q.cassini}|${cle}`, { l: { cassini: q.cassini }, q, nom: q.nom, cle });
+  }
   const index = [...entrees.values()].sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
   const homonymes = d3.rollup(index, v => new Set(v.map(e => e.l.cassini)).size, e => e.cle);
   let trouves = [], actif = -1;
@@ -594,7 +608,7 @@ function construireRecherche(lieux) {
     suggestions.querySelectorAll("li").forEach((li, k) => li.setAttribute("aria-selected", k === i ? "true" : "false"));
     if (i >= 0) { recherche.setAttribute("aria-activedescendant", `sugg-${i}`); suggestions.children[i].scrollIntoView({ block: "nearest" }); }
   };
-  const aller = e => { recherche.value = e.nom; fermer(); allerA(e.l); };
+  const aller = e => { recherche.value = e.nom; fermer(); e.q ? allerCommunaute(e.q) : allerA(e.l); };
   recherche.addEventListener("input", () => {
     const q = plier(recherche.value);
     if (q.length < 2) { fermer(); return; }
@@ -608,9 +622,10 @@ function construireRecherche(lieux) {
     const vus = new Set();
     trouves = [...debut, ...mot, ...dedans].filter(e => !vus.has(e.l.cassini) && vus.add(e.l.cassini)).slice(0, 12);
     suggestions.innerHTML = trouves.length ? trouves.map((e, i) => `<li id="sugg-${i}" role="option" aria-selected="false">${e.nom}${
+      e.q ? ` <small>${homonymes.get(e.cle) > 1 ? `${nombre(e.q.pop)} hab. · ` : ""}pas de cahier en ligne</small>` : `${
       plier(e.l.nom) !== e.cle ? ` <small>→ ${e.l.nom}</small>` : ""}${
-      homonymes.get(e.cle) > 1 || trouves.some(f => f !== e && f.cle === e.cle) ? ` <small>${e.l.bailliage} (${e.l.dept})</small>` : ""}</li>`).join("")
-      : `<li class="vide" role="option" aria-disabled="true">Aucun document en ligne pour ce nom : la carte ne montre que les lieux dont un cahier ou un procès‑verbal est signalé</li>`;
+      homonymes.get(e.cle) > 1 || trouves.some(f => f !== e && f.cle === e.cle) ? ` <small>${e.l.bailliage} (${e.l.dept})</small>` : ""}`}</li>`).join("")
+      : `<li class="vide" role="option" aria-disabled="true">Aucune communauté de 1793 de ce nom (noms de 1999 ou de la carte de Cassini)</li>`;
     suggestions.hidden = false;
     recherche.setAttribute("aria-expanded", "true");
     actif = -1;
@@ -628,6 +643,20 @@ function construireRecherche(lieux) {
     if (li) { ev.preventDefault(); aller(trouves[+li.id.slice(5)]); }
   });
   recherche.addEventListener("blur", fermer);
+}
+// une communauté sans document en ligne : on s'y rend, et la fiche dit ce que l'on sait de son cahier
+function allerCommunaute(q) {
+  const { width, height } = scene.getBoundingClientRect();
+  svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(Math.max(etat.k, 6)).translate(-q.x, -q.y));
+  etat.actif = null;
+  gPoints.selectAll(".pt").classed("actif", false);
+  const s = savoirs()(q);
+  detail.innerHTML = `
+    <h2>Lieu</h2>
+    <h3>${q.nom}</h3>
+    <p class="commune">sur la carte de Cassini : <span class="mono">n° ${q.cassini}</span><br>${nombre(q.pop)} habitants au recensement de 1793</p>
+    <p class="aide">${s === "hyslop" ? "Hyslop (1933) signale un cahier ou un procès‑verbal conservé pour cette paroisse ; il n'est pas encore en ligne ici. Le service d'archives du département le conserve sans doute." : "Aucun cahier connu de nos sources : jamais écrit, perdu, ou pas encore retrouvé dans les inventaires que nous avons lus."}</p>`;
+  ouvrirFiche();
 }
 function allerA(l) {
   const [x, y] = projection([l.lon, l.lat]);

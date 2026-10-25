@@ -169,11 +169,16 @@ a:hover { text-decoration-color: currentColor; }
 .pt.u-voir { fill: var(--g-2); }
 .pt.u-imprime { fill: var(--terre); stroke: var(--encre-2); stroke-width: 1.4; }
 .pt.actif { stroke: var(--encre); stroke-width: 2.4; }
-.disque { cursor: pointer; }
-.disque .tout { fill: var(--terre); fill-opacity: 0.6; stroke: var(--encre-2); stroke-width: 1.3; }
-.disque.manuscrits .tout { fill: var(--g-2); fill-opacity: 0.55; stroke: var(--g-2); }
-.disque .lire { fill: var(--lire); }
-.disque:hover .tout, .disque:focus .tout { fill-opacity: 0.8; }
+/* le royaume habité : une communauté de 1793 par cercle (carte.js, majPeuple) */
+.communautes { pointer-events: none; vector-effect: non-scaling-stroke; }
+.communautes.fond { fill: var(--encre-2); fill-opacity: 0.55; }
+.peuple .communautes.lire { fill: var(--lire); }
+.peuple .communautes.voir { fill: var(--g-2); }
+.peuple .communautes.imprime { fill: var(--terre); stroke: var(--encre-2); stroke-width: 1; }
+.peuple .communautes.hyslop { fill: var(--t-ocre); }
+.peuple .communautes.aucun { fill: var(--encre-3); fill-opacity: 0.35; }
+.peuple.approche .communautes { opacity: 0.75; }
+.peuple.proche .communautes.aucun { fill: none; stroke: var(--encre-3); stroke-width: 0.8; stroke-opacity: 0.8; }
 .teinte-aucune .bailliage.avec-cahier { fill: transparent; }
 .bulle {
   position: absolute; pointer-events: none; background: var(--bulle); color: var(--bulle-texte);
