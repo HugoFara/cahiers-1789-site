@@ -24,7 +24,19 @@ function erreur(message) {
   lecture.innerHTML = `<p>${echapper(message)} <a href="index.html">Retour à la carte</a>.</p>`;
 }
 
+// texte seul (dépôt dont les images ne sont pas encore servies ici) : les lignes, sans regard ni cadres
+function pageTexte(p, n) {
+  const lue = p.lecteur === "opus";
+  const lignes = lue ? p.lignes.map(l => l.t.trim() === "//" ? "" : `<div class="l">${marques(l.t) || "&nbsp;"}</div>`).join("") : "";
+  return `
+    <section class="page-lue seule" id="p${n}">
+      <h4>${VUE(p)} · ${lue ? "lu par Claude Opus 5.5" : "non transcrite"}</h4>
+      <div class="texte-lu">${lue ? lignes : `<p class="aide">Page courte (signatures, mention, page presque blanche) : le lecteur ne l'a pas relue.</p>`}</div>
+    </section>`;
+}
+
 function pageHtml(p, n) {
+  if (!p.image) return pageTexte(p, n);
   const lue = p.lecteur === "opus";
   const placee = lue && p.lignes.some(l => l.c);
   // le contour de la ligne sur le manuscrit (polygone de kraken, coupé aux mots de la ligne) : x, y, x, y…
@@ -53,29 +65,31 @@ function pageHtml(p, n) {
 function afficher(d) {
   document.title = `${d.titre} — Les cahiers de doléances de 1789`;
   const lues = d.pages.filter(p => p.lecteur === "opus");
+  const avecImages = d.pages.some(p => p.image);
+  if (!avecImages) document.querySelector(".entete-sous").textContent = "Le texte d'un cahier, ligne à ligne, tel qu'il est lu sur le manuscrit.";
   const mots = lues.reduce((n, p) => n + p.lignes.reduce((m, l) => m + l.t.split(/\s+/).filter(Boolean).length, 0), 0);
   lecture.innerHTML = `
     <div class="tete">
       <h2>Transcription</h2>
       <h3 class="titre-doc">${echapper(d.titre)}</h3>
       <p class="fiche">${[d.lieu, d.bailliage ? `bailliage de ${d.bailliage}` : "", d.type, d.ordre].filter(Boolean).map(echapper).join(" · ")}<br>
-        <span class="mono">${echapper(d.mention)}</span><br>${d.pages.length} page${d.pages.length > 1 ? "s" : ""}, dont ${lues.length} transcrite${lues.length > 1 ? "s" : ""} · ${mots.toLocaleString("fr-FR")} mots</p>
+        <span class="mono">${echapper(d.mention)}</span>${d.consulte ? ` · ${echapper(d.consulte)}` : ""}<br>${d.pages.length} page${d.pages.length > 1 ? "s" : ""}, dont ${lues.length} transcrite${lues.length > 1 ? "s" : ""} · ${mots.toLocaleString("fr-FR")} mots</p>
       <div class="avertissement">
         <p><b>Qui a lu ce texte ?</b> ${echapper(d.lecture)}</p>
-        <p><b>Ce qu'il vaut.</b> ${echapper(d.qualite)} Le texte n'a pas été relu par un humain : vérifiez chaque passage sur l'image, à côté.</p>
-        <p class="legende-lecture">Survoler ou toucher une ligne l'encadre sur l'image ; la cliquer l'agrandit. Marques du lecteur :
-          <span class="doute">?</span> lecture douteuse ou mot illisible · <del>rayé</del> sur le manuscrit · <span class="marque">en marge</span>, <span class="marque">signature</span>, <span class="marque">paraphe</span> · <span class="hors-ex">ligne en gris</span> : non située sur l'image.</p>
+        <p><b>Ce qu'il vaut.</b> ${echapper(d.qualite)} Le texte n'a pas été relu par un humain : ${avecImages ? "vérifiez chaque passage sur l'image, à côté." : "vérifiez chaque passage sur l'image, que montre le site des archives (bouton ci‑dessous ; les vues y sont numérotées comme ici)."}</p>
+        <p class="legende-lecture">${avecImages ? "Survoler ou toucher une ligne l'encadre sur l'image ; la cliquer l'agrandit. " : ""}Marques du lecteur :
+          <span class="doute">?</span> lecture douteuse ou mot illisible · <del>rayé</del> sur le manuscrit · <span class="marque">en marge</span>, <span class="marque">signature</span>, <span class="marque">paraphe</span>${avecImages ? ` · <span class="hors-ex">ligne en gris</span> : non située sur l'image` : ""}.</p>
         <p><a class="bouton" href="${echapper(d.notice)}" target="_blank" rel="noopener">Le document sur le site des archives ↗</a>
           <a class="bouton secondaire" id="telecharger" href="#">Télécharger le texte (.txt)</a></p>
       </div>
     </div>
     ${d.pages.map(pageHtml).join("")}
     <h2>Source et réutilisation</h2>
-    <p class="aide">Manuscrit : ${echapper(d.mention)} ; images réduites des vues du portail (${echapper(d.depot)}), doubles pages coupées en deux. Conditions de réutilisation : ${echapper(d.licence)}. Méthode et mesures : <a href="a-propos.html">À propos</a>.</p>`;
-  lecture.querySelectorAll(".page-lue").forEach(relier);
+    <p class="aide">Manuscrit : ${echapper(d.mention)} ; ${avecImages ? "images réduites des vues du portail" : "texte lu sur les vues du portail, qui seules montrent le manuscrit"} (${echapper(d.depot)}${d.consulte ? `, ${echapper(d.consulte)}` : ""}), doubles pages coupées en deux. Conditions de réutilisation : ${echapper(d.licence)}. Méthode et mesures : <a href="a-propos.html">À propos</a>.</p>`;
+  lecture.querySelectorAll(".page-lue:not(.seule)").forEach(relier);
   document.getElementById("telecharger").addEventListener("click", ev => {
     ev.preventDefault();
-    const entete = `${d.titre}\n${d.mention}\n${d.notice}\nLu par ${d.lecture}\n${d.qualite}\nTexte non relu par un humain. [?] : lecture douteuse ou illisible ; [~~…~~] : rayé.\n`;
+    const entete = `${d.titre}\n${d.mention}${d.consulte ? ` (${d.consulte})` : ""}\n${d.notice}\nLu par ${d.lecture}\n${d.qualite}\nTexte non relu par un humain. [?] : lecture douteuse ou illisible ; [~~…~~] : rayé.\n`;
     const corps = d.pages.map(p => `\n=== ${VUE(p)} ===\n${p.lecteur === "opus" ? p.lignes.map(l => l.t).join("\n") : "(non transcrite)"}`).join("\n");
     const a = Object.assign(document.createElement("a"), {
       href: URL.createObjectURL(new Blob([entete + corps + "\n"], { type: "text/plain;charset=utf-8" })),

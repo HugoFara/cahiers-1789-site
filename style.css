@@ -454,3 +454,5 @@ details.detail-frise summary { cursor: pointer; font: 500 12px var(--mono); lett
   }
   .ville text { font-size: 13px; }
 }
+.page-lue.seule .texte-lu { max-width: 42em; }
+.page-lue.seule .texte-lu .l { cursor: auto; }
