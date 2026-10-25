@@ -1,4 +1,4 @@
-// Atlas des collectes 1789 — carte D3.
+// Les cahiers de doléances de 1789 — la carte (D3).
 // Données : donnees.json (construire.py) ; fond : ref/royaume_1789.geojson et ref/bailliages_1789.geojson
 // (atlas des bailliages de Brette 1904, vectorisé par Gay, Gobbi et Goñi 2024, CC BY 4.0).
 // Tout est servi depuis ce dossier ; aucune requête vers un tiers.
@@ -20,9 +20,13 @@ const etat = { sources: new Set(), actif: null, k: 1, teinte: "aucune" };  // te
 const USAGES = ["lire", "voir", "imprime"];
 const USAGE_LIBELLE = { lire: "texte à lire ici", voir: "manuscrit sur le site des archives", imprime: "cahier imprimé" };
 const usageDe = l => l.usage ??= l.docs.some(d => d.lire) ? "lire" : (l.source === "ap" || l.source === "ed") ? "imprime" : "voir";
+// Sur téléphone, la carte fait 390 px de large : disques, points, villes et noms plus petits, et les villes
+// d'intendance sans leur nom tant qu'on n'a pas zoomé (les parlements le gardent).
+const TELEPHONE = matchMedia("(max-width: 640px)");
+const taille = () => TELEPHONE.matches ? 0.68 : 1;
 // En dessous de ce zoom, un disque par bailliage remplace les paroisses : la densité des dépôts va du compact au désert.
 const K_POINTS = 3;
-let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, gDisques, zoom, circonscriptions, cahiersParBailliage;
+let donnees, projection, chemin, g, gPoints, gChefs, gEtiquettes, gDisques, gActuelle, gNomsDep, gVoisins, gRoutes, gChemins, zoom, circonscriptions, cahiersParBailliage;
 const nombre = n => n.toLocaleString("fr-FR");
 const pourcent = (a, b) => { if (!b) return "—"; const x = 100 * a / b; return `${x.toLocaleString("fr-FR", x < 10 ? { minimumFractionDigits: 1, maximumFractionDigits: 1 } : { maximumFractionDigits: 0 })} %`; };
 let lieuxParBailliage;  // bailliage_id → lieux (toutes sources), pour la couverture
@@ -38,7 +42,13 @@ Promise.all([
   charger("ref/generalites_1789.geojson").then(r => r.json()),
   charger("ref/fleuves.geojson").then(r => r.json()),
   charger("ref/villes_1789.csv").then(r => r.text()).then(d3.csvParse),
-]).then(([d, royaume, bailliages, tableB, generalites, fleuves, villes]) => {
+  charger("ref/hors_royaume.geojson").then(r => r.json()),
+  charger("ref/lacs.geojson").then(r => r.json()),
+  charger("ref/france_actuelle.geojson").then(r => r.json()),
+  charger("ref/departements.geojson").then(r => r.json()),
+  charger("ref/voisins_1789.csv").then(r => r.text()).then(d3.csvParse),
+  charger("ref/routes_poste_1783.geojson").then(r => r.json()),
+]).then(([d, royaume, bailliages, tableB, generalites, fleuves, villes, hors, lacs, actuelle, departements, voisins, routes]) => {
   donnees = d;
   circonscriptions = new Map(d.circonscriptions.map(c => [c.id, c]));
   editions = new Map((d.editions ?? []).map(e => [e.id, e]));
@@ -47,7 +57,7 @@ Promise.all([
   document.getElementById("genere").textContent = `données du ${d.genere}`;
   construireLegende(d.sources);
   construireCouverture(d);
-  construireCarte(royaume, bailliages, new Map(tableB.map(b => [b.id, b])), d.lieux, d.bailliages ?? [], { generalites, fleuves, villes });
+  construireCarte(royaume, bailliages, new Map(tableB.map(b => [b.id, b])), d.lieux, d.bailliages ?? [], { generalites, fleuves, villes, hors, lacs, actuelle, departements, voisins, routes });
   construireTableau(d.lieux);
   construireRecherche(d.lieux);
 }).catch(e => {
@@ -160,7 +170,10 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   chemin = d3.geoPath(projection);
 
   g = svg.append("g");
-  // le royaume en 1789 : une seule pièce, tout le reste est mer ou étranger
+  // autour du royaume, les terres étrangères en 1789 (terres actuelles hors du contour de Brette, enclaves comprises :
+  // Comtat, Montbéliard, Mulhouse, Salm…) et les lacs ; le royaume par-dessus
+  g.append("path").datum(fond.hors).attr("d", chemin).attr("class", "hors-royaume");
+  g.append("path").datum(fond.lacs).attr("d", chemin).attr("class", "lac");
   g.append("path").datum(royaume).attr("d", chemin).attr("class", "royaume");
   const libelle = f => { const b = tableB.get(f.properties.BAIL_ID); return b ? `${b.nom_long} (généralité de ${b.generalite})` : f.properties.BAIL_NL; };
   const gB = g.append("g");
@@ -179,11 +192,37 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   // le cadre du royaume, au-dessus des bailliages et sans les masquer : les fleuves (tracé actuel simplifié, le Rhin
   // rectifié au XIXe siècle omis ; les affluents à partir d'un zoom ×2), puis les généralités, circonscriptions des
   // intendants, en trait fort (bailliages de Brette réunis par généralité)
+  // les routes de poste de 1783 tracées sur la carte de Cassini (routes-1789.md) : les grandes routes de Paris aux
+  // villes d'intendance et de parlement d'emblée, les autres à partir de ×2, toutes les routes de Cassini à partir de ×6
+  // (chargées à ce moment-là) ; une liaison que Cassini ne permet pas de suivre reste droite, en tirets
+  gChemins = g.append("g").attr("class", "chemins");
+  gRoutes = g.append("g").attr("class", "routes");
+  gRoutes.selectAll("path").data(fond.routes.features).join("path")
+    .attr("d", chemin).attr("class", f => `route rang-${f.properties.rang}${f.properties.trace === "droit" ? " droit" : ""}`);
   const gFleuves = g.append("g").attr("class", "fleuves");
   gFleuves.selectAll("path").data(fond.fleuves.features).join("path")
     .attr("d", chemin).attr("class", f => `fleuve rang-${f.properties.rang}`);
   g.append("g").attr("class", "generalites").selectAll("path").data(fond.generalites.features).join("path")
     .attr("d", chemin).attr("class", "generalite");
+  // la France d'aujourd'hui, pour s'y retrouver : frontière en tirets, départements en pointillés et leurs noms de près
+  gActuelle = g.append("g").attr("class", "actuelle");
+  gActuelle.append("g").selectAll("path").data(fond.departements.features).join("path").attr("d", chemin).attr("class", "departement");
+  gActuelle.append("path").datum(fond.actuelle).attr("d", chemin).attr("class", "frontiere-actuelle");
+  gNomsDep = gActuelle.append("g").attr("class", "noms-departements").attr("display", "none");
+  gNomsDep.selectAll("text").data(fond.departements.features).join("text")
+    .attr("transform", f => `translate(${d3.geoPath(projection).centroid(f)})`)
+    .text(f => `${f.properties.nom} (${f.properties.code})`);
+  // les voisins de 1789 : États, enclaves, mers ; les petits seulement de près
+  for (const v of fond.voisins) [v.x, v.y] = projection([+v.lon, +v.lat]);
+  gVoisins = g.append("g").attr("class", "voisins");
+  gVoisins.selectAll("g").data(fond.voisins).join("g")
+    .attr("class", v => `voisin ${v.type} rang-${v.rang}`)
+    .attr("transform", v => `translate(${v.x},${v.y})`)
+    .each(function (v) {
+      const t = d3.select(this).append("text");
+      t.append("tspan").attr("x", 0).text(v.nom);
+      if (v.souverain) t.append("tspan").attr("class", "souverain").attr("x", 0).attr("dy", "1.15em").text(v.souverain);
+    });
   // noms des bailliages, visibles quand on est assez près
   gEtiquettes = g.append("g").attr("class", "etiquettes").attr("display", "none");
   gEtiquettes.selectAll("text").data(bailliages.features).join("text")
@@ -274,7 +313,7 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     image = 0;
     if (etat.k === kTaille) return;
     kTaille = etat.k;
-    const s = 1 / Math.sqrt(kTaille);
+    const s = taille() / Math.sqrt(kTaille), e = taille() / kTaille;
     for (const n of cercles) n.setAttribute("r", n.__data__.r * s);
     for (const n of carres) {
       const l = n.__data__, r = l.r * s;
@@ -286,8 +325,19 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
     }
     gEtiquettes.attr("display", kTaille >= 2.5 ? null : "none").attr("font-size", `${11 / kTaille}px`);
     gFleuves.classed("detail", kTaille >= 2);
-    for (const n of noeudsVilles) n.setAttribute("transform", `translate(${n.__data__.x},${n.__data__.y}) scale(${1 / kTaille})`);
-    for (const n of gDisques.node().children) n.setAttribute("transform", `translate(${n.__xy[0]},${n.__xy[1]}) scale(${1 / kTaille})`);
+    gRoutes.classed("detail", kTaille >= 2);
+    if (kTaille >= 6 && !gChemins.attr("data-charge")) {
+      gChemins.attr("data-charge", "1");
+      charger("ref/chemins_cassini.geojson").then(r => r.json())
+        .then(c => gChemins.selectAll("path").data(c.features).join("path").attr("d", chemin).attr("class", "chemin-cassini"));
+    }
+    gChemins.attr("display", kTaille >= 6 ? null : "none");
+    gNomsDep.attr("display", kTaille >= 3 ? null : "none").attr("font-size", `${10 / kTaille}px`);
+    gVoisins.classed("detail", kTaille >= 2);
+    for (const n of gVoisins.node().children) n.setAttribute("transform", `translate(${n.__data__.x},${n.__data__.y}) scale(${e})`);
+    for (const n of noeudsVilles) n.setAttribute("transform", `translate(${n.__data__.x},${n.__data__.y}) scale(${e})`);
+    gVilles.classed("serre", TELEPHONE.matches && kTaille < 2);
+    for (const n of gDisques.node().children) n.setAttribute("transform", `translate(${n.__xy[0]},${n.__xy[1]}) scale(${e})`);
     const proche = kTaille >= K_POINTS;
     gDisques.attr("display", proche ? "none" : null);
     gPoints.attr("display", proche ? null : "none");
@@ -302,6 +352,17 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
   document.getElementById("zoom-plus").onclick = () => svg.transition().call(zoom.scaleBy, 1.6);
   document.getElementById("zoom-moins").onclick = () => svg.transition().call(zoom.scaleBy, 1 / 1.6);
   document.getElementById("zoom-reset").onclick = () => svg.transition().call(zoom.transform, d3.zoomIdentity);
+  // la France d'aujourd'hui, montrée par défaut, se masque d'un bouton (préférence gardée dans ce navigateur)
+  const bActuelle = document.getElementById("actuelle");
+  const montrerActuelle = oui => {
+    gActuelle.attr("display", oui ? null : "none");
+    bActuelle.setAttribute("aria-pressed", oui);
+    try { localStorage.setItem("actuelle", oui ? "1" : "0"); } catch {}
+  };
+  let pref = "1";
+  try { pref = localStorage.getItem("actuelle") ?? "1"; } catch {}
+  montrerActuelle(pref === "1");
+  bActuelle.onclick = () => montrerActuelle(bActuelle.getAttribute("aria-pressed") !== "true");
 
   // Première vue : cadrer sur les lieux plutôt que sur la France entière.
   cadrer(lieux);
@@ -328,7 +389,7 @@ const rayonDisque = n => n ? 3 + 1.05 * Math.sqrt(n) : 0;  // aire ∝ nombre de
 function majDisques() {
   gDisques.selectAll("g.disque").each(function (id) {
     const c = compteBailliage(id), k = etat.k;
-    this.setAttribute("transform", `translate(${this.__xy[0]},${this.__xy[1]}) scale(${1 / k})`);
+    this.setAttribute("transform", `translate(${this.__xy[0]},${this.__xy[1]}) scale(${taille() / k})`);
     this.style.display = c.total ? "" : "none";
     this.classList.toggle("manuscrits", c.voir + c.lire > 0);
     this.querySelector(".tout").setAttribute("r", rayonDisque(c.total));
@@ -338,8 +399,10 @@ function majDisques() {
 function zoomerSur(f) {
   const [[x0, y0], [x1, y1]] = chemin.bounds(f);
   const { width, height } = scene.getBoundingClientRect();
-  const k = Math.min(14, Math.max(K_POINTS + 0.5, 0.8 / Math.max((x1 - x0) / width, (y1 - y0) / height)));
-  svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2));
+  // sur téléphone, la fiche couvre le bas de l'écran : on cadre dans ce qui reste au-dessus
+  const haut = TELEPHONE.matches ? Math.max(120, window.innerHeight * 0.38 - scene.getBoundingClientRect().top) : height;
+  const k = Math.min(14, Math.max(K_POINTS + 0.5, 0.8 / Math.max((x1 - x0) / width, (y1 - y0) / haut)));
+  svg.transition().duration(700).call(zoom.transform, d3.zoomIdentity.translate(width / 2, haut / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2));
 }
 
 function cadrer(lieux) {
@@ -404,7 +467,7 @@ function choisir(l) {
       ${s.nom}, <em>${s.statut}</em>${methode ? `<br><span class="mono">${methode}</span>` : ""}</p>
     ${docs ? `<ol>${docs}</ol>` : `<p class="aide">Aucun document en ligne pour l'instant.</p>`}
     ${l.source === "ad62" ? `<p class="avert">Réutilisation privée seulement (conditions AD62) : la carte ne renvoie qu'à la visionneuse du portail.</p>` : ""}`;
-  detail.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  ouvrirFiche();
 }
 
 function choisirBailliage(b) {
@@ -466,7 +529,20 @@ function choisirBailliage(b) {
     ${mes ? `<h4>Le cahier général contre ses paroisses</h4>${mes}` : ""}
     ${hy ? `<h4>Cahiers généraux selon Hyslop (1934)</h4><ul class="editions hyslop">${hy}</ul><p class="aide">Où est le texte de chaque cahier d'ordre : tome et pages des Archives parlementaires (G : texte à corriger d'après le Guide), édition, manuscrit — ou perdu.</p>` : ""}
     ${blocs ? `<h4>Cahiers d'ordre et de bailliage</h4>${blocs}${(b.depots ?? []).includes("ap") && etat.sources.has("ap") ? `<p class="avert">Archives parlementaires : texte non moissonné, la carte renvoie à la notice Persée (demande n° 1 en attente).</p>` : ""}` : `<p class="aide">Aucun cahier d'ordre ou de bailliage dans les dépôts cochés.</p>`}`;
-  detail.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  ouvrirFiche();
+}
+
+// La fiche s'ouvre dans le rail ; sur téléphone, en panneau au bas de l'écran, par-dessus la carte, avec un bouton pour
+// la fermer (le rail est sous la carte, hors de vue).
+function ouvrirFiche() {
+  const fermer = document.createElement("button");
+  Object.assign(fermer, { type: "button", className: "fermer-fiche", textContent: "Fermer" });
+  fermer.setAttribute("aria-label", "Fermer la fiche");
+  fermer.onclick = () => detail.classList.remove("ouverte");
+  detail.prepend(fermer);
+  detail.classList.add("ouverte");
+  detail.scrollTop = 0;
+  if (!TELEPHONE.matches) detail.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
 // ---------- tableau ----------

@@ -1,4 +1,4 @@
-// Atlas des collectes 1789 — page de lecture d'un document (texte.html?id=ad43:f20034).
+// Les cahiers de doléances de 1789 — page de lecture d'un document (texte.html?id=ad43:f20034).
 // Le texte et la place de chaque ligne viennent de textes/<dépôt>/<identifiant>.json (textes.py), l'image de chaque
 // page de images/… : survoler une ligne l'encadre sur l'image, et inversement ; cliquer une ligne l'agrandit.
 
@@ -35,7 +35,7 @@ function pageHtml(p, n) {
     <section class="page-lue" id="p${n}">
       <h4>${VUE(p)} · ${lue ? `lu par Claude Opus 5.5${placee ? "" : " · lignes non situées sur l'image"}` : "non transcrite"}</h4>
       <div class="vis-a-vis">
-        <figure class="cliche" style="width: min(100%, calc((100vh - 32px) * ${p.largeur} / ${p.hauteur}))">
+        <figure class="cliche" style="--format: ${p.largeur / p.hauteur}">
           <div class="cadre" style="aspect-ratio: ${p.largeur} / ${p.hauteur}">
             <div class="plan">
               <img src="${echapper(p.image)}" alt="${echapper(VUE(p))} du manuscrit" loading="lazy" draggable="false" width="${p.largeur}" height="${p.hauteur}">
@@ -50,7 +50,7 @@ function pageHtml(p, n) {
 }
 
 function afficher(d) {
-  document.title = `${d.titre} — Atlas des collectes 1789`;
+  document.title = `${d.titre} — Les cahiers de doléances de 1789`;
   const lues = d.pages.filter(p => p.lecteur === "opus");
   const mots = lues.reduce((n, p) => n + p.lignes.reduce((m, l) => m + l.t.split(/\s+/).filter(Boolean).length, 0), 0);
   lecture.innerHTML = `
@@ -62,7 +62,7 @@ function afficher(d) {
       <div class="avertissement">
         <p><b>Qui a lu ce texte ?</b> ${echapper(d.lecture)}</p>
         <p><b>Ce qu'il vaut.</b> ${echapper(d.qualite)} Le texte n'a pas été relu par un humain : vérifiez chaque passage sur l'image, à côté.</p>
-        <p class="legende-lecture">Survoler une ligne l'encadre sur l'image ; la cliquer l'agrandit. Marques du lecteur :
+        <p class="legende-lecture">Survoler ou toucher une ligne l'encadre sur l'image ; la cliquer l'agrandit. Marques du lecteur :
           <span class="doute">?</span> lecture douteuse ou mot illisible · <del>rayé</del> sur le manuscrit · <span class="marque">en marge</span>, <span class="marque">signature</span>, <span class="marque">paraphe</span> · <span class="hors-ex">ligne en gris</span> : non située sur l'image.</p>
         <p><a class="bouton" href="${echapper(d.notice)}" target="_blank" rel="noopener">Le document sur le site des archives ↗</a>
           <a class="bouton secondaire" id="telecharger" href="#">Télécharger le texte (.txt)</a></p>

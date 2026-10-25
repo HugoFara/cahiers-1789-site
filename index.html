@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Atlas des collectes 1789</title>
+<title>Les cahiers de doléances de 1789</title>
 <!-- Polices servies localement (paquets @fontsource, licence OFL) : aucune requête vers un tiers. -->
 <link rel="stylesheet" href="assets/fonts/spectral-400.css">
 <link rel="stylesheet" href="assets/fonts/spectral-400-italic.css">
@@ -14,8 +14,8 @@
 </head>
 <body>
 <header class="entete">
-  <h1>Atlas des collectes 1789</h1>
-  <p class="entete-sous">Où sont les cahiers de doléances que nous avons récupérés, dénombrés ou attendus, paroisse par paroisse.
+  <h1>Les cahiers de doléances de 1789</h1>
+  <p class="entete-sous">Les cahiers du printemps 1789 sur la carte du royaume : à voir sur le site des archives, ou à lire ici en regard du manuscrit.
     <span id="genere"></span></p>
   <div class="outils">
     <a class="lien-page" href="reperes.html">Repères</a>
@@ -36,7 +36,7 @@
 <main class="corps">
   <section class="scene" id="scene" aria-label="Carte">
     <svg id="carte" role="img" aria-labelledby="carte-titre">
-      <title id="carte-titre">Royaume de France en 1789, bailliages et sénéchaussées, un point par paroisse dont un cahier a été collecté</title>
+      <title id="carte-titre">Royaume de France en 1789 : généralités, bailliages et sénéchaussées ; un disque par bailliage, puis un point par paroisse dont un cahier est en ligne</title>
     </svg>
     <div class="bulle" id="bulle" hidden></div>
     <div class="zoom">
@@ -44,7 +44,8 @@
       <button id="zoom-moins" type="button" aria-label="Réduire">−</button>
       <button id="zoom-reset" type="button" aria-label="Vue d'ensemble">⌂</button>
     </div>
-    <p class="fond-note">Fond : bailliages de 1789 d'après Brette (1904), vectorisés par Gay, Gobbi et Goñi (2024, CC BY 4.0) ; généralités : leurs bailliages réunis, contours approchés. Fleuves : tracé actuel simplifié (Natural Earth) ; le Rhin, déplacé au XIX<sup>e</sup> siècle, n'est pas tracé. Population de 1793 : EHESS (CC BY 3.0 FR).</p>
+    <button id="actuelle" class="bascule" type="button" aria-pressed="true" title="Frontière et départements de la France actuelle, pour s'y retrouver">France d'aujourd'hui</button>
+    <p class="fond-note">Fond : bailliages de 1789 d'après Brette (1904), vectorisés par Gay, Gobbi et Goñi (2024, CC BY 4.0) ; généralités : leurs bailliages réunis, contours approchés. Fleuves : tracé actuel (BD TOPO IGN, Natural Earth à l'étranger) ; le Rhin, déplacé au XIX<sup>e</sup> siècle, n'est pas tracé. Routes de poste de 1783 (Verdier et al., ODbL) sur les routes de Cassini (Perret et al., CC0). Population de 1793 : EHESS (CC BY 3.0 FR). <a href="a-propos.html#fond">Sources</a></p>
   </section>
 
   <section class="liste" id="liste" hidden aria-label="Liste des lieux">

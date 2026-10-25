@@ -1,0 +1,26 @@
+nom,souverain,lon,lat,rang,type
+Royaume de Grande-Bretagne,,-0.6,51.2,1,etat
+Pays-Bas autrichiens,à l'empereur,4.4,50.75,1,etat
+Provinces-Unies,,5.3,51.85,1,etat
+Saint-Empire,principautés allemandes,8.6,49.6,1,etat
+Cantons suisses,,7.9,46.85,1,etat
+Royaume de Sardaigne,"Savoie, Piémont, Nice",8.25,45.05,1,etat
+République de Gênes,,8.9,44.45,1,etat
+Royaume d'Espagne,,-1.6,42.75,1,etat
+La Manche,,-1.6,50.15,1,mer
+Mer du Nord,,2.4,51.6,1,mer
+Océan,,-4.6,46.2,1,mer
+Mer Méditerranée,,5.2,42.7,1,mer
+Comtat Venaissin et Avignon,au pape,5.13,44.06,2,enclave
+Principauté de Liège,,5.6,50.45,2,etat
+Duché de Luxembourg,à l'empereur,6.0,49.8,2,etat
+Duché de Deux-Ponts,,7.4,49.25,2,etat
+Comté de Sarrewerden,Nassau,7.15,48.93,2,enclave
+Principauté de Salm,,7.07,48.44,2,enclave
+Mulhouse,alliée des Cantons suisses,7.335,47.755,2,enclave
+Pays de Montbéliard,Wurtemberg,6.8,47.52,2,enclave
+République de Genève,,6.14,46.2,2,etat
+Savoie,roi de Sardaigne,6.4,45.55,2,etat
+Comté de Nice,roi de Sardaigne,7.15,43.95,2,etat
+Principauté de Monaco,,7.42,43.74,2,etat
+Andorre,,1.55,42.55,2,etat
