@@ -267,7 +267,7 @@ function construireCarte(royaume, bailliages, tableB, lieux, cahiersB, fond) {
 
   // un disque par bailliage aux petites échelles, posé au centre du bailliage : son aire dit le nombre de paroisses
   // ayant un document en ligne (dépôts cochés, un village compté une fois), le disque intérieur celles qu'on peut
-  // lire ici ; bleu s'il y a des manuscrits, creux s'il n'y a que de l'imprimé. Un clic zoome sur le bailliage.
+  // lire ici (en vert) ; bleu s'il y a des manuscrits, creux s'il n'y a que de l'imprimé. Un clic zoome sur le bailliage.
   const centres = new Map(bailliages.features.map(f => [f.properties.BAIL_ID, f]));
   gDisques = g.append("g").attr("class", "disques");
   const disques = gDisques.selectAll("g").data([...lieuxParBailliage.keys()].filter(id => centres.has(id))).join("g")

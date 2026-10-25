@@ -27,8 +27,9 @@ function erreur(message) {
 function pageHtml(p, n) {
   const lue = p.lecteur === "opus";
   const placee = lue && p.lignes.some(l => l.c);
-  const cadres = lue ? p.lignes.flatMap((l, k) => (l.c ?? []).map(([x, y, w, h]) =>
-    `<rect data-k="${k}" x="${x}" y="${y}" width="${w}" height="${h}"/>`)).join("") : "";
+  // le contour de la ligne sur le manuscrit (polygone de kraken, coupé aux mots de la ligne) : x, y, x, y…
+  const cadres = lue ? p.lignes.flatMap((l, k) => (l.c ?? []).map(c =>
+    `<polygon data-k="${k}" points="${c.join(" ")}"/>`)).join("") : "";
   const lignes = lue ? p.lignes.map((l, k) => l.t.trim() === "//" ? "" :
     `<div class="l${l.c ? "" : " hors"}" data-k="${k}"${l.c ? "" : ' title="ligne non située sur l\'image"'}>${marques(l.t) || "&nbsp;"}</div>`).join("") : "";
   return `
@@ -85,7 +86,7 @@ function afficher(d) {
   });
 }
 
-// une page : la ligne et ses cadres se désignent l'une l'autre ; un clic sur une ligne cadre l'image sur elle
+// une page : la ligne et ses contours se désignent l'une l'autre ; un clic sur une ligne cadre l'image sur elle
 function relier(section) {
   const cadre = section.querySelector(".cadre"), plan = section.querySelector(".plan");
   const svg = section.querySelector("svg"), entiere = section.querySelector(".entiere");
@@ -122,10 +123,10 @@ function relier(section) {
     section.querySelectorAll(`[data-k="${k}"]`).forEach(e => e.classList.toggle("vise", oui));
   };
   const agrandir = k => {
-    const rects = [...svg.querySelectorAll(`rect[data-k="${k}"]`)].map(r => ["x", "y", "width", "height"].map(a => +r.getAttribute(a)));
-    if (!rects.length) return;
-    const x0 = Math.min(...rects.map(r => r[0])), y0 = Math.min(...rects.map(r => r[1]));
-    const x1 = Math.max(...rects.map(r => r[0] + r[2])), y1 = Math.max(...rects.map(r => r[1] + r[3]));
+    const pts = [...svg.querySelectorAll(`polygon[data-k="${k}"]`)].flatMap(e => [...e.points]);
+    if (!pts.length) return;
+    const x0 = Math.min(...pts.map(q => q.x)), y0 = Math.min(...pts.map(q => q.y));
+    const x1 = Math.max(...pts.map(q => q.x)), y1 = Math.max(...pts.map(q => q.y));
     const cw = cadre.clientWidth, ch = cadre.clientHeight, f = cw / W;
     // assez grand pour lire la main (2,5 fois au moins), le début de la ligne au bord gauche ; on fait glisser pour la suite
     const s = Math.max(2.5, Math.min(4, 0.92 * cw / ((x1 - x0) * f)));
@@ -150,7 +151,7 @@ function relier(section) {
     const e = ev.target.closest("[data-k]");
     if (!e) return;
     if (e.classList.contains("choisie")) entiere.click();
-    else if (e.tagName === "rect") e.closest("section").querySelector(`.l[data-k="${e.dataset.k}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    else if (e.tagName === "polygon") e.closest("section").querySelector(`.l[data-k="${e.dataset.k}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
     else agrandir(e.dataset.k);
   });
 }

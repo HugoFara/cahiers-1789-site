@@ -34,6 +34,7 @@
   --ap-surface: #e6e2d6;    /* bailliages dotés d'un cahier général */
   --g-1: #b5402f;           /* graphiques des Repères : accent (validé avec --g-2, clair et sombre) */
   --g-2: #2a6f9e;
+  --lire: #2e8540;          /* points et disques : texte à lire ici — le vert, « c'est prêt » */
   --bulle: #1f1e1a;
   --bulle-texte: #f4f2ec;
   --serif: "Spectral", Georgia, "Times New Roman", serif;
@@ -47,7 +48,7 @@
     --t-rouge: #d4634f; --t-bleu: #4f93c2; --t-ocre: #d6a23a; --t-violet: #9370c4; --t-vert: #3fa85a; --t-indigo: #6f84e0;
     --t-rose: #d9609e; --t-brun: #b08f3a; --t-orange: #e8904a; --t-olive: #9aae3a; --t-cyan: #3fb3c9; --t-bordeaux: #c25a7c;
     --ed: #3fae92; --ap: #b8b2a5; --ap-surface: #34322d;
-    --g-1: #d4634f; --g-2: #4a96d8;
+    --g-1: #d4634f; --g-2: #4a96d8; --lire: #4cb562;
   }
 }
 :root[data-theme="dark"] {
@@ -57,7 +58,7 @@
   --t-rouge: #d4634f; --t-bleu: #4f93c2; --t-ocre: #d6a23a; --t-violet: #9370c4; --t-vert: #3fa85a; --t-indigo: #6f84e0;
   --t-rose: #d9609e; --t-brun: #b08f3a; --t-orange: #e8904a; --t-olive: #9aae3a; --t-cyan: #3fb3c9; --t-bordeaux: #c25a7c;
   --ed: #3fae92; --ap: #b8b2a5; --ap-surface: #34322d;
-  --g-1: #d4634f; --g-2: #4a96d8;
+  --g-1: #d4634f; --g-2: #4a96d8; --lire: #4cb562;
 }
 
 * { box-sizing: border-box; }
@@ -164,14 +165,14 @@ a:hover { text-decoration-color: currentColor; }
   pointer-events: none; paint-order: stroke; stroke: var(--terre); stroke-width: 2px; stroke-linejoin: round;
 }
 .pt { stroke-width: 1.2; vector-effect: non-scaling-stroke; cursor: pointer; stroke: var(--terre); }
-.pt.u-lire { fill: var(--g-1); }
+.pt.u-lire { fill: var(--lire); }
 .pt.u-voir { fill: var(--g-2); }
 .pt.u-imprime { fill: var(--terre); stroke: var(--encre-2); stroke-width: 1.4; }
 .pt.actif { stroke: var(--encre); stroke-width: 2.4; }
 .disque { cursor: pointer; }
 .disque .tout { fill: var(--terre); fill-opacity: 0.6; stroke: var(--encre-2); stroke-width: 1.3; }
 .disque.manuscrits .tout { fill: var(--g-2); fill-opacity: 0.55; stroke: var(--g-2); }
-.disque .lire { fill: var(--g-1); }
+.disque .lire { fill: var(--lire); }
 .disque:hover .tout, .disque:focus .tout { fill-opacity: 0.8; }
 .teinte-aucune .bailliage.avec-cahier { fill: transparent; }
 .bulle {
@@ -405,9 +406,9 @@ details.detail-frise summary { cursor: pointer; font: 500 12px var(--mono); lett
 .cliche img, .cliche svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .cliche .cadre { user-select: none; -webkit-user-select: none; }
 .cliche img { pointer-events: none; }
-.cliche rect { fill: transparent; stroke: transparent; stroke-width: 3; vector-effect: non-scaling-stroke; cursor: pointer; }
-.cliche rect.vise { fill: rgb(214 162 58 / 0.18); stroke: #d6a23a; }
-.cliche rect.choisie { fill: rgb(214 162 58 / 0.10); stroke: #d4634f; }
+.cliche polygon { fill: transparent; stroke: transparent; stroke-width: 3; vector-effect: non-scaling-stroke; cursor: pointer; }
+.cliche polygon.vise { fill: rgb(214 162 58 / 0.18); stroke: #d6a23a; }
+.cliche polygon.choisie { fill: rgb(214 162 58 / 0.10); stroke: #d4634f; }
 .cliche .entiere { position: absolute; right: 8px; top: 8px; padding: 4px 8px; font: 500 11px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; background: var(--papier); color: var(--encre); border: 1px solid var(--trait-fort); border-radius: 2px; cursor: pointer; }
 .texte-lu { font-size: 16px; line-height: 1.5; }
 .texte-lu .l { padding: 1px 6px; margin: 0 -6px; border-radius: 2px; cursor: pointer; overflow-wrap: anywhere; }
