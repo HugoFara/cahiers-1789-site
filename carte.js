@@ -400,11 +400,20 @@ function construireTableau(lieux) {
 const plier = s => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/œ/g, "oe").replace(/æ/g, "ae")
   .replace(/[\u2010-\u2015'’\-]/g, " ").replace(/\bste\b/g, "sainte").replace(/\bst\b/g, "saint").replace(/\s+/g, " ").trim();
 function construireRecherche(lieux) {
-  // un lieu par village de Cassini (deux dépôts peuvent tenir la même paroisse)
-  const vus = new Map();
-  for (const l of lieux) if (!vus.has(l.cassini)) vus.set(l.cassini, l);
-  const index = [...vus.values()].map(l => ({ l, cle: plier(l.nom) })).sort((a, b) => a.l.nom.localeCompare(b.l.nom, "fr"));
-  const homonymes = d3.rollup(index, v => v.length, e => e.cle);
+  // une entrée par nom et par village de Cassini : le nom du dépôt (deux dépôts peuvent l'écrire autrement), celui de
+  // 1999, celui de la carte de Cassini (le premier l'emporte quand deux se plient pareil) — « Bourg‑en‑Bresse » trouve
+  // le « Bourg » de l'Ain, « Aignereins » l'« Agnereins » de 1789
+  const premier = new Map(), entrees = new Map();
+  for (const l of lieux) {
+    if (!premier.has(l.cassini)) premier.set(l.cassini, l);
+    for (const nom of [l.nom, l.nom_1999, l.nom_cassini]) {
+      if (!nom) continue;
+      const cle = plier(nom), k = `${l.cassini}|${cle}`;
+      if (!entrees.has(k) || nom === l.nom) entrees.set(k, { l: premier.get(l.cassini), nom, cle });
+    }
+  }
+  const index = [...entrees.values()].sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
+  const homonymes = d3.rollup(index, v => new Set(v.map(e => e.l.cassini)).size, e => e.cle);
   let trouves = [], actif = -1;
   const fermer = () => { suggestions.hidden = true; recherche.setAttribute("aria-expanded", "false"); recherche.removeAttribute("aria-activedescendant"); actif = -1; };
   const marquer = i => {
@@ -412,7 +421,7 @@ function construireRecherche(lieux) {
     suggestions.querySelectorAll("li").forEach((li, k) => li.setAttribute("aria-selected", k === i ? "true" : "false"));
     if (i >= 0) { recherche.setAttribute("aria-activedescendant", `sugg-${i}`); suggestions.children[i].scrollIntoView({ block: "nearest" }); }
   };
-  const aller = e => { recherche.value = e.l.nom; fermer(); allerA(e.l); };
+  const aller = e => { recherche.value = e.nom; fermer(); allerA(e.l); };
   recherche.addEventListener("input", () => {
     const q = plier(recherche.value);
     if (q.length < 2) { fermer(); return; }
@@ -422,10 +431,13 @@ function construireRecherche(lieux) {
       else if (e.cle.includes(" " + q)) mot.push(e);
       else if (e.cle.includes(q)) dedans.push(e);
     }
-    trouves = [...debut, ...mot, ...dedans].slice(0, 12);
-    suggestions.innerHTML = trouves.length ? trouves.map((e, i) => `<li id="sugg-${i}" role="option" aria-selected="false">${e.l.nom}${
+    // un village une seule fois, sous le nom le mieux placé
+    const vus = new Set();
+    trouves = [...debut, ...mot, ...dedans].filter(e => !vus.has(e.l.cassini) && vus.add(e.l.cassini)).slice(0, 12);
+    suggestions.innerHTML = trouves.length ? trouves.map((e, i) => `<li id="sugg-${i}" role="option" aria-selected="false">${e.nom}${
+      plier(e.l.nom) !== e.cle ? ` <small>→ ${e.l.nom}</small>` : ""}${
       homonymes.get(e.cle) > 1 || trouves.some(f => f !== e && f.cle === e.cle) ? ` <small>${e.l.bailliage} (${e.l.dept})</small>` : ""}</li>`).join("")
-      : `<li class="vide" role="option" aria-disabled="true">Aucun lieu de ce nom sur la carte</li>`;
+      : `<li class="vide" role="option" aria-disabled="true">Aucun document en ligne pour ce nom : la carte ne montre que les lieux dont un cahier ou un procès‑verbal est signalé</li>`;
     suggestions.hidden = false;
     recherche.setAttribute("aria-expanded", "true");
     actif = -1;
