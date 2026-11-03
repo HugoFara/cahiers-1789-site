@@ -1,10 +1,4 @@
-# Les cahiers de doléances de 1789 en ligne
+# Les cahiers de doléances de 1789 en ligne — nouvelle adresse
 
-Carte des cahiers de doléances de 1789 que les services d'archives et les éditions ont mis en ligne : pour chaque
-paroisse et chaque bailliage, ce qui est numérisé, où, et sous quelle licence. Le site est statique et ne fait
-aucune requête externe.
-
-Sources, méthode et licences : page « À propos » du site (`a-propos.html`). Données générées le 2026-10-27.
-
-Les images et les transcriptions restent chez les services d'archives : le site n'en contient aucune, il renvoie
-vers les portails.
+Le site est désormais servi à l'adresse <https://cahiers1789.hugofara.net/> : avec les textes et les images de treize dépôts, il dépasse la place
+que GitHub Pages accorde. Ce dépôt ne contient plus que des pages qui y renvoient, en gardant la page demandée.
